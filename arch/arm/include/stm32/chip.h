@@ -90,9 +90,14 @@
 #else
 #  define __HAVE_L1  0
 #endif
+#ifdef CONFIG_STM32_STM32WBXXX
+#  define __HAVE_WB  1
+#else
+#  define __HAVE_WB  0
+#endif
 
 #if ((__HAVE_F1 + __HAVE_F2 + __HAVE_F30 + __HAVE_F33 + __HAVE_F37 + __HAVE_F4 + \
-      __HAVE_G4 + __HAVE_L1) != 1)
+      __HAVE_G4 + __HAVE_L1 + __HAVE_WB) != 1)
 #  error "Only one STM32 family must be selected !"
 #endif
 
@@ -2614,6 +2619,33 @@
 #  define STM32_NCAPSENSE                0   /* No capacitive sensing channels */
 #  define STM32_NCRC                     1   /* CRC */
 #  define STM32_NETHERNET                0   /* No Ethernet MAC */
+#  define STM32_NRNG                     1   /* Random number generator (RNG) */
+#  define STM32_NDCMI                    0   /* No digital camera interface (DCMI) */
+
+#elif defined (CONFIG_ARCH_CHIP_STM32WB55R)  /* VFQFPN68 package, 1024Kb FLASH, 256KiB SRAM */
+#  define STM32_NFSMC                    0   /* No FSMC */
+#  define STM32_NATIM                    1   /* One advanced timers TIM1 */
+#  define STM32_NGTIM                    5   /* 32-bit general timers TIM2 with DMA
+                                              * Two general 16-bit timers with DMA
+                                              * Two low-power timers with DMA */
+#  define STM32_NGTIMNDMA                0   /* No general timers without DMA */
+#  define STM32_NBTIM                    0   /* No basic timers */
+#  define STM32_NDMA                     2   /* DMA1-2 with 7 channels each */
+#  define STM32_NSPI                     3   /* SPI1-2, QSPI */
+#  define STM32_NI2S                     1   /* SAI1 (dual channel high quality audio) */
+#  define STM32_NUSART                   2   /* USART1, LPUART1 */
+#  define STM32_NI2C                     2   /* I2C1, I2C3 */
+#  define STM32_NCAN                     0   /* No CAN */
+#  define STM32_NSDIO                    0   /* One SDIO interface */
+#  define STM32_NLCD                     1   /* LCD 4x44, 8x40 */
+#  define STM32_NUSBOTG                  1   /* USB 2.0 FS */
+#  define STM32_NGPIO                    72  /* GPIOA-E,H */
+#  define STM32_NADC                     1   /* ADC1, 19-channels */
+#  define STM32_NDAC                     0   /* No DAC */
+#  define STM32_NCMP                     2   /* (2) Comparators */
+#  define STM32_NCAPSENSE                18  /* Capacitive sensing channels */
+#  define STM32_NCRC                     1   /* CRC */
+#  define STM32_NETHERNET                0   /* No ethernet */
 #  define STM32_NRNG                     1   /* Random number generator (RNG) */
 #  define STM32_NDCMI                    0   /* No digital camera interface (DCMI) */
 
