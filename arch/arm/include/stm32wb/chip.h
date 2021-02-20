@@ -31,7 +31,7 @@
  * Pre-processor Definitions
  ************************************************************************************/
 
-#if defined (CONFIG_ARCH_CHIP_STM32WB55R)  /* VFQFPN68 package, 1024Kb FLASH, 256KiB SRAM */
+#if defined (CONFIG_ARCH_CHIP_STM32WB55RG)     /* VFQFPN68 package, 1024Kb FLASH, 256KiB SRAM */
 #  define STM32WB_NFSMC                    0   /* No FSMC */
 #  define STM32WB_NATIM                    1   /* One advanced timers TIM1 */
 #  define STM32WB_NGTIM32                  1   /* 32-bit general timers TIM2 with DMA */
@@ -61,7 +61,7 @@
 #  error "Unsupported STM32WB chip"
 #endif
 
-#if defined (CONFIG_ARCH_CHIP_STM32WB55R)
+#if defined (CONFIG_ARCH_CHIP_STM32WB55RG)
 #  define STM32WB_SRAM1_SIZE       (192*1024)  /* 192Kb SRAM1 on AHB bus Matrix */
 #  define STM32WB_SRAM2A_SIZE      (32*1024)   /* 32Kb  SRAM2A on AHB bus Matrix */
 #  define STM32WB_SRAM2B_SIZE      (32*1024)   /* 32Kb  SRAM2B on AHB bus Matrix */

@@ -1272,6 +1272,15 @@ config ARCH_BOARD_NUCLEO_L476RG
 	---help---
 		STMicro Nucleo L476RG board based on the STMicro STM32L476RGT6 MCU.
 
+config ARCH_BOARD_NUCLEO_WB55RG
+	bool "STM32WB55 Nucleo WB55RG"
+	depends on ARCH_CHIP_STM32WB55RG
+	select ARCH_HAVE_LEDS
+	select ARCH_HAVE_BUTTONS
+	select ARCH_HAVE_IRQBUTTONS
+	---help---
+		STMicro Nucleo WB55RG board based on the STMicro STM32WB55RGV6 MCU.
+
 config ARCH_BOARD_QEMU_I486
 	bool "Qemu i486 Mode"
 	depends on ARCH_X86 || ARCH_I486
@@ -2293,6 +2302,7 @@ config ARCH_BOARD
 	default "nucleo-l452re"            if ARCH_BOARD_NUCLEO_L452RE
 	default "nucleo-l476rg"            if ARCH_BOARD_NUCLEO_L476RG
 	default "nucleo-l496zg"            if ARCH_BOARD_NUCLEO_L496ZG
+	default "nucleo-wb55rg"            if ARCH_BOARD_NUCLEO_WB55RG
 	default "nutiny-nuc120"            if ARCH_BOARD_NUTINY_NUC120
 	default "nr5m100-nexys4"           if ARCH_BOARD_NR5M100_NEXYS4
 	default "olimex-efm32g880f128-stk" if ARCH_BOARD_OLIMEX_EFM32G880F128_STK
@@ -2760,6 +2770,9 @@ source "boards/arm/stm32l4/stm32l476vg-disco/Kconfig"
 endif
 if ARCH_BOARD_STM32L4R9AI_DISCO
 source "boards/arm/stm32l4/stm32l4r9ai-disco/Kconfig"
+endif
+if ARCH_BOARD_NUCLEO_WB55RG
+source "boards/arm/stm32wb/nucleo-wb55rg/Kconfig"
 endif
 if ARCH_BOARD_AXOLOTI
 source "boards/arm/stm32/axoloti/Kconfig"

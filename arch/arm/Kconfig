@@ -385,6 +385,21 @@ config ARCH_CHIP_STM32L4
 	---help---
 		STMicro STM32 architectures (ARM Cortex-M4).
 
+config ARCH_CHIP_STM32WB
+	bool "STMicro STM32 WB"
+	select ARCH_CORTEXM4
+	select ARCH_HAVE_MPU
+	select ARCH_HAVE_FETCHADD
+	select ARCH_HAVE_I2CRESET
+	select ARCH_HAVE_HEAPCHECK
+	select ARCH_HAVE_PROGMEM
+	select ARCH_HAVE_SPI_BITORDER
+	select ARCH_HAVE_TICKLESS
+	select ARM_HAVE_MPU_UNIFIED
+	select ARMV7M_HAVE_STACKCHECK
+	---help---
+		STMicro STM32WB architectures (ARM Cortex-M4).
+
 config ARCH_CHIP_STR71X
 	bool "STMicro STR71x"
 	select ARCH_ARM7TDMI
