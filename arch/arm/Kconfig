@@ -772,6 +772,7 @@ config ARCH_CHIP
 	default "stm32f7"	if ARCH_CHIP_STM32F7
 	default "stm32h7"	if ARCH_CHIP_STM32H7
 	default "stm32l4"	if ARCH_CHIP_STM32L4
+	default "stm32wb"	if ARCH_CHIP_STM32WB
 	default "str71x"	if ARCH_CHIP_STR71X
 	default "tms570"	if ARCH_CHIP_TMS570
 	default "xmc4"		if ARCH_CHIP_XMC4
@@ -1026,6 +1027,9 @@ source arch/arm/src/stm32h7/Kconfig
 endif
 if ARCH_CHIP_STM32L4
 source arch/arm/src/stm32l4/Kconfig
+endif
+if ARCH_CHIP_STM32WB
+source arch/arm/src/stm32wb/Kconfig
 endif
 if ARCH_CHIP_STR71X
 source arch/arm/src/str71x/Kconfig

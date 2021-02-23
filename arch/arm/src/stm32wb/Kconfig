@@ -1,0 +1,2248 @@
+#
+# For a description of the syntax of this configuration file,
+# see the file kconfig-language.txt in the NuttX tools repository.
+#
+
+if ARCH_CHIP_STM32WB
+
+comment "STM32WB Configuration Options"
+
+choice
+	prompt "STM32 WB Chip Selection"
+	default ARCH_CHIP_STM32WB55RG
+	depends on ARCH_CHIP_STM32WB
+
+config ARCH_CHIP_STM32WB55RG
+	bool "STM32WB55RG"
+	select ARCH_HAVE_FPU
+	select STM32WB_HAVE_COMP
+	select STM32WB_HAVE_LPUART
+	select STM32WB_HAVE_DMA2
+	select STM32WB_HAVE_SPI2
+	select STM32WB_HAVE_I2C3
+	select STM32WB_HAVE_SAI
+	select STM32WB_HAVE_LCD
+	select STM32WB_HAVE_TSC
+	select STM32WB_HAVE_USB
+	select STM32WB_HAVE_QSPI
+	---help---
+		STM32 WB Cortex M4, 1024 Kb FLASH, 192+32+32 Kb SRAM
+
+config ARCH_CHIP_STM32WB50CG
+	bool "STM32WB50CG"
+	select ARCH_HAVE_FPU
+	---help---
+		STM32 WB Cortex M4, 1024 Kb FLASH, 64+32+32 Kb SRAM
+
+config ARCH_CHIP_STM32WB30CE
+	bool "STM32WB30CE"
+	select ARCH_HAVE_FPU
+	---help---
+		STM32 WB Cortex M4, 512 Kb FLASH, 32+32+32 Kb SRAM
+
+
+endchoice # STM32 WB Chip Selection
+
+
+comment "STM32WB SRAM2a and SRAM2b Options"
+
+config STM32WB_SRAM2A_HEAP
+	bool "SRAM2a is used for heap"
+	default n
+	select STM32WB_SRAM2A_INIT
+
+config STM32WB_SRAM2B_HEAP
+	bool "SRAM2b is used for heap"
+	default n
+
+config STM32WB_SRAM2A_INIT
+	bool "SRAM2a is initialized to zero"
+	default n
+	---help---
+		The STM32WB SRAM2a region has parity checking.  However, when the system
+		powers on, the memory is in an unknown state, and reads from uninitialized
+		memory can trigger parity faults from the random data.  This can be
+		avoided by first writing to all locations to force the parity into a valid
+		state.
+		However, if the SRAM2a is being retained in Standby mode, this may be 
+		undesirable (because it will destroy the contents). In that case, the board
+		should handle the initialization itself at the appropriate time.
+
+
+comment "STM32WB Peripherals"
+
+menu "STM32WB Peripheral Support"
+
+# These "hidden" settings determine whether a peripheral option is available
+# for the selected MCU
+
+config STM32WB_HAVE_COMP
+	bool
+	default n
+
+config STM32WB_HAVE_LPUART
+	bool
+	default n
+
+config STM32WB_HAVE_DMA2
+	bool
+	default n
+
+config STM32WB_HAVE_SPI2
+	bool
+	default n
+
+config STM32WB_HAVE_I2C3
+	bool
+	default n
+
+config STM32WB_HAVE_SAI
+	bool
+	default n
+
+config STM32WB_HAVE_LCD
+	bool
+	default n
+
+config STM32WB_HAVE_TSC
+	bool
+	default n
+
+config STM32WB_HAVE_USB
+	bool
+	default n
+
+config STM32WB_HAVE_QSPI
+	bool
+	default n
+
+
+
+# These are the peripheral selections proper
+
+config STM32WB_RTC
+	bool "RTC"
+	default n
+	select RTC
+
+comment "AHB1 Peripherals"
+
+config STM32WB_DMA1
+	bool "DMA1"
+	default n
+	select ARCH_DMA
+
+config STM32WB_DMA2
+	bool "DMA2"
+	default n
+	select ARCH_DMA
+	depends on STM32WB_HAVE_DMA2
+
+config STM32WB_CRC
+	bool "CRC"
+	default n
+
+config STM32WB_TSC
+	bool "TSC"
+	default n
+	depends on STM32WB_HAVE_TSC
+
+
+comment "AHB2 Peripherals"
+
+config STM32WB_ADC1
+	bool "ADC1"
+	default n
+
+
+comment "AHB3 Peripherals"
+
+config STM32WB_QSPI
+	bool "QuadSPI"
+	default n
+	depends on STM32WB_HAVE_QSPI
+	---help---
+		The STM32WB QSPI block is intended to support one serial NOR flash device
+
+
+
+if STM32WB_QSPI
+
+config STM32WB_QSPI_FLASH_SIZE
+	int "Size of attached serial flash, bytes"
+	default 16777216
+	range 1 2147483647
+	---help---
+		The STM32WB QSPI peripheral requires the size of the Flash be specified
+
+config STM32WB_QSPI_FIFO_THESHOLD
+	int "Number of bytes before asserting FIFO threshold flag"
+	default 4
+	range 1 16
+	---help---
+		The STM32WB QSPI peripheral requires that the FIFO threshold be specified
+		I would leave it at the default value of 4 unless you know what you are doing.
+
+config STM32WB_QSPI_CSHT
+	int "Number of cycles Chip Select must be inactive between transactions"
+	default 1
+	range 1 8
+	---help---
+		The STM32WB QSPI peripheral requires that it be specified the minimum number
+		of AHB cycles that Chip Select be held inactive between transactions.
+
+choice
+	prompt "Transfer technique"
+	default STM32WB_QSPI_DMA
+	---help---
+		You can choose between using polling, interrupts, or DMA to transfer data
+		over the QSPI interface.
+
+config STM32WB_QSPI_POLLING
+	bool "Polling"
+	---help---
+		Use conventional register I/O with status polling to transfer data.
+
+config STM32WB_QSPI_INTERRUPTS
+	bool "Interrupts"
+	---help---
+		User interrupt driven I/O transfers.
+
+config STM32WB_QSPI_DMA
+	bool "DMA"
+	depends on STM32WB_DMA
+	---help---
+		Use DMA to improve QSPI transfer performance.
+
+endchoice
+
+choice
+	prompt "DMA Channel"
+	default STM32WB_QSPI_DMA_CHAN_1_5
+	depends on STM32WB_DMA1 || STM32WB_DMA2
+	---help---
+		You can choose between two DMA channels for use with QSPI:
+		either DMA1 channel 5, or DMA2 channel 7.
+		If you only see one choice here, it is probably because
+		you have not also enabled the associated DMA controller.
+
+config STM32WB_QSPI_DMA_CHAN_1_5
+	bool "DMA1 Channel 5"
+	depends on STM32WB_DMA1
+	---help---
+		Use DMA1 channel 5 for QSPI.
+
+config STM32WB_QSPI_DMA_CHAN_2_7
+	bool "DMA2 Channel 7"
+	depends on STM32WB_DMA2
+	---help---
+		Use DMA2 channel 7 for QSPI.
+
+endchoice
+
+choice
+	prompt "DMA Priority"
+	default STM32WB_QSPI_DMAPRIORITY_MEDIUM
+	---help---
+		The DMA controller supports priority levels.  You are probably fine
+		with the default of 'medium' except for special cases.  In the event
+		of contention between to channels at the same priority, the lower
+		numbered channel has hardware priority over the higher numbered one.
+
+config STM32WB_QSPI_DMAPRIORITY_VERYHIGH
+	bool "Very High priority"
+	---help---
+		'Highest' priority.
+
+config STM32WB_QSPI_DMAPRIORITY_HIGH
+	bool "High priority"
+	---help---
+		'High' priority.
+
+config STM32WB_QSPI_DMAPRIORITY_MEDIUM
+	bool "Medium priority"
+	---help---
+		'Medium' priority.
+
+config STM32WB_QSPI_DMAPRIORITY_LOW
+	bool "Low priority"
+	---help---
+		'Low' priority.
+
+endchoice
+
+
+
+config STM32WB_QSPI_DMATHRESHOLD
+	int "QSPI DMA threshold"
+	default 4
+	depends on STM32WB_QSPI_DMA
+	---help---
+		When QSPI DMA is enabled, small DMA transfers will still be performed
+		by polling logic.  This value is the threshold below which transfers
+		will still be performed by conventional register status polling.
+
+config STM32WB_QSPI_DMADEBUG
+	bool "QSPI DMA transfer debug"
+	depends on STM32WB_QSPI_DMA && DEBUG_SPI && DEBUG_DMA
+	default n
+	---help---
+		Enable special debug instrumentation to analyze QSPI DMA data transfers.
+		This logic is as non-invasive as possible:  It samples DMA
+		registers at key points in the data transfer and then dumps all of
+		the registers at the end of the transfer.
+
+config STM32WB_QSPI_REGDEBUG
+	bool "QSPI Register level debug"
+	depends on DEBUG_SPI_INFO
+	default n
+	---help---
+		Output detailed register-level QSPI device debug information.
+		Requires also CONFIG_DEBUG_SPI_INFO.
+
+endif # STM32WB_QSPI
+
+
+
+comment "APB1 Peripherals"
+
+config STM32WB_PWR
+	bool "PWR"
+	default n
+
+config STM32WB_TIM2
+	bool "TIM2"
+	default n
+
+config STM32WB_LCD
+	bool "LCD"
+	default n
+	depends on STM32WB_HAVE_LCD
+
+config STM32WB_SPI2
+	bool "SPI2"
+	default n
+	depends on STM32WB_HAVE_SPI2
+	select SPI
+
+config STM32WB_I2C1
+	bool "I2C1"
+	default n
+
+config STM32WB_I2C3
+	bool "I2C3"
+	default n
+	depends on STM32WB_HAVE_I2C3
+
+config STM32WB_LPTIM1
+	bool "LPTIM1"
+	default n
+
+config STM32WB_LPUART1
+	bool "LPUART1"
+	default n
+	select ARCH_HAVE_SERIAL_TERMIOS
+	select ARCH_HAVE_LPUART1
+
+config STM32WB_LPTIM2
+	bool "LPTIM2"
+	default n
+
+config STM32WB_USB
+	bool "USB 2.0"
+	default n
+	depends on STM32WB_HAVE_USB
+	select USBDEV
+
+
+comment "APB2 Peripherals"
+
+config STM32WB_SYSCFG
+	bool "SYSCFG"
+	default y
+
+config STM32WB_TIM1
+	bool "TIM1"
+	default n
+
+config STM32WB_SPI1
+	bool "SPI1"
+	default n
+	select SPI
+
+config STM32WB_USART1
+	bool "USART1"
+	default n
+	select ARCH_HAVE_SERIAL_TERMIOS
+
+config STM32WB_TIM16
+	bool "TIM16"
+	default n
+
+config STM32WB_TIM17
+	bool "TIM17"
+	default n
+
+config STM32WB_COMP1
+	bool "COMP1"
+	default n
+	select COMP
+	depends on STM32WB_HAVE_COMP
+
+config STM32WB_COMP2
+	bool "COMP2"
+	default n
+	select COMP
+	depends on STM32WB_HAVE_COMP
+
+config STM32WB_SAI1
+	bool "SAI1"
+	default n
+	depends on STM32WB_HAVE_SAI
+
+config STM32WB_SAI1_A
+	bool "SAI1 Block A"
+	default n
+	select AUDIO
+	select I2S
+	select SCHED_HPWORK
+	depends on STM32WB_SAI1
+
+config STM32WB_SAI1_B
+	bool "SAI1 Block B"
+	default n
+	select AUDIO
+	select I2S
+	select SCHED_HPWORK
+	depends on STM32WB_SAI1
+
+
+
+comment "Other Peripherals"
+
+config STM32WB_BKPSRAM
+	bool "Enable BKP RAM Domain"
+	default n
+
+config STM32WB_IWDG
+	bool "IWDG"
+	default n
+	select WATCHDOG
+
+config STM32WB_WWDG
+	bool "WWDG"
+	default n
+	select WATCHDOG
+
+endmenu
+
+
+
+
+config STM32WB_SAI1PLL
+	bool "SAI1PLL"
+	default n
+	depends on STM32WB_SAI1
+	---help---
+		The STM32WB has a separate PLL for the SAI1 block.
+		Set this true and provide configuration parameters in
+		board.h to use this PLL.
+
+config STM32WB_FLASH_PREFETCH
+	bool "Enable FLASH Pre-fetch"
+	default y
+	---help---
+		Enable FLASH prefetch
+
+
+choice
+	prompt "JTAG Configuration"
+	default STM32WB_JTAG_DISABLE
+	---help---
+		JTAG Enable settings (by default JTAG-DP and SW-DP are disabled)
+
+config STM32WB_JTAG_DISABLE
+	bool "Disable all JTAG clocking"
+
+config STM32WB_JTAG_FULL_ENABLE
+	bool "Enable full SWJ (JTAG-DP + SW-DP)"
+
+config STM32WB_JTAG_NOJNTRST_ENABLE
+	bool "Enable full SWJ (JTAG-DP + SW-DP) but without JNTRST"
+
+config STM32WB_JTAG_SW_ENABLE
+	bool "Set JTAG-DP disabled and SW-DP enabled"
+
+endchoice
+
+
+
+config STM32WB_DISABLE_IDLE_SLEEP_DURING_DEBUG
+	bool "Disable IDLE Sleep (WFI) in debug mode"
+	default n
+	---help---
+		In debug configuration, disables the WFI instruction in the IDLE loop
+		to prevent the JTAG from disconnecting.  With some JTAG debuggers, such
+		as the ST-LINK2 with OpenOCD, if the ARM is put to sleep via the WFI
+		instruction, the debugger will disconnect, terminating the debug session.
+
+config ARCH_BOARD_STM32WB_CUSTOM_CLOCKCONFIG
+	bool "Custom clock configuration"
+	default n
+	---help---
+		Enables special, board-specific STM32 clock configuration.
+
+config STM32WB_HAVE_RTC_SUBSECONDS
+	bool
+	select ARCH_HAVE_RTC_SUBSECONDS
+	default y
+
+menu "RTC Configuration"
+	depends on STM32WB_RTC
+
+config STM32WB_RTC_MAGIC_REG
+	int "BKP register"
+	default 0
+	range  0 31
+	---help---
+		The BKP register used to store/check the Magic value to determine if
+		RTC is already setup
+
+config STM32WB_RTC_MAGIC
+	hex "RTC Magic 1"
+	default 0xfacefeed
+	---help---
+		Value used as Magic to determine if the RTC is already setup
+
+config STM32WB_RTC_MAGIC_TIME_SET
+	hex "RTC Magic 2"
+	default 0xf00dface
+	---help---
+		Value used as Magic to determine if the RTC has been setup and has
+		time set
+
+choice
+	prompt "RTC clock source"
+	default STM32WB_RTC_LSECLOCK
+	depends on STM32WB_RTC
+
+config STM32WB_RTC_LSECLOCK
+	bool "LSE clock"
+	---help---
+		Drive the RTC with the LSE clock
+
+config STM32WB_RTC_LSICLOCK
+	bool "LSI clock"
+	---help---
+		Drive the RTC with the LSI clock
+
+config STM32WB_RTC_HSECLOCK
+	bool "HSE clock"
+	---help---
+		Drive the RTC with the HSE clock, divided down to 1MHz.
+
+endchoice
+
+if STM32WB_RTC_LSECLOCK
+
+config STM32WB_RTC_LSECLOCK_START_DRV_CAPABILITY
+	int "LSE oscillator drive capability level at LSE start-up"
+	default 0
+	range 0 3
+	---help---
+		0 = Low drive capability (default)
+		1 = Medium low drive capability
+		2 = Medium high drive capability
+		3 = High drive capability
+
+config STM32WB_RTC_LSECLOCK_RUN_DRV_CAPABILITY
+	int "LSE oscillator drive capability level after LSE start-up"
+	default 0
+	range 0 3
+	---help---
+		0 = Low drive capability (default)
+		1 = Medium low drive capability
+		2 = Medium high drive capability
+		3 = High drive capability
+
+endif # STM32WB_RTC_LSECLOCK
+
+endmenu # RTC Configuration
+
+menu "Timer Configuration"
+
+if SCHED_TICKLESS
+
+config STM32WB_ONESHOT
+	bool
+	default y
+
+config STM32WB_FREERUN
+	bool
+	default y
+
+config STM32WB_TICKLESS_ONESHOT
+	int "Tickless one-shot timer channel"
+	default 2
+	range 1 8
+	depends on STM32WB_ONESHOT
+	---help---
+		If the Tickless OS feature is enabled, then one clock must be
+		assigned to provide the one-shot timer needed by the OS.
+
+config STM32WB_TICKLESS_FREERUN
+	int "Tickless free-running timer channel"
+	default 5
+	range 1 8
+	depends on STM32WB_FREERUN
+	---help---
+		If the Tickless OS feature is enabled, then one clock must be
+		assigned to provide the free-running timer needed by the OS.
+
+endif # SCHED_TICKLESS
+
+if !SCHED_TICKLESS
+
+config STM32WB_ONESHOT
+	bool "TIM one-shot wrapper"
+	default n
+	---help---
+		Enable a wrapper around the low level timer/counter functions to
+		support one-shot timer.
+
+config STM32WB_FREERUN
+	bool "TIM free-running wrapper"
+	default n
+	---help---
+		Enable a wrapper around the low level timer/counter functions to
+		support a free-running timer.
+
+endif # !SCHED_TICKLESS
+
+config STM32WB_ONESHOT_MAXTIMERS
+	int "Maximum number of oneshot timers"
+	default 1
+	range 1 8
+	depends on STM32WB_ONESHOT
+	---help---
+		Determines the maximum number of oneshot timers that can be
+		supported.  This setting pre-allocates some minimal support for each
+		of the timers and places an upper limit on the number of oneshot
+		timers that you can use.
+
+config STM32WB_LPTIM1_PWM
+	bool "LPTIM1 PWM"
+	default n
+	depends on STM32WB_LPTIM1
+	select PWM
+	---help---
+		Reserve low-power timer 1 for use by PWM
+
+		Timer devices may be used for different purposes.  One special purpose is
+		to generate modulated outputs for such things as motor control.  If STM32WB_LPTIM1
+		is defined then THIS following may also be defined to indicate that
+		the timer is intended to be used for pulsed output modulation.
+
+if STM32WB_LPTIM1_PWM
+
+choice
+	prompt "LPTIM1 clock source"
+	default STM32WB_LPTIM1_CLK_APB1
+
+config STM32WB_LPTIM1_CLK_APB1
+	bool "Clock LPTIM1 from APB1"
+
+config STM32WB_LPTIM1_CLK_LSE
+	bool "Clock LPTIM1 from LSE"
+
+config STM32WB_LPTIM1_CLK_LSI
+	bool "Clock LPTIM1 from LSI"
+
+config STM32WB_LPTIM1_CLK_HSI
+	bool "Clock LPTIM1 from HSI"
+endchoice
+
+endif # STM32WB_LPTIM1_PWM
+
+config STM32WB_LPTIM2_PWM
+	bool "LPTIM2 PWM"
+	default n
+	depends on STM32WB_LPTIM2
+	select PWM
+	---help---
+		Reserve low-power timer 2 for use by PWM
+
+		Timer devices may be used for different purposes.  One special purpose is
+		to generate modulated outputs for such things as motor control.  If STM32WB_LPTIM2
+		is defined then THIS following may also be defined to indicate that
+		the timer is intended to be used for pulsed output modulation.
+
+if STM32WB_LPTIM2_PWM
+
+choice
+	prompt "LPTIM2 clock source"
+	default STM32WB_LPTIM2_CLK_APB1
+
+config STM32WB_LPTIM2_CLK_APB1
+	bool "Clock LPTIM2 from APB1"
+
+config STM32WB_LPTIM2_CLK_LSE
+	bool "Clock LPTIM2 from LSE"
+
+config STM32WB_LPTIM2_CLK_LSI
+	bool "Clock LPTIM2 from LSI"
+
+config STM32WB_LPTIM2_CLK_HSI
+	bool "Clock LPTIM2 from HSI"
+endchoice
+
+endif # STM32WB_LPTIM2_PWM
+
+config STM32WB_PWM_LL_OPS
+	bool "PWM low-level operations"
+	default n
+	---help---
+		Enable low-level PWM ops.
+
+config STM32WB_TIM1_PWM
+	bool "TIM1 PWM"
+	default n
+	depends on STM32WB_TIM1
+	select PWM
+	select ARCH_HAVE_PWM_PULSECOUNT
+	---help---
+		Reserve timer 1 for use by PWM
+
+		Timer devices may be used for different purposes.  One special purpose is
+		to generate modulated outputs for such things as motor control.  If STM32WB_TIM1
+		is defined then THIS following may also be defined to indicate that
+		the timer is intended to be used for pulsed output modulation.
+
+if STM32WB_TIM1_PWM
+
+config STM32WB_TIM1_MODE
+	int "TIM1 Mode"
+	default 0
+	range 0 4
+	---help---
+		Specifies the timer mode.
+
+config STM32WB_TIM1_LOCK
+	int "TIM1 Lock Level Configuration"
+	default 0
+	range 0 3
+	---help---
+		Timer 1 lock level configuration
+
+config STM32WB_TIM1_TDTS
+	int "TIM1 t_DTS Division"
+	default 0
+	range 0 2
+	---help---
+		Timer 1 dead-time and sampling clock (t_DTS) division
+
+config STM32WB_TIM1_DEADTIME
+	int "TIM1 Initial Dead-time"
+	default 0
+	range 0 255
+	---help---
+		Timer 1 initial dead-time
+
+if STM32WB_PWM_MULTICHAN
+
+config STM32WB_TIM1_CHANNEL1
+	bool "TIM1 Channel 1"
+	default n
+	---help---
+		Enables channel 1.
+
+if STM32WB_TIM1_CHANNEL1
+
+config STM32WB_TIM1_CH1MODE
+	int "TIM1 Channel 1 Mode"
+	default 6
+	range 0 11
+	---help---
+		Specifies the channel mode. See enum stm32wb_pwm_chanmode_e in stm32wb_pwm.h.
+
+config STM32WB_TIM1_CH1OUT
+	bool "TIM1 Channel 1 Output"
+	default n
+	---help---
+		Enables channel 1 output.
+
+config STM32WB_TIM1_CH1NOUT
+	bool "TIM1 Channel 1 Complementary Output"
+	default n
+	depends on STM32WB_TIM1_CH1OUT
+	---help---
+		Enables channel 1 complementary output.
+
+endif # STM32WB_TIM1_CHANNEL1
+
+config STM32WB_TIM1_CHANNEL2
+	bool "TIM1 Channel 2"
+	default n
+	---help---
+		Enables channel 2.
+
+if STM32WB_TIM1_CHANNEL2
+
+config STM32WB_TIM1_CH2MODE
+	int "TIM1 Channel 2 Mode"
+	default 6
+	range 0 11
+	---help---
+		Specifies the channel mode. See enum stm32wb_pwm_chanmode_e in stm32wb_pwm.h.
+
+config STM32WB_TIM1_CH2OUT
+	bool "TIM1 Channel 2 Output"
+	default n
+	---help---
+		Enables channel 2 output.
+
+config STM32WB_TIM1_CH2NOUT
+	bool "TIM1 Channel 2 Complemenrary Output"
+	default n
+	depends on STM32WB_TIM1_CH2OUT
+	---help---
+		Enables channel 2 complementary output.
+
+endif # STM32WB_TIM1_CHANNEL2
+
+config STM32WB_TIM1_CHANNEL3
+	bool "TIM1 Channel 3"
+	default n
+	---help---
+		Enables channel 3.
+
+if STM32WB_TIM1_CHANNEL3
+
+config STM32WB_TIM1_CH3MODE
+	int "TIM1 Channel 3 Mode"
+	default 6
+	range 0 11
+	---help---
+		Specifies the channel mode. See enum stm32wb_pwm_chanmode_e in stm32wb_pwm.h.
+
+config STM32WB_TIM1_CH3OUT
+	bool "TIM1 Channel 3 Output"
+	default n
+	---help---
+		Enables channel 3 output.
+
+config STM32WB_TIM1_CH3NOUT
+	bool "TIM1 Channel 3 Complementary Output"
+	default n
+	depends on STM32WB_TIM1_CH3OUT
+	---help---
+		Enables channel 3 complementary output.
+
+endif # STM32WB_TIM1_CHANNEL3
+
+config STM32WB_TIM1_CHANNEL4
+	bool "TIM1 Channel 4"
+	default n
+	---help---
+		Enables channel 4.
+
+if STM32WB_TIM1_CHANNEL4
+
+config STM32WB_TIM1_CH4MODE
+	int "TIM1 Channel 4 Mode"
+	default 6
+	range 0 11
+	---help---
+		Specifies the channel mode. See enum stm32wb_pwm_chanmode_e in stm32wb_pwm.h.
+
+config STM32WB_TIM1_CH4OUT
+	bool "TIM1 Channel 4 Output"
+	default n
+	---help---
+		Enables channel 4 output.
+
+endif # STM32WB_TIM1_CHANNEL4
+
+endif # STM32WB_PWM_MULTICHAN
+
+if !STM32WB_PWM_MULTICHAN
+
+config STM32WB_TIM1_CHANNEL
+	int "TIM1 PWM Output Channel"
+	default 1
+	range 1 4
+	---help---
+		If TIM1 is enabled for PWM usage, you also need specifies the timer output
+		channel {1,..,4}
+
+if STM32WB_TIM1_CHANNEL = 1
+
+config STM32WB_TIM1_CH1OUT
+	bool "TIM1 Channel 1 Output"
+	default n
+	---help---
+		Enables channel 1 output.
+
+config STM32WB_TIM1_CH1NOUT
+	bool "TIM1 Channel 1 Complementary Output"
+	default n
+	---help---
+		Enables channel 1 Complementary Output.
+
+endif # STM32WB_TIM1_CHANNEL = 1
+
+if STM32WB_TIM1_CHANNEL = 2
+
+config STM32WB_TIM1_CH2OUT
+	bool "TIM1 Channel 2 Output"
+	default n
+	---help---
+		Enables channel 2 output.
+
+config STM32WB_TIM1_CH2NOUT
+	bool "TIM1 Channel 2 Complementary Output"
+	default n
+	---help---
+		Enables channel 2 Complementary Output.
+
+endif # STM32WB_TIM1_CHANNEL = 2
+
+if STM32WB_TIM1_CHANNEL = 3
+
+config STM32WB_TIM1_CH3OUT
+	bool "TIM1 Channel 3 Output"
+	default n
+	---help---
+		Enables channel 3 output.
+
+config STM32WB_TIM1_CH3NOUT
+	bool "TIM1 Channel 3 Complementary Output"
+	default n
+	---help---
+		Enables channel 3 Complementary Output.
+
+endif # STM32WB_TIM1_CHANNEL = 3
+
+if STM32WB_TIM1_CHANNEL = 4
+
+config STM32WB_TIM1_CH4OUT
+	bool "TIM1 Channel 4 Output"
+	default n
+	---help---
+		Enables channel 4 output.
+
+endif # STM32WB_TIM1_CHANNEL = 4
+
+config STM32WB_TIM1_CHMODE
+	int "TIM1 Channel Mode"
+	default 6
+	range 0 11
+	---help---
+		Specifies the channel mode. See enum stm32wb_pwm_chanmode_e in stm32wb_pwm.h.
+
+endif # !STM32WB_PWM_MULTICHAN
+
+endif # STM32WB_TIM1_PWM
+
+config STM32WB_TIM2_PWM
+	bool "TIM2 PWM"
+	default n
+	depends on STM32WB_TIM2
+	select PWM
+	select ARCH_HAVE_PWM_PULSECOUNT
+	---help---
+		Reserve timer 2 for use by PWM
+
+		Timer devices may be used for different purposes.  One special purpose is
+		to generate modulated outputs for such things as motor control.  If STM32WB_TIM2
+		is defined then THIS following may also be defined to indicate that
+		the timer is intended to be used for pulsed output modulation.
+
+if STM32WB_TIM2_PWM
+
+config STM32WB_TIM2_MODE
+	int "TIM2 Mode"
+	default 0
+	range 0 4
+	---help---
+		Specifies the timer mode.
+
+if STM32WB_PWM_MULTICHAN
+
+config STM32WB_TIM2_CHANNEL1
+	bool "TIM2 Channel 1"
+	default n
+	---help---
+		Enables channel 1.
+
+if STM32WB_TIM2_CHANNEL1
+
+config STM32WB_TIM2_CH1MODE
+	int "TIM2 Channel 1 Mode"
+	default 6
+	range 0 11
+	---help---
+		Specifies the channel mode. See enum stm32wb_pwm_chanmode_e in stm32wb_pwm.h.
+
+config STM32WB_TIM2_CH1OUT
+	bool "TIM2 Channel 1 Output"
+	default n
+	---help---
+		Enables channel 1 output.
+
+endif # STM32WB_TIM2_CHANNEL1
+
+config STM32WB_TIM2_CHANNEL2
+	bool "TIM2 Channel 2"
+	default n
+	---help---
+		Enables channel 2.
+
+if STM32WB_TIM2_CHANNEL2
+
+config STM32WB_TIM2_CH2MODE
+	int "TIM2 Channel 2 Mode"
+	default 6
+	range 0 11
+	---help---
+		Specifies the channel mode. See enum stm32wb_pwm_chanmode_e in stm32wb_pwm.h.
+
+config STM32WB_TIM2_CH2OUT
+	bool "TIM2 Channel 2 Output"
+	default n
+	---help---
+		Enables channel 2 output.
+
+endif # STM32WB_TIM2_CHANNEL2
+
+config STM32WB_TIM2_CHANNEL3
+	bool "TIM2 Channel 3"
+	default n
+	---help---
+		Enables channel 3.
+
+if STM32WB_TIM2_CHANNEL3
+
+config STM32WB_TIM2_CH3MODE
+	int "TIM2 Channel 3 Mode"
+	default 6
+	range 0 11
+	---help---
+		Specifies the channel mode. See enum stm32wb_pwm_chanmode_e in stm32wb_pwm.h.
+
+config STM32WB_TIM2_CH3OUT
+	bool "TIM2 Channel 3 Output"
+	default n
+	---help---
+		Enables channel 3 output.
+
+endif # STM32WB_TIM2_CHANNEL3
+
+endif # STM32WB_PWM_MULTICHAN
+
+if !STM32WB_PWM_MULTICHAN
+
+config STM32WB_TIM2_CHANNEL
+	int "TIM2 PWM Output Channel"
+	default 1
+	range 1 4
+	---help---
+		If TIM2 is enabled for PWM usage, you also need specifies the timer output
+		channel {1,..,4}
+
+if STM32WB_TIM2_CHANNEL = 1
+
+config STM32WB_TIM2_CH1OUT
+	bool "TIM2 Channel 1 Output"
+	default n
+	---help---
+		Enables channel 1 output.
+
+endif # STM32WB_TIM2_CHANNEL = 1
+
+if STM32WB_TIM2_CHANNEL = 2
+
+config STM32WB_TIM2_CH2OUT
+	bool "TIM2 Channel 2 Output"
+	default n
+	---help---
+		Enables channel 2 output.
+
+endif # STM32WB_TIM2_CHANNEL = 2
+
+if STM32WB_TIM2_CHANNEL = 3
+
+config STM32WB_TIM2_CH3OUT
+	bool "TIM2 Channel 3 Output"
+	default n
+	---help---
+		Enables channel 3 output.
+
+endif # STM32WB_TIM2_CHANNEL = 3
+
+if STM32WB_TIM2_CHANNEL = 4
+
+config STM32WB_TIM2_CH4OUT
+	bool "TIM2 Channel 4 Output"
+	default n
+	---help---
+		Enables channel 4 output.
+
+endif # STM32WB_TIM2_CHANNEL = 4
+
+config STM32WB_TIM2_CHMODE
+	int "TIM2 Channel Mode"
+	default 6
+	range 0 11
+	---help---
+		Specifies the channel mode. See enum stm32wb_pwm_chanmode_e in stm32wb_pwm.h.
+
+endif # !STM32WB_PWM_MULTICHAN
+
+endif # STM32WB_TIM2_PWM
+
+
+
+
+
+
+
+
+
+config STM32WB_TIM16_PWM
+	bool "TIM16 PWM"
+	default n
+	depends on STM32WB_TIM16
+	select PWM
+	---help---
+		Reserve timer 16 for use by PWM
+
+		Timer devices may be used for different purposes.  One special purpose is
+		to generate modulated outputs for such things as motor control.  If STM32WB_TIM16
+		is defined then THIS following may also be defined to indicate that
+		the timer is intended to be used for pulsed output modulation.
+
+if STM32WB_TIM16_PWM
+
+config STM32WB_TIM16_LOCK
+	int "TIM16 Lock Level Configuration"
+	default 0
+	range 0 3
+	---help---
+		Timer 16 lock level configuration
+
+config STM32WB_TIM16_TDTS
+	int "TIM16 t_DTS Division"
+	default 0
+	range 0 2
+	---help---
+		Timer 16 dead-time and sampling clock (t_DTS) division
+
+config STM32WB_TIM16_DEADTIME
+	int "TIM16 Initial Dead-time"
+	default 0
+	range 0 255
+	---help---
+		Timer 16 initial dead-time
+
+if STM32WB_PWM_MULTICHAN
+
+config STM32WB_TIM16_CHANNEL1
+	bool "TIM16 Channel 1"
+	default n
+	---help---
+		Enables channel 1.
+
+if STM32WB_TIM16_CHANNEL1
+
+config STM32WB_TIM16_CH1MODE
+	int "TIM16 Channel 1 Mode"
+	default 6
+	range 0 7
+	---help---
+		Specifies the channel mode. See enum stm32wb_pwm_chanmode_e in stm32wb_pwm.h.
+
+config STM32WB_TIM16_CH1OUT
+	bool "TIM16 Channel 1 Output"
+	default n
+	---help---
+		Enables channel 1 output.
+
+config STM32WB_TIM16_CH1NOUT
+	bool "TIM16 Channel 1 Complementary Output"
+	default n
+	depends on STM32WB_TIM16_CH1OUT
+	---help---
+		Enables channel 1 complementary output.
+
+endif # STM32WB_TIM16_CHANNEL1
+
+endif # STM32WB_PWM_MULTICHAN
+
+if !STM32WB_PWM_MULTICHAN
+
+config STM32WB_TIM16_CHANNEL
+	int "TIM16 PWM Output Channel"
+	default 1
+	range 1 1
+	---help---
+		If TIM16 is enabled for PWM usage, you also need specifies the timer output
+		channel {1}
+
+if STM32WB_TIM16_CHANNEL = 1
+
+config STM32WB_TIM16_CH1OUT
+	bool "TIM16 Channel 1 Output"
+	default n
+	---help---
+		Enables channel 1 output.
+
+endif # STM32WB_TIM16_CHANNEL = 1
+
+config STM32WB_TIM16_CHMODE
+	int "TIM16 Channel Mode"
+	default 6
+	range 0 7
+	---help---
+		Specifies the channel mode. See enum stm32wb_pwm_chanmode_e in stm32wb_pwm.h.
+
+endif # !STM32WB_PWM_MULTICHAN
+
+endif # STM32WB_TIM16_PWM
+
+config STM32WB_TIM17_PWM
+	bool "TIM17 PWM"
+	default n
+	depends on STM32WB_TIM17
+	select PWM
+	---help---
+		Reserve timer 17 for use by PWM
+
+		Timer devices may be used for different purposes.  One special purpose is
+		to generate modulated outputs for such things as motor control.  If STM32WB_TIM17
+		is defined then THIS following may also be defined to indicate that
+		the timer is intended to be used for pulsed output modulation.
+
+if STM32WB_TIM17_PWM
+
+config STM32WB_TIM17_LOCK
+	int "TIM17 Lock Level Configuration"
+	default 0
+	range 0 3
+	---help---
+		Timer 17 lock level configuration
+
+config STM32WB_TIM17_TDTS
+	int "TIM17 t_DTS Division"
+	default 0
+	range 0 2
+	---help---
+		Timer 17 dead-time and sampling clock (t_DTS) division
+
+config STM32WB_TIM17_DEADTIME
+	int "TIM17 Initial Dead-time"
+	default 0
+	range 0 255
+	---help---
+		Timer 17 initial dead-time
+
+if STM32WB_PWM_MULTICHAN
+
+config STM32WB_TIM17_CHANNEL1
+	bool "TIM17 Channel 1"
+	default n
+	---help---
+		Enables channel 1.
+
+if STM32WB_TIM17_CHANNEL1
+
+config STM32WB_TIM17_CH1MODE
+	int "TIM17 Channel 1 Mode"
+	default 6
+	range 0 7
+	---help---
+		Specifies the channel mode. See enum stm32wb_pwm_chanmode_e in stm32wb_pwm.h.
+
+config STM32WB_TIM17_CH1OUT
+	bool "TIM17 Channel 1 Output"
+	default n
+	---help---
+		Enables channel 1 output.
+
+config STM32WB_TIM17_CH1NOUT
+	bool "TIM17 Channel 1 Complementary Output"
+	default n
+	depends on STM32WB_TIM17_CH1OUT
+	---help---
+		Enables channel 1 complementary output.
+
+endif # STM32WB_TIM17_CHANNEL1
+
+endif # STM32WB_PWM_MULTICHAN
+
+if !STM32WB_PWM_MULTICHAN
+
+config STM32WB_TIM17_CHANNEL
+	int "TIM17 PWM Output Channel"
+	default 1
+	range 1 1
+	---help---
+		If TIM17 is enabled for PWM usage, you also need specifies the timer output
+		channel {1}
+
+if STM32_TIM17_CHANNEL = 1
+
+config STM32WB_TIM17_CH1OUT
+	bool "TIM17 Channel 1 Output"
+	default n
+	---help---
+		Enables channel 1 output.
+
+endif # STM32WB_TIM17_CHANNEL = 1
+
+config STM32WB_TIM17_CHMODE
+	int "TIM17 Channel Mode"
+	default 6
+	range 0 7
+	---help---
+		Specifies the channel mode. See enum stm32wb_pwm_chanmode_e in stm32wb_pwm.h.
+
+endif # !STM32WB_PWM_MULTICHAN
+
+endif # STM32WB_TIM17_PWM
+
+
+
+
+
+
+
+if STM32WB_LPTIM1_PWM
+
+if STM32WB_PWM_MULTICHAN
+
+config STM32WB_LPTIM1_CHANNEL1
+	bool "LPTIM1 Channel 1"
+	default n
+	---help---
+		Enables channel 1.
+
+if STM32WB_LPTIM1_CHANNEL1
+
+config STM32WB_LPTIM1_CH1OUT
+	bool "LPTIM1 Channel 1 Output"
+	default n
+	---help---
+		Enables channel 1 output.
+
+config STM32WB_LPTIM1_CH1NOUT
+	bool "LPTIM1 Channel 1 Complementary Output"
+	default n
+	depends on STM32WB_LPTIM1_CH1OUT
+	---help---
+		Enables channel 1 complementary output.
+
+endif # STM32WB_LPTIM1_CHANNEL1
+
+endif # STM32WB_PWM_MULTICHAN
+
+if !STM32WB_PWM_MULTICHAN
+
+config STM32WB_LPTIM1_CHANNEL
+	int "LPTIM1 PWM Output Channel"
+	default 1
+	range 1 1
+	---help---
+		If LPTIM1 is enabled for PWM usage, you also need specifies the timer output
+		channel {1}
+
+if STM32WB_LPTIM1_CHANNEL = 1
+
+config STM32WB_LPTIM1_CH1OUT
+	bool "LPTIM1 Channel 1 Output"
+	default n
+	---help---
+		Enables channel 1 output.
+
+config STM32WB_LPTIM1_CH1NOUT
+	bool "LPTIM1 Channel 1 Complementary Output"
+	default n
+	---help---
+		Enables channel 1 Complementary Output.
+
+endif # STM32WB_LPTIM1_CHANNEL = 1
+
+endif # !STM32WB_PWM_MULTICHAN
+
+endif # STM32WB_LPTIM1_PWM
+
+if STM32WB_LPTIM2_PWM
+
+if STM32WB_PWM_MULTICHAN
+
+config STM32WB_LPTIM2_CHANNEL1
+	bool "LPTIM2 Channel 1"
+	default n
+	---help---
+		Enables channel 1.
+
+if STM32WB_LPTIM2_CHANNEL1
+
+config STM32WB_LPTIM2_CH1OUT
+	bool "LPTIM2 Channel 1 Output"
+	default n
+	---help---
+		Enables channel 1 output.
+
+config STM32WB_LPTIM2_CH1NOUT
+	bool "LPTIM2 Channel 1 Complementary Output"
+	default n
+	depends on STM32WB_LPTIM2_CH1OUT
+	---help---
+		Enables channel 1 complementary output.
+
+endif # STM32WB_LPTIM2_CHANNEL1
+
+endif # STM32WB_PWM_MULTICHAN
+
+if !STM32WB_PWM_MULTICHAN
+
+config STM32WB_LPTIM2_CHANNEL
+	int "LPTIM2 PWM Output Channel"
+	default 1
+	range 1 1
+	---help---
+		If LPTIM2 is enabled for PWM usage, you also need specifies the timer output
+		channel {1}
+
+if STM32WB_LPTIM2_CHANNEL = 1
+
+config STM32WB_LPTIM2_CH1OUT
+	bool "LPTIM2 Channel 1 Output"
+	default n
+	---help---
+		Enables channel 1 output.
+
+config STM32WB_LPTIM2_CH1NOUT
+	bool "LPTIM2 Channel 1 Complementary Output"
+	default n
+	---help---
+		Enables channel 1 Complementary Output.
+
+endif # STM32WB_LPTIM2_CHANNEL = 1
+
+endif # !STM32WB_PWM_MULTICHAN
+
+endif # STM32WB_LPTIM2_PWM
+
+
+
+
+config STM32WB_PWM_MULTICHAN
+	bool "PWM Multiple Output Channels"
+	default n
+	depends on STM32WB_TIM1_PWM || STM32WB_TIM2_PWM || STM32WB_TIM16_PWM || STM32WB_TIM17_PWM || STM32WB_LPTIM1_PWM || STM32WB_LPTIM2_PWM
+	select ARCH_HAVE_PWM_MULTICHAN
+	---help---
+		Specifies that the PWM driver supports multiple output
+		channels per timer.
+
+config STM32WB_TIM1_ADC
+	bool "TIM1 ADC"
+	default n
+	depends on STM32WB_TIM1 && STM32WB_ADC1
+	---help---
+		Reserve timer 1 for use by ADC
+
+		Timer devices may be used for different purposes.  If STM32WB_TIM1 is
+		defined then the following may also be defined to indicate that the
+		timer is intended to be used for ADC conversion. Note that ADC usage
+		requires two definition:  Not only do you have to assign the timer
+		for used by the ADC, but then you also have to configure which ADC
+		channel it is assigned to.
+
+choice
+	prompt "Select ADC to trigger"
+	default STM32WB_TIM1_ADC1
+	depends on STM32WB_TIM1_ADC
+
+config STM32WB_TIM1_ADC1
+	bool "TIM1 trigger ADC1"
+	depends on STM32WB_ADC1
+	select STM32WB_HAVE_ADC1_TIMER
+	---help---
+		Reserve TIM1 to trigger ADC1
+
+endchoice
+
+config STM32WB_TIM1_ADC_CHAN
+	int "TIM1 channel"
+	default 1
+	range 1 4
+	depends on STM32WB_TIM1_ADC
+	---help---
+		Values 1:CC1 2:CC2 3:CC3 4:CC4
+
+config STM32WB_TIM2_ADC
+	bool "TIM2 ADC"
+	default n
+	depends on STM32WB_TIM2 && STM32WB_ADC1
+	---help---
+		Reserve timer 2 for use by ADC
+
+		Timer devices may be used for different purposes.  If STM32WB_TIM2 is
+		defined then the following may also be defined to indicate that the
+		timer is intended to be used for ADC conversion. Note that ADC usage
+		requires two definition:  Not only do you have to assign the timer
+		for used by the ADC, but then you also have to configure which ADC
+		channel it is assigned to.
+
+choice
+	prompt "Select ADC to trigger"
+	default STM32WB_TIM2_ADC1
+	depends on STM32WB_TIM2_ADC
+
+config STM32WB_TIM2_ADC1
+	bool "TIM2 trigger ADC1"
+	depends on STM32WB_ADC1
+	select STM32WB_HAVE_ADC1_TIMER
+	---help---
+		Reserve TIM2 to trigger ADC1
+
+endchoice
+
+config STM32WB_TIM2_ADC_CHAN
+	int "TIM2 channel"
+	default 1
+	range 1 4
+	depends on STM32WB_TIM2_ADC
+	---help---
+		Values 1:CC1 2:CC2 3:CC3 4:CC4
+
+
+
+config STM32WB_HAVE_ADC1_TIMER
+	bool
+
+config STM32WB_ADC1_SAMPLE_FREQUENCY
+	int "ADC1 Sampling Frequency"
+	default 100
+	depends on STM32WB_HAVE_ADC1_TIMER
+	---help---
+		ADC1 sampling frequency.  Default:  100Hz
+
+
+
+config STM32WB_TIM1_CAP
+	bool "TIM1 Capture"
+	default n
+	depends on STM32WB_HAVE_TIM1
+	---help---
+		Reserve timer 1 for use by Capture
+
+		Timer devices may be used for different purposes.  One special purpose is
+		to capture input.
+
+config STM32WB_TIM2_CAP
+	bool "TIM2 Capture"
+	default n
+	depends on STM32WB_HAVE_TIM2
+	---help---
+		Reserve timer 2 for use by Capture
+
+		Timer devices may be used for different purposes.  One special purpose is
+		to capture input.
+
+
+
+
+menu "STM32WB TIMx Outputs Configuration"
+	depends on STM32WB_TIM1_PWM || STM32WB_TIM2_PWM || STM32WB_TIM16_PWM || STM32WB_TIM17_PWM || STM32WB_LPTIM1_PWM || STM32WB_LPTIM2_PWM
+
+config STM32WB_TIM1_CH1POL
+	int "TIM1 Channel 1 Output polarity"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM1_CH1OUT
+	---help---
+		TIM1 Channel 1 output polarity
+
+config STM32WB_TIM1_CH1IDLE
+	int "TIM1 Channel 1 Output IDLE"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM1_CH1OUT
+	---help---
+		TIM1 Channel 1 output IDLE
+
+config STM32WB_TIM1_CH1NPOL
+	int "TIM1 Channel 1 Complementary Output polarity"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM1_CH1NOUT
+	---help---
+		TIM1 Channel 1 Complementary Output polarity
+
+config STM32WB_TIM1_CH1NIDLE
+	int "TIM1 Channel 1 Complementary Output IDLE"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM1_CH1NOUT
+	---help---
+		TIM1 Channel 1 Complementary Output IDLE
+
+config STM32WB_TIM1_CH2POL
+	int "TIM1 Channel 2 Output polarity"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM1_CH2OUT
+	---help---
+		TIM1 Channel 2 output polarity
+
+config STM32WB_TIM1_CH2IDLE
+	int "TIM1 Channel 2 Output IDLE"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM1_CH2OUT
+	---help---
+		TIM1 Channel 2 output IDLE
+
+config STM32WB_TIM1_CH2NPOL
+	int "TIM1 Channel 2 Complementary Output polarity"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM1_CH2NOUT
+	---help---
+		TIM1 Channel 2 Complementary Output polarity
+
+config STM32WB_TIM1_CH2NIDLE
+	int "TIM1 Channel 2 Complementary Output IDLE"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM1_CH2NOUT
+	---help---
+		TIM1 Channel 2 Complementary Output IDLE
+
+config STM32WB_TIM1_CH3POL
+	int "TIM1 Channel 3 Output polarity"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM1_CH3OUT
+	---help---
+		TIM1 Channel 3 output polarity
+
+config STM32WB_TIM1_CH3IDLE
+	int "TIM1 Channel 3 Output IDLE"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM1_CH3OUT
+	---help---
+		TIM1 Channel 3 output IDLE
+
+config STM32WB_TIM1_CH3NPOL
+	int "TIM1 Channel 3 Complementary Output polarity"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM1_CH3NOUT
+	---help---
+		TIM1 Channel 3 Complementary Output polarity
+
+config STM32WB_TIM1_CH3NIDLE
+	int "TIM1 Channel 3 Complementary Output IDLE"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM1_CH3NOUT
+	---help---
+		TIM1 Channel 3 Complementary Output IDLE
+
+config STM32WB_TIM1_CH4POL
+	int "TIM1 Channel 4 Output polarity"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM1_CH4OUT
+	---help---
+		TIM1 Channel 4 output polarity
+
+config STM32WB_TIM1_CH4IDLE
+	int "TIM1 Channel 4 Output IDLE"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM1_CH4OUT
+	---help---
+		TIM1 Channel 4 output IDLE
+
+config STM32WB_TIM2_CH1POL
+	int "TIM2 Channel 1 Output polarity"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM2_CH1OUT
+	---help---
+		TIM2 Channel 1 output polarity
+
+config STM32WB_TIM2_CH1IDLE
+	int "TIM2 Channel 1 Output IDLE"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM2_CH1OUT
+	---help---
+		TIM2 Channel 1 output IDLE
+
+config STM32WB_TIM2_CH2POL
+	int "TIM2 Channel 2 Output polarity"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM2_CH2OUT
+	---help---
+		TIM2 Channel 2 output polarity
+
+config STM32WB_TIM2_CH2IDLE
+	int "TIM2 Channel 2 Output IDLE"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM2_CH2OUT
+	---help---
+		TIM2 Channel 2 output IDLE
+
+config STM32WB_TIM2_CH3POL
+	int "TIM2 Channel 3 Output polarity"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM2_CH3OUT
+	---help---
+		TIM2 Channel 3 output polarity
+
+config STM32WB_TIM2_CH3IDLE
+	int "TIM2 Channel 3 Output IDLE"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM2_CH3OUT
+	---help---
+		TIM2 Channel 3 output IDLE
+
+config STM32WB_TIM2_CH4POL
+	int "TIM2 Channel 4 Output polarity"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM2_CH4OUT
+	---help---
+		TIM2 Channel 4 output polarity
+
+config STM32WB_TIM2_CH4IDLE
+	int "TIM2 Channel 4 Output IDLE"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM2_CH4OUT
+	---help---
+		TIM2 Channel 4 output IDLE
+
+config STM32WB_TIM16_CH1POL
+	int "TIM16 Channel 1 Output polarity"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM16_CH1OUT
+	---help---
+		TIM16 Channel 1 output polarity
+
+config STM32WB_TIM16_CH1IDLE
+	int "TIM16 Channel 1 Output IDLE"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM16_CH1OUT
+	---help---
+		TIM16 Channel 1 output IDLE
+
+config STM32WB_TIM17_CH1POL
+	int "TIM17 Channel 1 Output polarity"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM17_CH1OUT
+	---help---
+		TIM17 Channel 1 output polarity
+
+config STM32WB_TIM17_CH1IDLE
+	int "TIM17 Channel 1 Output IDLE"
+	default 0
+	range 0 1
+	depends on STM32WB_TIM17_CH1OUT
+	---help---
+		TIM17 Channel 1 output IDLE
+
+endmenu #STM32WB TIMx Outputs Configuration
+
+
+
+
+
+endmenu # Timer Configuration
+
+menu "ADC Configuration"
+	depends on STM32WB_ADC1
+
+config STM32WB_ADC_NO_STARTUP_CONV
+	bool "Do not start conversion when opening ADC device"
+	default n
+	---help---
+		Do not start conversion when opening ADC device.
+
+config STM32WB_ADC_NOIRQ
+	bool "Do not use default ADC interrupts"
+	default n
+	---help---
+		Do not use default ADC interrupts handlers.
+
+config STM32WB_ADC_SMPR
+	int "ADC sample time"
+	default 0
+	range 0 7
+	---help---
+		ADC sample time
+		  0 -   2.5 ADC clock cycles
+			1 -   6.5 ADC clock cycles
+			2 -  12.5 ADC clock cycles
+			3 -  24.5 ADC clock cycles
+			4 -  47.5 ADC clock cycles
+			5 -  92.5 ADC clock cycles
+			6 - 247.5 ADC clock cycles
+			7 - 640.5 ADC clock cycles
+
+config STM32WB_ADC_LL_OPS
+	bool "ADC low-level operations"
+	default n
+	---help---
+		Enable low-level ADC ops.
+
+config STM32WB_ADC1_RESOLUTION
+	int "ADC1 resolution"
+	depends on STM32WB_ADC1
+	default 0
+	range 0 3
+	---help---
+		ADC1 resolution. 0 - 12 bit, 1 - 10 bit, 2 - 8 bit, 3 - 6 bit
+
+config STM32WB_ADC1_DMA
+	bool "ADC1 DMA"
+	depends on STM32WB_ADC1
+	default n
+	---help---
+		If DMA is selected, then the ADC may be configured to support
+		DMA transfer, which is necessary if multiple channels are read
+		or if very high trigger frequencies are used.
+
+config STM32WB_ADC1_DMA_CFG
+	int "ADC1 DMA configuration"
+	depends on STM32WB_ADC1_DMA
+	range 0 1
+	default 1
+	---help---
+		0 - ADC1 DMA in One Shot Mode, 1 - ADC1 DMA in Circular Mode
+
+
+
+
+menu "STM32WB ADCx triggering Configuration"
+
+config STM32WB_ADC1_TIMTRIG
+	int "ADC1 regular channel trigger"
+	default 0
+	range 0 4
+	depends on STM32WB_HAVE_ADC1_TIMER
+	---help---
+		Values 0:CC1 1:CC2 2:CC3 3:CC4 4:TRGO
+
+config STM32WB_ADC1_INJ_CHAN
+	int "ADC1 configured injected channels"
+	depends on STM32WB_ADC1
+	range 0 4
+	default 0
+	---help---
+		Number of configured ADC1 injected channels.
+
+if STM32WB_ADC1_INJ_CHAN > 0
+
+config STM32WB_ADC1_JTIMTRIG
+	int "ADC1 external trigger for injected channels"
+	default 0
+	range 0 5
+	depends on STM32WB_HAVE_ADC1_TIMER
+	---help---
+		Values 0:CC1 1:CC2 2:CC3 3:CC4 4:TRGO 5:TRGO2
+
+endif
+
+
+endmenu #STM32WB ADCx triggering Configuration
+
+endmenu
+
+
+
+
+config STM32WB_SERIALDRIVER
+	bool
+
+config STM32WB_1WIREDRIVER
+	bool
+
+menu "U[S]ART Configuration"
+	depends on STM32WB_USART1
+
+choice
+	prompt "USART1 Driver Configuration"
+	default STM32WB_USART1_SERIALDRIVER
+	depends on STM32WB_USART1
+
+config STM32WB_USART1_SERIALDRIVER
+	bool "Standard serial driver"
+	select USART1_SERIALDRIVER
+	select STM32WB_SERIALDRIVER
+
+config STM32WB_USART1_1WIREDRIVER
+	bool "1-Wire driver"
+	select STM32WB_1WIREDRIVER
+
+endchoice # USART1 Driver Configuration
+
+if USART1_SERIALDRIVER
+
+config USART1_RS485
+	bool "RS-485 on USART1"
+	default n
+	depends on STM32WB_USART1
+	---help---
+		Enable RS-485 interface on USART1. Your board config will have to
+		provide GPIO_USART1_RS485_DIR pin definition. Currently it cannot be
+		used with USART1_RXDMA.
+
+config USART1_RS485_DIR_POLARITY
+	int "USART1 RS-485 DIR pin polarity"
+	default 1
+	range 0 1
+	depends on USART1_RS485
+	---help---
+		Polarity of DIR pin for RS-485 on USART1. Set to state on DIR pin which
+		enables TX (0 - low / nTXEN, 1 - high / TXEN).
+
+config USART1_RXDMA
+	bool "USART1 Rx DMA"
+	default n
+	depends on STM32WB_USART1 && (STM32WB_DMA1 || STM32WB_DMA2)
+	---help---
+		In high data rate usage, Rx DMA may eliminate Rx overrun errors
+
+endif # USART1_SERIALDRIVER
+
+
+
+
+
+
+if STM32WB_SERIALDRIVER
+
+comment "Serial Driver Configuration"
+
+config STM32WB_SERIAL_RXDMA_BUFFER_SIZE
+	int "Rx DMA buffer size"
+	default 32
+	depends on USART1_RXDMA
+	---help---
+		The DMA buffer size when using RX DMA to emulate a FIFO.
+
+		When streaming data, the generic serial layer will be called
+		every time the FIFO receives half this number of bytes.
+
+		Value given here will be rounded up to next multiple of 32 bytes.
+
+config STM32WB_SERIAL_DISABLE_REORDERING
+	bool "Disable reordering of ttySx devices."
+	depends on STM32WB_USART1
+	default n
+	---help---
+		NuttX per default reorders the serial ports (/dev/ttySx) so that the
+		console is always on /dev/ttyS0. If more than one UART is in use this
+		can, however, have the side-effect that all port mappings
+		(hardware USART1 -> /dev/ttyS0) change if the console is moved to another
+		UART. This is in particular relevant if a project uses the USB console
+		in some boards and a serial console in other boards, but does not
+		want the side effect of having all serial port names change when just
+		the console is moved from serial to USB.
+
+config STM32WB_FLOWCONTROL_BROKEN
+	bool "Use Software UART RTS flow control"
+	depends on STM32WB_USART1
+	default n
+	---help---
+		Enable UART RTS flow control using Software. Because STM
+		Current STM32 have broken HW based RTS behavior (they assert
+		nRTS after every byte received)  Enable this setting workaround
+		this issue by using software based management of RTS
+
+config STM32WB_USART_BREAKS
+	bool "Add TIOxSBRK to support sending Breaks"
+	depends on STM32WB_USART1
+	default n
+	---help---
+		Add TIOCxBRK routines to send a line break per the STM32 manual, the
+		break will be a pulse based on the value M. This is not a BSD compatible
+		break.
+
+config STM32WB_SERIALBRK_BSDCOMPAT
+	bool "Use GPIO To send Break"
+	depends on STM32WB_USART1 && STM32WB_USART_BREAKS
+	default n
+	---help---
+		Enable using GPIO on the TX pin to send a BSD compatible break:
+		TIOCSBRK will start the break and TIOCCBRK will end the break.
+		The current STM32 U[S]ARTS have no way to leave the break (TX=LOW)
+		on because the SW starts the break and then the HW automatically clears
+		the break. This makes it is difficult to sent a long break.
+
+config STM32WB_USART_SINGLEWIRE
+	bool "Single Wire Support"
+	default n
+	depends on STM32WB_USART1
+	---help---
+		Enable single wire UART support.  The option enables support for the
+		TIOCSSINGLEWIRE ioctl in the STM32WB serial driver.
+
+config STM32WB_USART_INVERT
+	bool "Signal Invert Support"
+	default n
+	depends on STM32WB_USART1
+	---help---
+		Enable signal inversion UART support. The option enables support for the
+		TIOCSINVERT ioctl in the STM32WB serial driver.
+
+config STM32WB_USART_SWAP
+	bool "Swap RX/TX pins support"
+	default n
+	depends on STM32WB_USART1
+	---help---
+		Enable RX/TX pin swapping support. The option enables support for the
+		TIOCSSWAP ioctl in the STM32WB serial driver.
+
+if PM
+
+config STM32WB_PM_SERIAL_ACTIVITY
+	int "PM serial activity"
+	default 10
+	---help---
+		PM activity reported to power management logic on every serial
+		interrupt.
+
+endif
+endif # STM32WB_SERIALDRIVER
+
+endmenu # U[S]ART Configuration
+
+menu "SPI Configuration"
+	depends on STM32WB_SPI1 || STM32WB_SPI2
+
+config STM32WB_SPI_INTERRUPTS
+	bool "Interrupt driver SPI"
+	default n
+	---help---
+		Select to enable interrupt driven SPI support. Non-interrupt-driven,
+		poll-waiting is recommended if the interrupt rate would be to high in
+		the interrupt driven case.
+
+config STM32WB_SPI_DMA
+	bool "SPI DMA"
+	default n
+	---help---
+		Use DMA to improve SPI transfer performance.  Cannot be used with STM32WB_SPI_INTERRUPT.
+
+endmenu
+
+menu "I2C Configuration"
+	depends on STM32WB_I2C1 || STM32WB_I2C3
+
+config STM32WB_I2C_DYNTIMEO
+	bool "Use dynamic timeouts"
+	default n
+	depends on STM32WB_I2C1 || STM32WB_I2C3
+
+config STM32WB_I2C_DYNTIMEO_USECPERBYTE
+	int "Timeout Microseconds per Byte"
+	default 500
+	depends on STM32WB_I2C_DYNTIMEO
+
+config STM32WB_I2C_DYNTIMEO_STARTSTOP
+	int "Timeout for Start/Stop (Milliseconds)"
+	default 1000
+	depends on STM32WB_I2C_DYNTIMEO
+
+config STM32WB_I2CTIMEOSEC
+	int "Timeout seconds"
+	default 0
+	depends on STM32WB_I2C1 || STM32WB_I2C3
+
+config STM32WB_I2CTIMEOMS
+	int "Timeout Milliseconds"
+	default 500
+	depends on (STM32WB_I2C1 || STM32WB_I2C3) && !STM32WB_I2C_DYNTIMEO
+
+config STM32WB_I2CTIMEOTICKS
+	int "Timeout for Done and Stop (ticks)"
+	default 500
+	depends on (STM32WB_I2C1 || STM32WB_I2C3) && !STM32WB_I2C_DYNTIMEO
+
+endmenu
+
+
+
+
+
+menu "QEncoder Driver"
+	depends on SENSORS_QENCODER
+	depends on STM32WB_TIM1 || STM32WB_TIM2
+
+config STM32WB_TIM1_QE
+	bool "TIM1"
+	default n
+	depends on STM32WB_TIM1
+	---help---
+		Reserve TIM1 for use by QEncoder.
+
+if STM32WB_TIM1_QE
+
+config STM32WB_TIM1_QEPSC
+	int "TIM1 pulse prescaler"
+	default 1
+	---help---
+		This prescaler divides the number of recorded encoder pulses, limiting the count rate at the expense of resolution.
+		Replaces the obscure "output clock of TIM1." (CONFIG_TIM1_QECLKOUT).
+
+endif
+
+config STM32WB_TIM2_QE
+	bool "TIM2"
+	default n
+	depends on STM32WB_TIM2
+	---help---
+		Reserve TIM2 for use by QEncoder.
+
+if STM32WB_TIM2_QE
+
+config STM32WB_TIM2_QEPSC
+	int "TIM2 pulse prescaler"
+	default 1
+	---help---
+		This prescaler divides the number of recorded encoder pulses, limiting the count rate at the expense of resolution.
+		Replaces the obscure "output clock of TIM2." (CONFIG_TIM2_QECLKOUT).
+
+endif
+
+config STM32WB_QENCODER_FILTER
+	bool "Enable filtering on STM32 QEncoder input"
+	default y
+
+choice
+	depends on STM32WB_QENCODER_FILTER
+	prompt "Input channel sampling frequency"
+	default STM32WB_QENCODER_SAMPLE_FDTS_4
+
+config STM32WB_QENCODER_SAMPLE_FDTS
+	bool "fDTS"
+
+config STM32WB_QENCODER_SAMPLE_CKINT
+	bool "fCK_INT"
+
+config STM32WB_QENCODER_SAMPLE_FDTS_2
+	bool "fDTS/2"
+
+config STM32WB_QENCODER_SAMPLE_FDTS_4
+	bool "fDTS/4"
+
+config STM32WB_QENCODER_SAMPLE_FDTS_8
+	bool "fDTS/8"
+
+config STM32WB_QENCODER_SAMPLE_FDTS_16
+	bool "fDTS/16"
+
+config STM32WB_QENCODER_SAMPLE_FDTS_32
+	bool "fDTS/32"
+
+endchoice
+
+choice
+	depends on STM32WB_QENCODER_FILTER
+	prompt "Input channel event count"
+	default STM32WB_QENCODER_SAMPLE_EVENT_6
+
+config STM32WB_QENCODER_SAMPLE_EVENT_1
+	depends on STM32WB_QENCODER_SAMPLE_FDTS
+	bool "1"
+
+config STM32WB_QENCODER_SAMPLE_EVENT_2
+	depends on STM32WB_QENCODER_SAMPLE_CKINT
+	bool "2"
+
+config STM32WB_QENCODER_SAMPLE_EVENT_4
+	depends on STM32WB_QENCODER_SAMPLE_CKINT
+	bool "4"
+
+config STM32WB_QENCODER_SAMPLE_EVENT_5
+	depends on STM32WB_QENCODER_SAMPLE_FDTS_16 || STM32WB_QENCODER_SAMPLE_FDTS_32
+	bool "5"
+
+config STM32WB_QENCODER_SAMPLE_EVENT_6
+	depends on !STM32WB_QENCODER_SAMPLE_FDTS && !STM32WB_QENCODER_SAMPLE_CKINT
+	bool "6"
+
+config STM32WB_QENCODER_SAMPLE_EVENT_8
+	depends on !STM32WB_QENCODER_SAMPLE_FDTS
+	bool "8"
+
+endchoice
+
+endmenu
+
+
+
+menu "SAI Configuration"
+	depends on STM32WB_SAI1
+
+choice
+	prompt "Operation mode"
+	default STM32WB_SAI_DMA
+	---help---
+		Select the operation mode the SAI driver should use.
+
+config STM32WB_SAI_POLLING
+	bool "Polling"
+	---help---
+		The SAI registers are polled for events.
+
+config STM32WB_SAI_INTERRUPTS
+	bool "Interrupt"
+	---help---
+		Select to enable interrupt driven SAI support.
+
+config STM32WB_SAI_DMA
+	bool "DMA"
+	---help---
+		Use DMA to improve SAI transfer performance.
+
+endchoice # Operation mode
+
+choice
+	prompt "SAI1 synchronization enable"
+	default STM32WB_SAI1_BOTH_ASYNC
+	depends on STM32WB_SAI1_A && STM32WB_SAI1_B
+	---help---
+		Select the synchronization mode of the SAI sub-blocks
+
+config STM32WB_SAI1_BOTH_ASYNC
+	bool "Both asynchronous"
+
+config STM32WB_SAI1_A_SYNC_WITH_B
+	bool "Block A is synchronous with Block B"
+
+config STM32WB_SAI1_B_SYNC_WITH_A
+	bool "Block B is synchronous with Block A"
+
+endchoice # SAI1 synchronization enable
+
+endmenu
+
+endif # ARCH_CHIP_STM32WB
