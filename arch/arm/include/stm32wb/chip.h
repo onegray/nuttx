@@ -42,7 +42,8 @@
 #  define STM32WB_NDMA                     2   /* DMA1-2 with 7 channels each */
 #  define STM32WB_NSPI                     3   /* SPI1-2, QSPI */
 #  define STM32WB_NI2S                     1   /* SAI1 (dual channel high quality audio) */
-#  define STM32WB_NUSART                   2   /* USART1, LPUART1 */
+#  define STM32WB_NUSART                   1   /* USART1 */
+#  define STM32WB_NLPUART                  1   /* LPUART1 */
 #  define STM32WB_NI2C                     2   /* I2C1, I2C3 */
 #  define STM32WB_NCAN                     0   /* No CAN */
 #  define STM32WB_NSDIO                    0   /* One SDIO interface */
