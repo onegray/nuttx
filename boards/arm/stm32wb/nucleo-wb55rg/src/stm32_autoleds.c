@@ -1,9 +1,8 @@
 /****************************************************************************
- * boards/arm/stm32l4/nucleo-l476rg/src/stm32l4_boot.c
+ * boards/arm/stm32l4/nucleo-l476rg/src/stm32l4_autoleds.c
  *
- *   Copyright (C) 2014-2015, 2018 Gregory Nutt. All rights reserved.
+ *   Copyright (C) 2014-2015 Gregory Nutt. All rights reserved.
  *   Author: Gregory Nutt <gnutt@nuttx.org>
- *           Librae <librae8226@gmail.com>
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -40,80 +39,58 @@
 
 #include <nuttx/config.h>
 
+#include <stdint.h>
+#include <stdbool.h>
 #include <debug.h>
 
-#include <nuttx/arch.h>
 #include <nuttx/board.h>
-#include <nuttx/spi/spi.h>
-
 #include <arch/board/board.h>
 
+#include "chip.h"
 #include "arm_arch.h"
-// #include "nucleo-wb55rg.h"
+#include "arm_internal.h"
+#include "stm32wb.h"
+#include "nucleo-wb55rg.h"
+
+#ifdef CONFIG_ARCH_LEDS
 
 /****************************************************************************
  * Public Functions
  ****************************************************************************/
 
 /****************************************************************************
- * Name: stm32wb_board_initialize
- *
- * Description:
- *   All STM32L4 architectures must provide the following entry point.  This entry point
- *   is called early in the initialization -- after all memory has been configured
- *   and mapped but before any devices have been initialized.
- *
+ * Name: board_autoled_initialize
  ****************************************************************************/
 
-void stm32wb_board_initialize(void)
+void board_autoled_initialize(void)
 {
-  /* Configure on-board LEDs if LED support has been selected. */
+  /* Configure LD2 GPIO for output */
 
-#ifdef CONFIG_ARCH_LEDS
-  board_autoled_initialize();
-#endif
-
-  /* Configure SPI chip selects if 1) SP2 is not disabled, and 2) the weak function
-   * stm32wb_spiinitialize() has been brought into the link.
-   */
-
-#if defined(CONFIG_STM32L4_SPI1) || defined(CONFIG_STM32L4_SPI2) || defined(CONFIG_STM32L4_SPI3)
-  stm32wb_spiinitialize();
-#endif
-
-  /* Initialize USB is 1) USBDEV is selected, 2) the USB controller is not
-   * disabled, and 3) the weak function stm32wb_usbinitialize() has been brought
-   * into the build.
-   */
-
-#if defined(CONFIG_USBDEV) && defined(CONFIG_STM32L4_USB)
-  stm32wb_usbinitialize();
-#endif
+//  stm32wb_configgpio(GPIO_LD2);
 }
 
 /****************************************************************************
- * Name: board_late_initialize
- *
- * Description:
- *   If CONFIG_BOARD_LATE_INITIALIZE is selected, then an additional
- *   initialization call will be performed in the boot-up sequence to a
- *   function called board_late_initialize().  board_late_initialize() will be
- *   called immediately after up_initialize() is called and just before the
- *   initial application is started.  This additional initialization phase
- *   may be used, for example, to initialize board-specific device drivers.
- *
+ * Name: board_autoled_on
  ****************************************************************************/
 
-#ifdef CONFIG_BOARD_LATE_INITIALIZE
-void board_late_initialize(void)
+void board_autoled_on(int led)
 {
-  /* Perform NSH initialization here instead of from the NSH.  This
-   * alternative NSH initialization is necessary when NSH is ran in user-space
-   * but the initialization function must run in kernel space.
-   */
-
-#if defined(CONFIG_NSH_LIBRARY) && !defined(CONFIG_NSH_ARCHINIT)
-  board_app_initialize(0);
-#endif
+  if (led == 1)
+    {
+//      stm32wb_gpiowrite(GPIO_LD2, true);
+    }
 }
-#endif
+
+/****************************************************************************
+ * Name: board_autoled_off
+ ****************************************************************************/
+
+void board_autoled_off(int led)
+{
+  if (led == 1)
+    {
+//      stm32wb_gpiowrite(GPIO_LD2, false);
+    }
+}
+
+#endif /* CONFIG_ARCH_LEDS */
