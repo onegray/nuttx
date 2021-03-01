@@ -28,7 +28,7 @@
 #include <nuttx/config.h>
 #include "chip.h"
 
-#if defined(CONFIG_STM32WB_STM32WB55)
+#if defined(CONFIG_ARCH_CHIP_STM32WB55RG)
 #  include "hardware/stm32wb55xx_pinmap.h"
 #else
 #  error "Unsupported STM32 WB pin map"

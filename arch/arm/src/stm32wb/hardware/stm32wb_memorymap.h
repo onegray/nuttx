@@ -38,8 +38,8 @@
 #define STM32WB_FLASH_BASE     0x08000000     /* 0x08000000-0x080fffff: FLASH memory */
 #define STM32WB_FLASH_MASK     0xf8000000     /* Test if addr in FLASH */
 #define STM32WB_SRAM1_BASE     0x20000000     /* 0x20000000-0x2002ffff: 192к RAM1 block */
-#define STM32WB_SRAM2a_BASE    0x20030000     /* 0x20030000-0x20037fff: 32k RAM2a block */
-#define STM32WB_SRAM2b_BASE    0x20038000     /* 0x20038000-0x2003ffff: 32k RAM2b block */
+#define STM32WB_SRAM2A_BASE    0x20030000     /* 0x20030000-0x20037fff: 32k RAM2a block */
+#define STM32WB_SRAM2B_BASE    0x20038000     /* 0x20038000-0x2003ffff: 32k RAM2b block */
 
 #define STM32WB_SYSMEM_BASE    0x1fff0000     /* 0x1fff0000-0x20006fff: System memory */
 #define STM32WB_OTP_BASE       0x1fff7000     /* 0x1fff7000-0x1fff73ff: OTP memory */

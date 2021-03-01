@@ -1,0 +1,193 @@
+############################################################################
+# arch/arm/src/stm32wb/Make.defs
+#
+# Licensed to the Apache Software Foundation (ASF) under one or more
+# contributor license agreements.  See the NOTICE file distributed with
+# this work for additional information regarding copyright ownership.  The
+# ASF licenses this file to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance with the
+# License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+# WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
+# License for the specific language governing permissions and limitations
+# under the License.
+#
+############################################################################
+
+# The start-up, "head", file.  Only common vectors are support so there
+# isn't one.
+
+# Common ARM and Cortex-M4 files (copied from stm32/Make.defs)
+
+CMN_ASRCS  = arm_saveusercontext.S arm_fullcontextrestore.S arm_switchcontext.S
+CMN_ASRCS += arm_testset.S arm_fetchadd.S vfork.S
+
+ifeq ($(CONFIG_ARCH_SETJMP_H),y)
+ifeq ($(CONFIG_ARCH_TOOLCHAIN_GNU),y)
+CMN_ASRCS += arm_setjmp.S
+endif
+endif
+
+CMN_CSRCS  = arm_assert.c arm_blocktask.c arm_copyfullstate.c arm_createstack.c
+CMN_CSRCS += arm_doirq.c arm_exit.c arm_hardfault.c arm_initialize.c
+CMN_CSRCS += arm_initialstate.c arm_interruptcontext.c arm_mdelay.c arm_memfault.c
+CMN_CSRCS += arm_modifyreg8.c arm_modifyreg16.c arm_modifyreg32.c
+CMN_CSRCS += arm_releasepending.c arm_releasestack.c arm_reprioritizertr.c
+CMN_CSRCS += arm_schedulesigaction.c arm_sigdeliver.c arm_stackframe.c
+CMN_CSRCS += arm_svcall.c arm_systemreset.c arm_trigger_irq.c arm_udelay.c
+CMN_CSRCS += arm_unblocktask.c arm_usestack.c arm_vfork.c
+
+# Configuration-dependent common files
+
+ifeq ($(CONFIG_ARMV7M_STACKCHECK),y)
+CMN_CSRCS += arm_stackcheck.c
+endif
+
+ifeq ($(CONFIG_ARMV7M_LAZYFPU),y)
+CMN_ASRCS += arm_lazyexception.S
+else
+CMN_ASRCS += arm_exception.S
+endif
+CMN_CSRCS += arm_vectors.c
+
+ifeq ($(CONFIG_ARCH_FPU),y)
+CMN_ASRCS += arm_fpu.S
+CMN_CSRCS += arm_copyarmstate.c
+endif
+
+ifeq ($(CONFIG_ARCH_RAMVECTORS),y)
+CMN_CSRCS += arm_ramvec_initialize.c arm_ramvec_attach.c
+endif
+
+ifeq ($(CONFIG_ARM_MPU),y)
+CMN_CSRCS += arm_mpu.c
+endif
+
+ifeq ($(CONFIG_BUILD_PROTECTED),y)
+CMN_CSRCS += arm_task_start.c arm_pthread_start.c
+CMN_CSRCS += arm_signal_dispatch.c
+CMN_UASRCS += arm_signal_handler.S
+endif
+
+ifeq ($(CONFIG_STACK_COLORATION),y)
+CMN_CSRCS += arm_checkstack.c
+endif
+
+# Required STM32WB files
+
+CHIP_CSRCS  = stm32wb_allocateheap.c              # stm32wb_exti_gpio.c stm32wb_gpio.c
+CHIP_CSRCS += stm32wb_irq.c                       # stm32wb_lowputc.c stm32wb_rcc.c
+CHIP_CSRCS += stm32wb_start.c stm32wb_serial.c    # stm32wb_waste.c stm32wb_uid.c
+# CHIP_CSRCS += stm32wb_spi.c stm32wb_i2c.c stm32wb_lse.c stm32wb_lsi.c
+# CHIP_CSRCS += stm32wb_pwr.c stm32wb_tim.c stm32wb_flash.c
+# CHIP_CSRCS += stm32wb_dfumode.c
+
+ifneq ($(CONFIG_ARCH_IDLE_CUSTOM),y)
+# CHIP_CSRCS += stm32wb_idle.c
+endif
+
+ifeq ($(CONFIG_TIMER),y)
+# CHIP_CSRCS += stm32wb_tim_lowerhalf.c
+endif
+
+ifneq ($(CONFIG_SCHED_TICKLESS),y)
+# CHIP_CSRCS += stm32wb_timerisr.c
+else
+# CHIP_CSRCS += stm32wb_tickless.c
+endif
+
+ifeq ($(CONFIG_STM32WB_ONESHOT),y)
+# CHIP_CSRCS += stm32wb_oneshot.c stm32wb_oneshot_lowerhalf.c
+endif
+
+ifeq ($(CONFIG_STM32WB_FREERUN),y)
+# CHIP_CSRCS += stm32wb_freerun.c
+endif
+
+ifeq ($(CONFIG_BUILD_PROTECTED),y)
+# CHIP_CSRCS += stm32wb_userspace.c stm32wb_mpuinit.c
+endif
+
+ifeq ($(CONFIG_STM32WB_ADC),y)
+# CHIP_CSRCS += stm32wb_adc.c
+endif
+
+ifeq ($(CONFIG_STM32WB_DMA),y)
+# CHIP_CSRCS += stm32wb_dma.c
+endif
+
+ifeq ($(CONFIG_USBDEV),y)
+ifeq ($(CONFIG_STM32WB_USB),y)
+# CHIP_CSRCS += stm32wb_usbdev.c
+endif
+endif
+
+ifeq ($(CONFIG_PM),y)
+# CHIP_CSRCS += stm32wb_pmlpr.c stm32wb_pmsleep.c stm32wb_pmstandby.c
+# CHIP_CSRCS += stm32wb_pmstop.c
+
+ifneq ($(CONFIG_ARCH_CUSTOM_PMINIT),y)
+# CHIP_CSRCS += stm32wb_pminitialize.c
+endif
+endif
+
+ifeq ($(CONFIG_STM32WB_PWR),y)
+# CHIP_CSRCS += stm32wb_exti_pwr.c
+endif
+
+ifeq ($(CONFIG_STM32WB_RTC),y)
+ifeq ($(CONFIG_RTC_ALARM),y)
+# CHIP_CSRCS += stm32wb_exti_alarm.c
+endif
+ifeq ($(CONFIG_RTC_PERIODIC),y)
+# CHIP_CSRCS += stm32wb_exti_wakeup.c
+endif
+ifeq ($(CONFIG_RTC_DRIVER),y)
+# CHIP_CSRCS += stm32wb_rtc_lowerhalf.c
+# CHIP_CSRCS += stm32wb_rtc.c
+endif
+endif
+
+ifeq ($(CONFIG_DEBUG_FEATURES),y)
+# CHIP_CSRCS += stm32wb_dumpgpio.c
+endif
+
+ifeq ($(CONFIG_STM32WB_COMP),y)
+# CHIP_CSRCS += stm32wb_comp.c stm32wb_exti_comp.c
+endif
+
+ifeq ($(CONFIG_STM32WB_RNG),y)
+# CHIP_CSRCS += stm32wb_rng.c
+endif
+
+ifeq ($(CONFIG_STM32WB_SAI),y)
+# CHIP_CSRCS += stm32wb_sai.c
+endif
+
+ifeq ($(CONFIG_STM32WB_LPTIM),y)
+# CHIP_CSRCS += stm32wb_lptim.c
+endif
+
+ifeq ($(CONFIG_PWM),y)
+# CHIP_CSRCS += stm32wb_pwm.c
+endif
+
+ifeq ($(CONFIG_SENSORS_QENCODER),y)
+# CHIP_CSRCS += stm32wb_qencoder.c
+endif
+
+ifeq ($(CONFIG_STM32WB_QSPI),y)
+# CHIP_CSRCS += stm32wb_qspi.c
+endif
+
+ifeq ($(CONFIG_STM32WB_IWDG),y)
+# CHIP_CSRCS += stm32wb_iwdg.c
+endif
+
+ifeq ($(CONFIG_STM32WB_1WIREDRIVER),y)
+# CHIP_CSRCS += stm32wb_1wire.c
+endif

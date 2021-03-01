@@ -115,7 +115,7 @@
 #define STM32WB_IRQ_DMA2CH7     (STM32WB_IRQ_FIRST + 61) /* 61: DMA2 Channel 7 global interrupt */
 #define STM32WB_IRQ_DMAMUX1     (STM32WB_IRQ_FIRST + 62) /* 62: DMAMUX1 overrun interrupt */
 
-#if defined(CONFIG_STM32WB_STM32WB55)
+#if defined(CONFIG_ARCH_CHIP_STM32WB55RG)
 #  define STM32WB_IRQ_NEXTINTS  63
 #else
 #  error "Unsupported STM32WB chip"

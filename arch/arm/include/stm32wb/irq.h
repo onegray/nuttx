@@ -61,7 +61,7 @@
 
 #define STM32WB_IRQ_FIRST         (16) /* Vector number of the first external interrupt */
 
-#if defined(CONFIG_STM32WB_STM32WB55)
+#if defined(CONFIG_ARCH_CHIP_STM32WB55RG)
 #  include <arch/stm32wb/stm32wb55xx_irq.h>
 #else
 #  error "Unsupported STM32 WB chip"
