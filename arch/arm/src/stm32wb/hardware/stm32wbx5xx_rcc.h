@@ -209,7 +209,7 @@
 
 #define RCC_CFGR_MCOSEL_SHIFT       (24)      /* Bits 24-27: Microcontroller Clock Output */
 #define RCC_CFGR_MCOSEL_MASK        (0xf << RCC_CFGR_MCOSEL_SHIFT)
-#  define RCC_CFGR_MCOSEL_NONE      (0x0 << RCC_CFGR_MCOSEL_SHIFT) /* 0000: Output disabled, no clock on MCO */
+#  define RCC_CFGR_MCOSEL_DISABLED  (0x0 << RCC_CFGR_MCOSEL_SHIFT) /* 0000: Output disabled, no clock on MCO */
 #  define RCC_CFGR_MCOSEL_SYSCLK    (0x1 << RCC_CFGR_MCOSEL_SHIFT) /* 0001: SYSCLK system clock selected */
 #  define RCC_CFGR_MCOSEL_MSI       (0x2 << RCC_CFGR_MCOSEL_SHIFT) /* 0010: MSI clock selected */
 #  define RCC_CFGR_MCOSEL_HSI16     (0x3 << RCC_CFGR_MCOSEL_SHIFT) /* 0011: HSI16 clock selected */
@@ -221,7 +221,7 @@
 
 #define RCC_CFGR_MCOPRE_SHIFT       (28)      /* Bits 28-30: MCO prescaler */
 #define RCC_CFGR_MCOPRE_MASK        (0x7 << RCC_CFGR_MCOPRE_SHIFT)
-#  define RCC_CFGR_MCOPRE_NONE      (0x0 << RCC_CFGR_MCOPRE_SHIFT) /* 000: no division */
+#  define RCC_CFGR_MCOPRE_DIV1      (0x0 << RCC_CFGR_MCOPRE_SHIFT) /* 000: no division */
 #  define RCC_CFGR_MCOPRE_DIV2      (0x1 << RCC_CFGR_MCOPRE_SHIFT) /* 001: division by 2 */
 #  define RCC_CFGR_MCOPRE_DIV4      (0x2 << RCC_CFGR_MCOPRE_SHIFT) /* 010: division by 4 */
 #  define RCC_CFGR_MCOPRE_DIV8      (0x3 << RCC_CFGR_MCOPRE_SHIFT) /* 011: division by 8 */
