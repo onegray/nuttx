@@ -49,33 +49,12 @@
 
 const uint32_t g_gpiobase[STM32WB_NPORTS] =
 {
-#if STM32WB_NPORTS > 0
   STM32WB_GPIOA_BASE,
-#endif
-#if STM32WB_NPORTS > 1
   STM32WB_GPIOB_BASE,
-#endif
-#if STM32WB_NPORTS > 2
   STM32WB_GPIOC_BASE,
-#endif
-#if STM32WB_NPORTS > 3
   STM32WB_GPIOD_BASE,
-#endif
-#if STM32WB_NPORTS > 4
   STM32WB_GPIOE_BASE,
-#endif
-#if STM32WB_NPORTS > 5
-  STM32WB_GPIOF_BASE,
-#endif
-#if STM32WB_NPORTS > 6
-  STM32WB_GPIOG_BASE,
-#endif
-#if STM32WB_NPORTS > 7
-  STM32WB_GPIOH_BASE,
-#endif
-#if STM32WB_NPORTS > 8
-  STM32WB_GPIOI_BASE,
-#endif
+  STM32WB_GPIOH_BASE
 };
 
 /****************************************************************************

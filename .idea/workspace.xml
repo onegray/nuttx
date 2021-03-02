@@ -71,12 +71,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="0c12a10c-3457-4a50-9e91-5173b69013ab" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/scopes/stm32wb55.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/scopes/stm32wb55.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/arch/arm/src/stm32wb/stm32wb_gpio.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arch/arm/src/stm32/stm32_gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/arch/arm/src/stm32/stm32_gpio.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arch/arm/src/stm32l4/stm32l4_gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/arch/arm/src/stm32l4/stm32l4_gpio.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/arch/arm/src/stm32wb/hardware/stm32wb_gpio.h" beforeDir="false" afterPath="$PROJECT_DIR$/arch/arm/src/stm32wb/hardware/stm32wb_gpio.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/arch/arm/src/stm32wb/stm32wb_gpio.c" beforeDir="false" afterPath="$PROJECT_DIR$/arch/arm/src/stm32wb/stm32wb_gpio.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/boards/arm/stm32wb/nucleo-wb55rg/src/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/boards/arm/stm32wb/nucleo-wb55rg/src/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/boards/arm/stm32wb/nucleo-wb55rg/src/stm32_boot.c" beforeDir="false" afterPath="$PROJECT_DIR$/boards/arm/stm32wb/nucleo-wb55rg/src/stm32_boot.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -446,9 +445,9 @@
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
+    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
-        <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
+        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
     <list>
