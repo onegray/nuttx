@@ -301,7 +301,6 @@
 #define RCC_CIER_HSI48RDYIE         (1 << 10) /* Bit 10: HSI48 Ready Interrupt Enable */
 #define RCC_CIER_LSI2RDYIE          (1 << 11) /* Bit 11: LSI2 Ready Interrupt Enable */
 
-
 /* Clock interrupt flag register */
 
 #define RCC_CIFR_LSI1RDYIF          (1 << 0)  /* Bit 0:  LSI1 Ready Interrupt Flag */
