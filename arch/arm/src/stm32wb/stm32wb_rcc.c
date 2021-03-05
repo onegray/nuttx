@@ -63,9 +63,9 @@
 #define HSIRDY_TIMEOUT HSERDY_TIMEOUT
 #define MSIRDY_TIMEOUT HSERDY_TIMEOUT
 
-/* HSE divisor to yield ~1MHz RTC clock */
-
-#define HSE_DIVISOR (STM32_HSE_FREQUENCY + 500000) / 1000000
+///* HSE divisor to yield ~1MHz RTC clock */
+//
+//#define HSE_DIVISOR (STM32_HSE_FREQUENCY + 500000) / 1000000
 
 /* Determine if board wants to use HSI48 as 48 MHz oscillator. */
 
@@ -616,6 +616,18 @@ static void STM32_stdclockconfig(void)
 
   if (timeout > 0)
     {
+      /* Setup regulator voltage according to clock frequency */
+
+      regval = getreg32(STM32L4_PWR_CR1);
+      regval &= ~PWR_CR1_VOS_MASK;
+#if STM32L4_SYSCLK_FREQUENCY > 16000000 || \
+    (defined(BOARD_MAX_PLL_FREQUENCY) && BOARD_MAX_PLL_FREQUENCY > 16000000)
+      regval |= PWR_CR1_VOS_RANGE1;
+#else
+      regval |= PWR_CR1_VOS_RANGE2;
+#endif
+      putreg32(regval, STM32L4_PWR_CR1);
+
       /* Set the HCLK source/divider */
 
       regval  = getreg32(STM32_RCC_CFGR);
@@ -643,22 +655,14 @@ static void STM32_stdclockconfig(void)
 
 
 
-
-
-
-
-
-
-      
-
-#ifdef CONFIG_STM32_RTC_HSECLOCK
-      /* Set the RTC clock divisor */
-
-      regval  = getreg32(STM32_RCC_CFGR);
-      regval &= ~RCC_CFGR_RTCPRE_MASK;
-      regval |= RCC_CFGR_RTCPRE(HSE_DIVISOR);
-      putreg32(regval, STM32_RCC_CFGR);
-#endif
+//#ifdef CONFIG_STM32_RTC_HSECLOCK
+//      /* Set the RTC clock divisor */
+//
+//      regval  = getreg32(STM32_RCC_CFGR);
+//      regval &= ~RCC_CFGR_RTCPRE_MASK;
+//      regval |= RCC_CFGR_RTCPRE(HSE_DIVISOR);
+//      putreg32(regval, STM32_RCC_CFGR);
+//#endif
 
       /* Set the PLL source and main divider */
 
@@ -712,8 +716,6 @@ static void STM32_stdclockconfig(void)
 
 #ifdef CONFIG_STM32_SAI1PLL
       /* Configure SAI1 PLL */
-
-      regval  = getreg32(STM32_RCC_PLLSAI1CFG);
 
       /* Set the PLL dividers and multipliers to configure the SAI1 PLL */
 

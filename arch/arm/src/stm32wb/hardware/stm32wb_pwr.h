@@ -100,8 +100,8 @@
 #define PWR_CR1_DBP              (1 << 8)  /* Bit 8: Disable Backup domain write protection */
 #define PWR_CR1_VOS_SHIFT        (9)
 #  define PWR_CR1_VOS_MASK       (0x3 << PWR_CR1_VOS_SHIFT) /* Bits 9-10: Voltage scaling range selection */
-#  define PWR_CR1_VOS_RANGE1     (0x1 << PWR_CR1_VOS_SHIFT) /* 01: Range 1 */
-#  define PWR_CR1_VOS_RANGE2     (0x2 << PWR_CR1_VOS_SHIFT) /* 10: Range 2 */
+#  define PWR_CR1_VOS_RANGE1     (0x1 << PWR_CR1_VOS_SHIFT) /* 01: Range 1 (1.2V, up to 64 MHz) */
+#  define PWR_CR1_VOS_RANGE2     (0x2 << PWR_CR1_VOS_SHIFT) /* 10: Range 2 (1.0V, up to 16 MHz) */
 #define PWR_CR1_LPR              (1 << 14) /* Bit 14: Low-power run */
 
 /* Power control register 2 */
