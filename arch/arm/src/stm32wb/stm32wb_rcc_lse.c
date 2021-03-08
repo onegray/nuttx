@@ -53,14 +53,14 @@
  ****************************************************************************/
 
 /****************************************************************************
- * Name: stm32wb_rcc_enablelse
+ * Name: stm32wb_rcc_enable_lse
  *
  * Description:
  *   Enable the External Low-Speed (LSE) oscillator.
  *
  ****************************************************************************/
 
-void stm32wb_rcc_enablelse(void)
+void stm32wb_rcc_enable_lse(void)
 {
   bool writable;
   uint32_t regval;
