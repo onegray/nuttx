@@ -209,19 +209,21 @@
 
 #define RCC_CFGR_MCOSEL_SHIFT       (24)      /* Bits 24-27: Microcontroller Clock Output */
 #define RCC_CFGR_MCOSEL_MASK        (0xf << RCC_CFGR_MCOSEL_SHIFT)
-#  define RCC_CFGR_MCOSEL_NONE      (0x0 << RCC_CFGR_MCOSEL_SHIFT) /* 0000: Output disabled, no clock on MCO */
+#  define RCC_CFGR_MCOSEL_DISABLED  (0x0 << RCC_CFGR_MCOSEL_SHIFT) /* 0000: Output disabled, no clock on MCO */
 #  define RCC_CFGR_MCOSEL_SYSCLK    (0x1 << RCC_CFGR_MCOSEL_SHIFT) /* 0001: SYSCLK system clock selected */
 #  define RCC_CFGR_MCOSEL_MSI       (0x2 << RCC_CFGR_MCOSEL_SHIFT) /* 0010: MSI clock selected */
 #  define RCC_CFGR_MCOSEL_HSI16     (0x3 << RCC_CFGR_MCOSEL_SHIFT) /* 0011: HSI16 clock selected */
-#  define RCC_CFGR_MCOSEL_HSE       (0x4 << RCC_CFGR_MCOSEL_SHIFT) /* 0100: HSE clock selected */
+#  define RCC_CFGR_MCOSEL_HSE_AFT   (0x4 << RCC_CFGR_MCOSEL_SHIFT) /* 0100: HSE clock after stabilization */
 #  define RCC_CFGR_MCOSEL_PLL       (0x5 << RCC_CFGR_MCOSEL_SHIFT) /* 0101: Main PLLRCLK selected  */
 #  define RCC_CFGR_MCOSEL_LSI1      (0x6 << RCC_CFGR_MCOSEL_SHIFT) /* 0110: LSI1 clock selected */
 #  define RCC_CFGR_MCOSEL_LSI2      (0x7 << RCC_CFGR_MCOSEL_SHIFT) /* 0111: LSI2 clock selected */
-#  define RCC_CFGR_MCOSEL_HSE       (0x8 << RCC_CFGR_MCOSEL_SHIFT) /* 1000: HSE clock selected */
+#  define RCC_CFGR_MCOSEL_LSE       (0x8 << RCC_CFGR_MCOSEL_SHIFT) /* 1000: LSE clock selected */
+#  define RCC_CFGR_MCOSEL_HSI48     (0x9 << RCC_CFGR_MCOSEL_SHIFT) /* 1001: HSI48 clock selected */
+#  define RCC_CFGR_MCOSEL_HSE_BFR   (0xc << RCC_CFGR_MCOSEL_SHIFT) /* 1100: HSE clock before stabilization */
 
 #define RCC_CFGR_MCOPRE_SHIFT       (28)      /* Bits 28-30: MCO prescaler */
 #define RCC_CFGR_MCOPRE_MASK        (0x7 << RCC_CFGR_MCOPRE_SHIFT)
-#  define RCC_CFGR_MCOPRE_NONE      (0x0 << RCC_CFGR_MCOPRE_SHIFT) /* 000: no division */
+#  define RCC_CFGR_MCOPRE_DIV1      (0x0 << RCC_CFGR_MCOPRE_SHIFT) /* 000: no division */
 #  define RCC_CFGR_MCOPRE_DIV2      (0x1 << RCC_CFGR_MCOPRE_SHIFT) /* 001: division by 2 */
 #  define RCC_CFGR_MCOPRE_DIV4      (0x2 << RCC_CFGR_MCOPRE_SHIFT) /* 010: division by 4 */
 #  define RCC_CFGR_MCOPRE_DIV8      (0x3 << RCC_CFGR_MCOPRE_SHIFT) /* 011: division by 8 */
@@ -300,7 +302,6 @@
 #define RCC_CIER_LSECSSIE           (1 << 9)  /* Bit 9: LSE Clock Security System Interrupt Enable */
 #define RCC_CIER_HSI48RDYIE         (1 << 10) /* Bit 10: HSI48 Ready Interrupt Enable */
 #define RCC_CIER_LSI2RDYIE          (1 << 11) /* Bit 11: LSI2 Ready Interrupt Enable */
-
 
 /* Clock interrupt flag register */
 
