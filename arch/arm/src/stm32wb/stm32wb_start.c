@@ -37,10 +37,10 @@
 #include "chip.h"
 #include "nvic.h"
 
-//#include "stm32wb.h"
-//#include "stm32wb_gpio.h"
+#include "stm32wb_rcc.h"
+#include "stm32wb_gpio.h"
 //#include "stm32wb_userspace.h"
-//#include "stm32wb_start.h"
+#include "stm32wb_start.h"
 
 /****************************************************************************
  * Pre-processor Definitions
@@ -294,11 +294,11 @@ void __start(void)
 
   /* Configure the UART so that we can get debug output as soon as possible */
 
-//  stm32wb_clockconfig();
-//  stm32wb_fpuconfig();
-//  stm32wb_lowsetup();
-//  stm32wb_gpioinit();
-//  showprogress('A');
+  stm32wb_clockconfig();
+  stm32wb_fpuconfig();
+  /* Todo: stm32wb_lowsetup(); */  
+  stm32wb_gpioinit();
+  showprogress('A');
 
   /* Clear .bss.  We'll do this inline (vs. calling memset) just to be
    * certain that there are no issues with the state of global variables.

@@ -1,5 +1,5 @@
 /****************************************************************************
- * arch/arm/src/stm32wb/stm32wb.h
+ * arch/arm/src/stm32wb/stm32wb_start.h
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -18,29 +18,27 @@
  *
  ****************************************************************************/
 
-#ifndef __ARCH_ARM_SRC_STM32WB_STM32WB_H
-#define __ARCH_ARM_SRC_STM32WB_STM32WB_H
+#ifndef __ARCH_ARM_SRC_STM32WB_STM32WB_START_H
+#define __ARCH_ARM_SRC_STM32WB_STM32WB_START_H
 
 /************************************************************************************
  * Included Files
  ************************************************************************************/
 
-#include <nuttx/config.h>
-#include <sys/types.h>
-#include <stdint.h>
-#include <stdbool.h>
-
-#include "arm_internal.h"
-
 /************************************************************************************
- * Pre-processor Definitions
+ * Public Function Prototypes
  ************************************************************************************/
 
-/* Peripherals **********************************************************************/
+/************************************************************************************
+ * Name: stm32l4_board_initialize
+ *
+ * Description:
+ *   All STM32WB architectures must provide the following entry point.  This entry
+ *   point is called early in the initialization -- after all memory has been
+ *   configured and mapped but before any devices have been initialized.
+ *
+ ************************************************************************************/
 
-#include "chip.h"
+void stm32wb_board_initialize(void);
 
-/* Todo: add other peripheral includes */
-
-
-#endif /* __ARCH_ARM_SRC_STM32WB_STM32WB_H */
+#endif /* __ARCH_ARM_SRC_STM32WB_STM32WB_START_H */

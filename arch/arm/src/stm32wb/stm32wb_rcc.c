@@ -24,10 +24,20 @@
 
 #include <nuttx/config.h>
 #include <arch/stm32wb/chip.h>
+#include <arch/board/board.h>
 
+#include <stdint.h>
+#include <stdio.h>
+#include <assert.h>
+#include <debug.h>
+
+#include "arm_internal.h"
+#include "arm_arch.h"
+
+#include "chip.h"
+#include "stm32wb_rcc.h"
 #include "stm32wb_pwr.h"
-#include "stm32wb_flash.h"
-#include "stm32wb_hsi48.h"
+#include "hardware/stm32wb_flash.h"
 
 /****************************************************************************
  * Pre-processor Definitions
@@ -83,8 +93,8 @@ static inline void rcc_reset(void)
   /* Reset CFGR register */
 
   regval = getreg32(STM32WB_RCC_CFGR);       /* Reset SW, HPRE, PPRE1, PPRE2, STOPWUCK, MCOSEL, MCOPRE bits */
-  regval &= ~(RCC_CFGR_SW_MASK | RCC_CFGR_HPRE_MASK | RCC_CFGR_PPRE1_MASK | RCC_CFGR_PPRE2_MASK
-              RCC_CFGR_STOPWUCK | RCC_CFGR_MCOSEL_MASK | RCC_CFGR_MCOPRE);
+  regval &= ~(RCC_CFGR_SW_MASK | RCC_CFGR_HPRE_MASK | RCC_CFGR_PPRE1_MASK | RCC_CFGR_PPRE2_MASK |
+              RCC_CFGR_STOPWUCK | RCC_CFGR_MCOSEL_MASK | RCC_CFGR_MCOPRE_MASK);
   putreg32(regval, STM32WB_RCC_CFGR);
 
     /* Reset HSION, HSEON, CSSON and PLLON bits */
@@ -647,7 +657,7 @@ static void stm32wb_stdclockconfig(void)
        */
 
 #ifdef STM32WB_BOARD_USEHSI
-      regval |= RCC_PLLCFG_PLLSRC_HSI;
+      regval |= RCC_PLLCFG_PLLSRC_HSI16;
 #elif defined(STM32WB_BOARD_USEMSI)
       regval |= RCC_PLLCFG_PLLSRC_MSI;
 #else /* if STM32WB_BOARD_USEHSE */
@@ -735,7 +745,7 @@ static void stm32wb_stdclockconfig(void)
 #if defined(CONFIG_STM32WB_IWDG) || defined(CONFIG_STM32WB_RTC_LSICLOCK)
       /* Low speed internal clock source LSI */
 
-      stm32wb_rcc_enablelsi();
+      stm32wb_rcc_enable_lsi();
 #endif
 
 #if defined(STM32WB_USE_LSE)
@@ -751,7 +761,7 @@ static void stm32wb_stdclockconfig(void)
        * this for automatically trimming MSI, etc.
        */
 
-      stm32wb_rcc_enablelse();
+      stm32wb_rcc_enable_lse();
 
 #  if defined(STM32WB_BOARD_USEMSI)
       /* Now that LSE is up, auto trim the MSI */
