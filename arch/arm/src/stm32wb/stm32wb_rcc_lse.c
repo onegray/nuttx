@@ -25,7 +25,6 @@
 #include <nuttx/config.h>
 
 #include "arm_arch.h"
-
 #include "stm32wb_pwr.h"
 #include "stm32wb_rcc.h"
 #include "stm32wb_waste.h"

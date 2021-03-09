@@ -32,7 +32,7 @@
 #include "chip.h"
 
 #if defined(CONFIG_ARCH_CHIP_STM32WB55RG)
-#  include "hardware/stm32wbx5xx_rcc.h"
+#  include "hardware/stm32wb_rcc.h"
 #else
 #  error "Unsupported STM32WB chip"
 #endif
