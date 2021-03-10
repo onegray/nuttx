@@ -174,48 +174,125 @@
 
 /* Control register 1 */
 
-#define TIM_CR1_CEN                 (1 << 0)  /* Bit 0: Counter enable */
-#define TIM_CR1_UDIS                (1 << 1)  /* Bit 1: Update disable */
-#define TIM_CR1_URS                 (1 << 2)  /* Bit 2: Update request source */
-#define TIM_CR1_OPM                 (1 << 3)  /* Bit 3: One pulse mode */
-#define TIM_CR1_ARPE                (1 << 7)  /* Bit 7: Auto-reload preload enable */
-#define TIM_CR1_CKD_SHIFT           (8)       /* Bits 9-8: Clock division */
-#define TIM_CR1_CKD_MASK            (0x3 << TIM_CR1_CKD_SHIFT)
-#  define TIM_CR1_CKD_TCKINT        (0x0 << TIM_CR1_CKD_SHIFT) /* 00: tDTS=tCK_INT */
-#  define TIM_CR1_CKD_2TCKINT       (0x1 << TIM_CR1_CKD_SHIFT) /* 01: tDTS=2*tCK_INT */
-#  define TIM_CR1_CKD_4TCKINT       (0x2 << TIM_CR1_CKD_SHIFT) /* 10: tDTS=4*tCK_INT */
-#define TIM_CR1_UIFREMAP            (1 << 11) /* Bit 11: UIF status bit remapping */
+#define TIM1_CR1_CEN                (1 << 0)  /* Bit 0: Counter enable */
+#define TIM1_CR1_UDIS               (1 << 1)  /* Bit 1: Update disable */
+#define TIM1_CR1_URS                (1 << 2)  /* Bit 2: Update request source */
+#define TIM1_CR1_OPM                (1 << 3)  /* Bit 3: One pulse mode */
+#define TIM1_CR1_DIR                (1 << 4)  /* Bit 4: Counter direction */
+#define TIM1_CR1_CMS_SHIFT          (5)       /* Bits 5-6: Center-aligned mode selection */
+#define TIM1_CR1_CMS_MASK           (0x3 << TIM1_CR1_CMS_SHIFT)
+#  define TIM1_CR1_EDGE             (0x0 << TIM1_CR1_CMS_SHIFT) /* 00: Edge-aligned mode */
+#  define TIM1_CR1_CENTER1          (0x1 << TIM1_CR1_CMS_SHIFT) /* 01: Center-aligned mode 1 */
+#  define TIM1_CR1_CENTER2          (0x2 << TIM1_CR1_CMS_SHIFT) /* 10: Center-aligned mode 2 */
+#  define TIM1_CR1_CENTER3          (0x3 << TIM1_CR1_CMS_SHIFT) /* 11: Center-aligned mode 3 */
+#define TIM1_CR1_ARPE               (1 << 7)  /* Bit 7: Auto-reload preload enable */
+#define TIM1_CR1_CKD_SHIFT          (8)       /* Bits 8-9: Clock division */
+#define TIM1_CR1_CKD_MASK           (0x3 << TIM1_CR1_CKD_SHIFT)
+#  define TIM1_CR1_CKD_TCKINT       (0x0 << TIM1_CR1_CKD_SHIFT) /* 00: tDTS=tCK_INT */
+#  define TIM1_CR1_CKD_2TCKINT      (0x1 << TIM1_CR1_CKD_SHIFT) /* 01: tDTS=2*tCK_INT */
+#  define TIM1_CR1_CKD_4TCKINT      (0x2 << TIM1_CR1_CKD_SHIFT) /* 10: tDTS=4*tCK_INT */
+#define TIM1_CR1_UIFREMAP           (1 << 11) /* Bit 11: UIF status bit remapping */
 
-/* Control register 1 - TIM1, TIM2 alignment modes and direction */
+#define TIM2_CR1_CEN                (1 << 0)  /* Bit 0: Counter enable */
+#define TIM2_CR1_UDIS               (1 << 1)  /* Bit 1: Update disable */
+#define TIM2_CR1_URS                (1 << 2)  /* Bit 2: Update request source */
+#define TIM2_CR1_OPM                (1 << 3)  /* Bit 3: One pulse mode */
+#define TIM2_CR1_DIR                (1 << 4)  /* Bit 4: Counter direction */
+#define TIM2_CR1_CMS_SHIFT          (5)       /* Bits 5-6: Center-aligned mode selection */
+#define TIM2_CR1_CMS_MASK           (0x3 << TIM2_CR1_CMS_SHIFT)
+#  define TIM2_CR1_EDGE             (0x0 << TIM2_CR1_CMS_SHIFT) /* 00: Edge-aligned mode */
+#  define TIM2_CR1_CENTER1          (0x1 << TIM2_CR1_CMS_SHIFT) /* 01: Center-aligned mode 1 */
+#  define TIM2_CR1_CENTER2          (0x2 << TIM2_CR1_CMS_SHIFT) /* 10: Center-aligned mode 2 */
+#  define TIM2_CR1_CENTER3          (0x3 << TIM2_CR1_CMS_SHIFT) /* 11: Center-aligned mode 3 */
+#define TIM2_CR1_ARPE               (1 << 7)  /* Bit 7: Auto-reload preload enable */
+#define TIM2_CR1_CKD_SHIFT          (8)       /* Bits 8-9: Clock division */
+#define TIM2_CR1_CKD_MASK           (0x3 << TIM2_CR1_CKD_SHIFT)
+#  define TIM2_CR1_CKD_TCKINT       (0x0 << TIM2_CR1_CKD_SHIFT) /* 00: tDTS=tCK_INT */
+#  define TIM2_CR1_CKD_2TCKINT      (0x1 << TIM2_CR1_CKD_SHIFT) /* 01: tDTS=2*tCK_INT */
+#  define TIM2_CR1_CKD_4TCKINT      (0x2 << TIM2_CR1_CKD_SHIFT) /* 10: tDTS=4*tCK_INT */
+#define TIM2_CR1_UIFREMAP           (1 << 11) /* Bit 11: UIF status bit remapping */
 
-#define TIM1_CR1_DIR                (1 << 4)  /* Bit 4: Direction */
+#define TIM16_CR1_CEN               (1 << 0)  /* Bit 0: Counter enable */
+#define TIM16_CR1_UDIS              (1 << 1)  /* Bit 1: Update disable */
+#define TIM16_CR1_URS               (1 << 2)  /* Bit 2: Update request source */
+#define TIM16_CR1_OPM               (1 << 3)  /* Bit 3: One pulse mode */
+#define TIM16_CR1_ARPE              (1 << 7)  /* Bit 7: Auto-reload preload enable */
+#define TIM16_CR1_CKD_SHIFT         (8)       /* Bits 8-9: Clock division */
+#define TIM16_CR1_CKD_MASK          (0x3 << TIM16_CR1_CKD_SHIFT)
+#  define TIM16_CR1_CKD_TCKINT      (0x0 << TIM16_CR1_CKD_SHIFT) /* 00: tDTS=tCK_INT */
+#  define TIM16_CR1_CKD_2TCKINT     (0x1 << TIM16_CR1_CKD_SHIFT) /* 01: tDTS=2*tCK_INT */
+#  define TIM16_CR1_CKD_4TCKINT     (0x2 << TIM16_CR1_CKD_SHIFT) /* 10: tDTS=4*tCK_INT */
+#define TIM16_CR1_UIFREMAP          (1 << 11) /* Bit 11: UIF status bit remapping */
 
-#define TIM2_CR1_DIR                (1 << 4)  /* Bit 4: Direction */
-
-#define TIM1_CR1_CMS_SHIFT          (5)       /* Bits 6-5: Center-aligned mode selection */
-#define TIM1_CR1_CMS_MASK           (0x3 << TIM_CR1_CMS_SHIFT)
-#  define TIM1_CR1_EDGE             (0x0 << TIM_CR1_CMS_SHIFT) /* 00: Edge-aligned mode */
-#  define TIM1_CR1_CENTER1          (0x1 << TIM_CR1_CMS_SHIFT) /* 01: Center-aligned mode 1 */
-#  define TIM1_CR1_CENTER2          (0x2 << TIM_CR1_CMS_SHIFT) /* 10: Center-aligned mode 2 */
-#  define TIM1_CR1_CENTER3          (0x3 << TIM_CR1_CMS_SHIFT) /* 11: Center-aligned mode 3 */
-
-#define TIM2_CR1_CMS_SHIFT          (5)       /* Bits 6-5: Center-aligned mode selection */
-#define TIM2_CR1_CMS_MASK           (0x3 << TIM_CR1_CMS_SHIFT)
-#  define TIM2_CR1_EDGE             (0x0 << TIM_CR1_CMS_SHIFT) /* 00: Edge-aligned mode */
-#  define TIM2_CR1_CENTER1          (0x1 << TIM_CR1_CMS_SHIFT) /* 01: Center-aligned mode 1 */
-#  define TIM2_CR1_CENTER2          (0x2 << TIM_CR1_CMS_SHIFT) /* 10: Center-aligned mode 2 */
-#  define TIM2_CR1_CENTER3          (0x3 << TIM_CR1_CMS_SHIFT) /* 11: Center-aligned mode 3 */
-
-
-
-
-
-
-
-
+#define TIM17_CR1_CEN               (1 << 0)  /* Bit 0: Counter enable */
+#define TIM17_CR1_UDIS              (1 << 1)  /* Bit 1: Update disable */
+#define TIM17_CR1_URS               (1 << 2)  /* Bit 2: Update request source */
+#define TIM17_CR1_OPM               (1 << 3)  /* Bit 3: One pulse mode */
+#define TIM17_CR1_ARPE              (1 << 7)  /* Bit 7: Auto-reload preload enable */
+#define TIM17_CR1_CKD_SHIFT         (8)       /* Bits 8-9: Clock division */
+#define TIM17_CR1_CKD_MASK          (0x3 << TIM17_CR1_CKD_SHIFT)
+#  define TIM17_CR1_CKD_TCKINT      (0x0 << TIM17_CR1_CKD_SHIFT) /* 00: tDTS=tCK_INT */
+#  define TIM17_CR1_CKD_2TCKINT     (0x1 << TIM17_CR1_CKD_SHIFT) /* 01: tDTS=2*tCK_INT */
+#  define TIM17_CR1_CKD_4TCKINT     (0x2 << TIM17_CR1_CKD_SHIFT) /* 10: tDTS=4*tCK_INT */
+#define TIM17_CR1_UIFREMAP          (1 << 11) /* Bit 11: UIF status bit remapping */
 
 
 
+
+
+/* Control register 2 */
+
+// tim1, 16, 17:
+#define TIM_CR2_CCPC                (1 << 0)  /* Bit 0:  Capture/Compare Preloaded Control */
+#define TIM_CR2_CCUS                (1 << 2)  /* Bit 2:  Capture/Compare Control Update Selection */
+#define TIM_CR2_CCDS                (1 << 3)  /* Bit 3:  Capture/Compare DMA Selection */
+
+
+// tim1, tim2
+#define TIM_CR2_MMS_SHIFT           (4)       /* Bits 6-4: Master Mode Selection */
+#define TIM_CR2_MMS_MASK            (7 << TIM_CR2_MMS_SHIFT)
+#  define TIM_CR2_MMS_RESET         (0 << TIM_CR2_MMS_SHIFT) /* 000: Reset - TIMx_EGR UG bit is TRGO */
+#  define TIM_CR2_MMS_ENABLE        (1 << TIM_CR2_MMS_SHIFT) /* 001: Enable - CNT_EN is TRGO */
+#  define TIM_CR2_MMS_UPDATE        (2 << TIM_CR2_MMS_SHIFT) /* 010: Update event is TRGO */
+#  define TIM_CR2_MMS_COMPP         (3 << TIM_CR2_MMS_SHIFT) /* 011: Compare Pulse - CC1IF flag */
+#  define TIM_CR2_MMS_OC1REF        (4 << TIM_CR2_MMS_SHIFT) /* 100: Compare OC1REF is TRGO */
+#  define TIM_CR2_MMS_OC2REF        (5 << TIM_CR2_MMS_SHIFT) /* 101: Compare OC2REF is TRGO */
+#  define TIM_CR2_MMS_OC3REF        (6 << TIM_CR2_MMS_SHIFT) /* 110: Compare OC3REF is TRGO */
+#  define TIM_CR2_MMS_OC4REF        (7 << TIM_CR2_MMS_SHIFT) /* 111: Compare OC4REF is TRGO */
+#define TIM_CR2_TI1S                (1 << 7)  /* Bit 7: TI1 Selection */
+
+
+// tim1, 16, 17:
+#define TIM_CR2_OIS1                (1 << 8)  /* Bit 8:  Output Idle state 1 (OC1 output) */
+#define TIM_CR2_OIS1N               (1 << 9)  /* Bit 9:  Output Idle state 1 (OC1N output) */
+
+
+// tim1 only:
+#define TIM_CR2_OIS2                (1 << 10) /* Bit 10: Output Idle state 2 (OC2 output) */
+#define TIM_CR2_OIS2N               (1 << 11) /* Bit 11: Output Idle state 2 (OC2N output) */
+#define TIM_CR2_OIS3                (1 << 12) /* Bit 12: Output Idle state 3 (OC3 output) */
+#define TIM_CR2_OIS3N               (1 << 13) /* Bit 13: Output Idle state 3 (OC3N output) */
+#define TIM_CR2_OIS4                (1 << 14) /* Bit 14: Output Idle state 4 (OC4 output) */
+#define TIM_CR2_OIS5                (1 << 16) /* Bit 16: Output Idle state 5 (OC5 output) */
+#define TIM_CR2_OIS6                (1 << 18) /* Bit 18: Output Idle state 6 (OC6 output) */
+#define TIM_CR2_MMS2_SHIFT          (20)      /* Bits 20-23: Master Mode Selection 2 */
+#define TIM_CR2_MMS2_MASK           (15 << TIM_CR2_MMS2_SHIFT)
+#  define TIM_CR2_MMS2_RESET        (0 << TIM_CR2_MMS2_SHIFT)  /* 0000: Reset - TIMx_EGR UG bit is TRG9 */
+#  define TIM_CR2_MMS2_ENABLE       (1 << TIM_CR2_MMS2_SHIFT)  /* 0001: Enable - CNT_EN is TRGO2 */
+#  define TIM_CR2_MMS2_UPDATE       (2 << TIM_CR2_MMS2_SHIFT)  /* 0010: Update event is TRGH0 */
+#  define TIM_CR2_MMS2_COMPP        (3 << TIM_CR2_MMS2_SHIFT)  /* 0010: Compare Pulse - CC1IF flag */
+#  define TIM_CR2_MMS2_OC1REF       (4 << TIM_CR2_MMS2_SHIFT)  /* 0100: Compare OC1REF is TRGO2 */
+#  define TIM_CR2_MMS2_OC2REF       (5 << TIM_CR2_MMS2_SHIFT)  /* 0101: Compare OC2REF is TRGO2 */
+#  define TIM_CR2_MMS2_OC3REF       (6 << TIM_CR2_MMS2_SHIFT)  /* 0110: Compare OC3REF is TRGO2 */
+#  define TIM_CR2_MMS2_OC4REF       (7 << TIM_CR2_MMS2_SHIFT)  /* 0111: Compare OC4REF is TRGO2 */
+#  define TIM_CR2_MMS2_OC5REF       (8 << TIM_CR2_MMS2_SHIFT)  /* 1000: Compare OC5REF is TRGO2 */
+#  define TIM_CR2_MMS2_OC6REF       (9 << TIM_CR2_MMS2_SHIFT)  /* 1001: Compare OC6REF is TRGO2 */
+#  define TIM_CR2_MMS2_CMPOC4       (10 << TIM_CR2_MMS2_SHIFT) /* 1010: Compare pulse - OC4REF edge is TRGO2 */
+#  define TIM_CR2_MMS2_CMPOC6       (11 << TIM_CR2_MMS2_SHIFT) /* 1011: Compare pulse - OC6REF edge is TRGO2 */
+#  define TIM_CR2_MMS2_CMPOC4R6R    (12 << TIM_CR2_MMS2_SHIFT) /* 1100: Compare pulse - OC4REF/OC6REF rising */
+#  define TIM_CR2_MMS2_CMPOC4R6F    (13 << TIM_CR2_MMS2_SHIFT) /* 1101: Compare pulse - OC4REF rising/OC6REF falling */
+#  define TIM_CR2_MMS2_CMPOC5R6R    (14 << TIM_CR2_MMS2_SHIFT) /* 1110: Compare pulse - OC5REF/OC6REF rising */
+#  define TIM_CR2_MMS2_CMPOC5R6F    (15 << TIM_CR2_MMS2_SHIFT) /* 1111: Compare pulse - OC5REF rising/OC6REF falling */
 
 
 
@@ -223,72 +300,9 @@
 
 /* Register Bitfield Definitions ****************************************************/
 
-/* Control register 1 */
 
-#define ATIM_CR1_CEN                (1 << 0)  /* Bit 0: Counter enable */
-#define ATIM_CR1_UDIS               (1 << 1)  /* Bit 1: Update disable */
-#define ATIM_CR1_URS                (1 << 2)  /* Bit 2: Update request source */
-#define ATIM_CR1_OPM                (1 << 3)  /* Bit 3: One pulse mode */
-#define ATIM_CR1_DIR                (1 << 4)  /* Bit 4: Direction */
-#define ATIM_CR1_CMS_SHIFT          (5)       /* Bits 6-5: Center-aligned mode selection */
-#define ATIM_CR1_CMS_MASK           (3 << ATIM_CR1_CMS_SHIFT)
-#  define ATIM_CR1_EDGE             (0 << ATIM_CR1_CMS_SHIFT) /* 00: Edge-aligned mode */
-#  define ATIM_CR1_CENTER1          (1 << ATIM_CR1_CMS_SHIFT) /* 01: Center-aligned mode 1 */
-#  define ATIM_CR1_CENTER2          (2 << ATIM_CR1_CMS_SHIFT) /* 10: Center-aligned mode 2 */
-#  define ATIM_CR1_CENTER3          (3 << ATIM_CR1_CMS_SHIFT) /* 11: Center-aligned mode 3 */
-#define ATIM_CR1_ARPE               (1 << 7)  /* Bit 7: Auto-reload preload enable */
-#define ATIM_CR1_CKD_SHIFT          (8)       /* Bits 9-8: Clock division */
-#define ATIM_CR1_CKD_MASK           (3 << ATIM_CR1_CKD_SHIFT)
-#  define ATIM_CR1_TCKINT           (0 << ATIM_CR1_CKD_SHIFT) /* 00: tDTS=tCK_INT */
-#  define ATIM_CR1_2TCKINT          (1 << ATIM_CR1_CKD_SHIFT) /* 01: tDTS=2*tCK_INT */
-#  define ATIM_CR1_4TCKINT          (2 << ATIM_CR1_CKD_SHIFT) /* 10: tDTS=4*tCK_INT */
-#define ATIM_CR1_UIFREMAP           (1 << 11) /* Bit 11: UIF status bit remapping */
 
-/* Control register 2 */
-
-#define ATIM_CR2_CCPC               (1 << 0)  /* Bit 0:  Capture/Compare Preloaded Control */
-#define ATIM_CR2_CCUS               (1 << 2)  /* Bit 2:  Capture/Compare Control Update Selection */
-#define ATIM_CR2_CCDS               (1 << 3)  /* Bit 3:  Capture/Compare DMA Selection */
-#define ATIM_CR2_MMS_SHIFT          (4)       /* Bits 6-4: Master Mode Selection */
-#define ATIM_CR2_MMS_MASK           (7 << ATIM_CR2_MMS_SHIFT)
-#  define ATIM_CR2_MMS_RESET        (0 << ATIM_CR2_MMS_SHIFT) /* 000: Reset - TIMx_EGR UG bit is TRGO */
-#  define ATIM_CR2_MMS_ENABLE       (1 << ATIM_CR2_MMS_SHIFT) /* 001: Enable - CNT_EN is TRGO */
-#  define ATIM_CR2_MMS_UPDATE       (2 << ATIM_CR2_MMS_SHIFT) /* 010: Update event is TRGO */
-#  define ATIM_CR2_MMS_COMPP        (3 << ATIM_CR2_MMS_SHIFT) /* 010: Compare Pulse - CC1IF flag */
-#  define ATIM_CR2_MMS_OC1REF       (4 << ATIM_CR2_MMS_SHIFT) /* 100: Compare OC1REF is TRGO */
-#  define ATIM_CR2_MMS_OC2REF       (5 << ATIM_CR2_MMS_SHIFT) /* 101: Compare OC2REF is TRGO */
-#  define ATIM_CR2_MMS_OC3REF       (6 << ATIM_CR2_MMS_SHIFT) /* 110: Compare OC3REF is TRGO */
-#  define ATIM_CR2_MMS_OC4REF       (7 << ATIM_CR2_MMS_SHIFT) /* 111: Compare OC4REF is TRGO */
-#define ATIM_CR2_TI1S               (1 << 7)  /* Bit 7: TI1 Selection */
-#define ATIM_CR2_OIS1               (1 << 8)  /* Bit 8:  Output Idle state 1 (OC1 output) */
-#define ATIM_CR2_OIS1N              (1 << 9)  /* Bit 9:  Output Idle state 1 (OC1N output) */
-#define ATIM_CR2_OIS2               (1 << 10) /* Bit 10: Output Idle state 2 (OC2 output) */
-#define ATIM_CR2_OIS2N              (1 << 11) /* Bit 11: Output Idle state 2 (OC2N output) */
-#define ATIM_CR2_OIS3               (1 << 12) /* Bit 12: Output Idle state 3 (OC3 output) */
-#define ATIM_CR2_OIS3N              (1 << 13) /* Bit 13: Output Idle state 3 (OC3N output) */
-#define ATIM_CR2_OIS4               (1 << 14) /* Bit 14: Output Idle state 4 (OC4 output) */
-#define ATIM_CR2_OIS5               (1 << 16) /* Bit 16: OOutput Idle state 5 (OC5 output) */
-#define ATIM_CR2_OIS6               (1 << 18) /* Bit 18: Output Idle state 6 (OC6 output) */
-#define ATIM_CR2_MMS2_SHIFT         (20)      /* Bits 20-23: Master Mode Selection 2 */
-#define ATIM_CR2_MMS2_MASK          (15 << ATIM_CR2_MMS2_SHIFT)
-#  define ATIM_CR2_MMS2_RESET       (0 << ATIM_CR2_MMS2_SHIFT)  /* 0000: Reset - TIMx_EGR UG bit is TRG9 */
-#  define ATIM_CR2_MMS2_ENABLE      (1 << ATIM_CR2_MMS2_SHIFT)  /* 0001: Enable - CNT_EN is TRGO2 */
-#  define ATIM_CR2_MMS2_UPDATE      (2 << ATIM_CR2_MMS2_SHIFT)  /* 0010: Update event is TRGH0*/
-#  define ATIM_CR2_MMS2_COMPP       (3 << ATIM_CR2_MMS2_SHIFT)  /* 0010: Compare Pulse - CC1IF flag */
-#  define ATIM_CR2_MMS2_OC1REF      (4 << ATIM_CR2_MMS2_SHIFT)  /* 0100: Compare OC1REF is TRGO2 */
-#  define ATIM_CR2_MMS2_OC2REF      (5 << ATIM_CR2_MMS2_SHIFT)  /* 0101: Compare OC2REF is TRGO2 */
-#  define ATIM_CR2_MMS2_OC3REF      (6 << ATIM_CR2_MMS2_SHIFT)  /* 0110: Compare OC3REF is TRGO2 */
-#  define ATIM_CR2_MMS2_OC4REF      (7 << ATIM_CR2_MMS2_SHIFT)  /* 0111: Compare OC4REF is TRGO2 */
-#  define ATIM_CR2_MMS2_OC5REF      (8 << ATIM_CR2_MMS2_SHIFT)  /* 1000: Compare OC5REF is TRGO2 */
-#  define ATIM_CR2_MMS2_OC6REF      (9 << ATIM_CR2_MMS2_SHIFT)  /* 1001: Compare OC6REF is TRGO2 */
-#  define ATIM_CR2_MMS2_CMPOC4      (10 << ATIM_CR2_MMS2_SHIFT) /* 1010: Compare pulse - OC4REF edge is TRGO2 */
-#  define ATIM_CR2_MMS2_CMPOC6      (11 << ATIM_CR2_MMS2_SHIFT) /* 1011: Compare pulse - OC6REF edge is TRGO2 */
-#  define ATIM_CR2_MMS2_CMPOC4R6R   (12 << ATIM_CR2_MMS2_SHIFT) /* 1100: Compare pulse - OC4REF/OC6REF rising */
-#  define ATIM_CR2_MMS2_CMPOC4R6F   (13 << ATIM_CR2_MMS2_SHIFT) /* 1101: Compare pulse - OC4REF rising/OC6REF falling */
-#  define ATIM_CR2_MMS2_CMPOC5R6R   (14 << ATIM_CR2_MMS2_SHIFT) /* 1110: Compare pulse - OC5REF/OC6REF rising */
-#  define ATIM_CR2_MMS2_CMPOC5R6F   (15 << ATIM_CR2_MMS2_SHIFT) /* 1111: Compare pulse - OC5REF rising/OC6REF falling */
-
-/* Slave mode control register */
+/* Slave mode control register TIM1, TIM2 */
 
 #define ATIM_SMCR_SMS_SHIFT       (0)       /* Bits 0-2: Slave mode selection */
 #define ATIM_SMCR_SMS_MASK        (7 << ATIM_SMCR_SMS_SHIFT)
@@ -340,242 +354,816 @@
 #define ATIM_SMCR_ETP             (1 << 15) /* Bit 15: External trigger polarity */
 #define ATIM_SMCR_SMS             (1 << 16) /* Bit 16: Slave mode selection - bit 3 */
 
+#define ATIM_SMCR_TShi_SHIFT        (20) /* Bits 20-21:  */
+
+
+
+
+
+
+
 /* DMA/Interrupt enable register */
 
+// all
 #define ATIM_DIER_UIE             (1 << 0)  /* Bit 0: Update interrupt enable */
 #define ATIM_DIER_CC1IE           (1 << 1)  /* Bit 1: Capture/Compare 1 interrupt enable */
+
+// tim 1-2
 #define ATIM_DIER_CC2IE           (1 << 2)  /* Bit 2: Capture/Compare 2 interrupt enable */
 #define ATIM_DIER_CC3IE           (1 << 3)  /* Bit 3: Capture/Compare 3 interrupt enable */
 #define ATIM_DIER_CC4IE           (1 << 4)  /* Bit 4: Capture/Compare 4 interrupt enable */
+
+// 1, 16,17
 #define ATIM_DIER_COMIE           (1 << 5)  /* Bit 5: COM interrupt enable */
+
+// tim 1-2
 #define ATIM_DIER_TIE             (1 << 6)  /* Bit 6: Trigger interrupt enable */
+
+// 1, 16,17
 #define ATIM_DIER_BIE             (1 << 7)  /* Bit 7: Break interrupt enable */
+
+// all
 #define ATIM_DIER_UDE             (1 << 8)  /* Bit 8: Update DMA request enable */
 #define ATIM_DIER_CC1DE           (1 << 9)  /* Bit 9: Capture/Compare 1 DMA request enable */
+
+// tim 1-2
 #define ATIM_DIER_CC2DE           (1 << 10) /* Bit 10: Capture/Compare 2 DMA request enable */
 #define ATIM_DIER_CC3DE           (1 << 11) /* Bit 11: Capture/Compare 3 DMA request enable */
 #define ATIM_DIER_CC4DE           (1 << 12) /* Bit 12: Capture/Compare 4 DMA request enable */
+
+// 1 only
 #define ATIM_DIER_COMDE           (1 << 13) /* Bit 13: COM DMA request enable */
 #define ATIM_DIER_TDE             (1 << 14) /* Bit 14: Trigger DMA request enable */
 
+
+
+
+
+
+
+
+
+
+
+
+
 /* Status register */
 
+// all
 #define ATIM_SR_UIF               (1 << 0)  /* Bit 0:  Update interrupt Flag */
 #define ATIM_SR_CC1IF             (1 << 1)  /* Bit 1:  Capture/Compare 1 interrupt Flag */
+
+// tim 1-2
 #define ATIM_SR_CC2IF             (1 << 2)  /* Bit 2:  Capture/Compare 2 interrupt Flag */
 #define ATIM_SR_CC3IF             (1 << 3)  /* Bit 3:  Capture/Compare 3 interrupt Flag */
 #define ATIM_SR_CC4IF             (1 << 4)  /* Bit 4:  Capture/Compare 4 interrupt Flag */
+
+// tim 1, 16, 17
 #define ATIM_SR_COMIF             (1 << 5)  /* Bit 5:  COM interrupt Flag */
+
+// tim 1-2
 #define ATIM_SR_TIF               (1 << 6)  /* Bit 6:  Trigger interrupt Flag */
+
+// tim 1, 16, 17
 #define ATIM_SR_BIF               (1 << 7)  /* Bit 7:  Break interrupt Flag */
+
+// tim 1 only
 #define ATIM_SR_B2IF              (1 << 8)  /* Bit 8:  Break 2 interrupt Flag */
+
+// all
 #define ATIM_SR_CC1OF             (1 << 9)  /* Bit 9:  Capture/Compare 1 Overcapture Flag */
+
+//tim 1-2
 #define ATIM_SR_CC2OF             (1 << 10) /* Bit 10: Capture/Compare 2 Overcapture Flag */
 #define ATIM_SR_CC3OF             (1 << 11) /* Bit 11: Capture/Compare 3 Overcapture Flag */
 #define ATIM_SR_CC4OF             (1 << 12) /* Bit 12: Capture/Compare 4 Overcapture Flag */
+
+// tim 1 only
 #define ATIM_SR_SBIF              (1 << 13) /* Bit 13: System break interrupt Flag */
 #define ATIM_SR_CC5IF             (1 << 16) /* Bit 16: Compare 5 interrupt flag */
 #define ATIM_SR_CC6IF             (1 << 17) /* Bit 17: Compare 6 interrupt flag */
 
+
+
+
+
+
+
+
+
+
 /* Event generation register */
 
+// all
 #define ATIM_EGR_UG               (1 << 0)  /* Bit 0: Update Generation */
 #define ATIM_EGR_CC1G             (1 << 1)  /* Bit 1: Capture/Compare 1 Generation */
+
+// tim 1-2
 #define ATIM_EGR_CC2G             (1 << 2)  /* Bit 2: Capture/Compare 2 Generation */
 #define ATIM_EGR_CC3G             (1 << 3)  /* Bit 3: Capture/Compare 3 Generation */
 #define ATIM_EGR_CC4G             (1 << 4)  /* Bit 4: Capture/Compare 4 Generation */
+
+// tim 1, 16, 17
 #define ATIM_EGR_COMG             (1 << 5)  /* Bit 5: Capture/Compare Control Update Generation */
+
+// tim 1-2
 #define ATIM_EGR_TG               (1 << 6)  /* Bit 6: Trigger Generation */
+
+// tim 1, 16, 17
 #define ATIM_EGR_BG               (1 << 7)  /* Bit 7: Break Generation */
+
+// tim 1
 #define ATIM_EGR_B2G              (1 << 8)  /* Bit 8: Break 2 Generation */
 
-/* Capture/compare mode register 1 -- Output compare mode */
 
-#define ATIM_CCMR1_CC1S_SHIFT     (0)       /* Bits 1-0: Capture/Compare 1 Selection */
-#define ATIM_CCMR1_CC1S_MASK      (3 << ATIM_CCMR1_CC1S_SHIFT)
-                                            /* (See common (unshifted) bit field definitions below) */
-#define ATIM_CCMR1_OC1FE          (1 << 2)  /* Bit 2: Output Compare 1 Fast enable */
-#define ATIM_CCMR1_OC1PE          (1 << 3)  /* Bit 3: Output Compare 1 Preload enable */
-#define ATIM_CCMR1_OC1M_SHIFT     (4)       /* Bits 6-4: Output Compare 1 Mode */
-#define ATIM_CCMR1_OC1M_MASK      (7 << ATIM_CCMR1_OC1M_SHIFT)
-                                            /* (See common (unshifted) bit field definitions below) */
-#define ATIM_CCMR1_OC1CE          (1 << 7)  /* Bit 7: Output Compare 1Clear Enable */
-#define ATIM_CCMR1_CC2S_SHIFT     (8)       /* Bits 8-9: Capture/Compare 2 Selection */
-#define ATIM_CCMR1_CC2S_MASK      (3 << ATIM_CCMR1_CC2S_SHIFT)
-                                            /* (See common (unshifted) bit field definitions below) */
-#define ATIM_CCMR1_OC2FE          (1 << 10) /* Bit 10: Output Compare 2 Fast enable */
-#define ATIM_CCMR1_OC2PE          (1 << 11) /* Bit 11: Output Compare 2 Preload enable */
-#define ATIM_CCMR1_OC2M_SHIFT     (12)      /* Bits 14-12: Output Compare 2 Mode */
-#define ATIM_CCMR1_OC2M_MASK      (7 << ATIM_CCMR1_OC2M_SHIFT)
-                                            /* (See common (unshifted) bit field definitions below) */
-#define ATIM_CCMR1_OC2CE          (1 << 15) /* Bit 15: Output Compare 2 Clear Enable */
-#define ATIM_CCMR1_OC1M           (1 << 16) /* Bit 16: Output Compare 1 mode - bit 3 */
-#define ATIM_CCMR1_OC2M           (1 << 24) /* Bit 24: Output Compare 2 mode - bit 3 */
 
-/* Common CCMR (unshifted) Capture/Compare Selection bit-field definitions */
 
-#define ATIM_CCMR_CCS_CCOUT       (0)       /* 00: CCx channel  output */
-#define ATIM_CCMR_CCS_CCIN1       (1)       /* 01: CCx channel input, ICx is TIx */
-#define ATIM_CCMR_CCS_CCIN2       (2)       /* 10: CCx channel input, ICx is TIy */
-#define ATIM_CCMR_CCS_CCINTRC     (3)       /* 11: CCx channel input, ICx is TRC */
 
-/* Common CCMR (unshifted) Compare Mode bit field definitions */
 
-#define ATIM_CCMR_MODE_FRZN       (0)       /* 000: Frozen */
-#define ATIM_CCMR_MODE_CHACT      (1)       /* 001: Channel x active on match */
-#define ATIM_CCMR_MODE_CHINACT    (2)       /* 010: Channel x inactive on match */
-#define ATIM_CCMR_MODE_OCREFTOG   (3)       /* 011: OCxREF toggle ATIM_CNT=ATIM_CCRx */
-#define ATIM_CCMR_MODE_OCREFLO    (4)       /* 100: OCxREF forced low */
-#define ATIM_CCMR_MODE_OCREFHI    (5)       /* 101: OCxREF forced high */
-#define ATIM_CCMR_MODE_PWM1       (6)       /* 110: PWM mode 1 */
-#define ATIM_CCMR_MODE_PWM2       (7)       /* 111: PWM mode 2 */
-#define ATIM_CCMR_MODE_COMBINED1  (12)      /* 1100: Combined PWM mode 1 */
-#define ATIM_CCMR_MODE_COMBINED2  (13)      /* 1101: Combined PWM mode 2 */
-#define ATIM_CCMR_MODE_ASYMMETRIC1 (14)     /* 1110: Asymmetric PWM mode 1 */
-#define ATIM_CCMR_MODE_ASYMMETRIC2 (15)     /* 1111: Asymmetric PWM mode 2 */
 
-/* Capture/compare mode register 1 -- Input capture mode */
 
-                                            /* Bits 1-0:(same as output compare mode) */
-#define ATIM_CCMR1_IC1PSC_SHIFT   (2)       /* Bits 3-2: Input Capture 1 Prescaler */
-#define ATIM_CCMR1_IC1PSC_MASK    (3 << ATIM_CCMR1_IC1PSC_SHIFT)
-                                            /* (See common (unshifted) bit field definitions below) */
-#define ATIM_CCMR1_IC1F_SHIFT     (4)       /* Bits 7-4: Input Capture 1 Filter */
-#define ATIM_CCMR1_IC1F_MASK      (0x0f << ATIM_CCMR1_IC1F_SHIFT)
-                                            /* (See common (unshifted) bit field definitions below) */
-                                            /* Bits 9:8 (same as output compare mode) */
-#define ATIM_CCMR1_IC2PSC_SHIFT   (10)      /* Bits 11:10: Input Capture 2 Prescaler */
-#define ATIM_CCMR1_IC2PSC_MASK    (3 << ATIM_CCMR1_IC2PSC_SHIFT)
-                                            /* (See common (unshifted) bit field definitions below) */
-#define ATIM_CCMR1_IC2F_SHIFT     (12)      /* Bits 15-12: Input Capture 2 Filter */
-#define ATIM_CCMR1_IC2F_MASK      (0x0f << ATIM_CCMR1_IC2F_SHIFT)
-                                            /* (See common (unshifted) bit field definitions below) */
 
-/* Common CCMR (unshifted) Input Capture Prescaler bit-field definitions */
 
-#define ATIM_CCMR_ICPSC_NOPSC     (0)       /* 00: no prescaler, capture each edge */
-#define ATIM_CCMR_ICPSC_EVENTS2   (1)       /* 01: capture once every 2 events */
-#define ATIM_CCMR_ICPSC_EVENTS4   (2)       /* 10: capture once every 4 events */
-#define ATIM_CCMR_ICPSC_EVENTS8   (3)       /* 11: capture once every 8 events */
 
-/* Common CCMR (unshifted) Input Capture Filter bit-field definitions */
 
-#define ATIM_CCMR_ICF_NOFILT      (0)       /* 0000: No filter, sampling at fDTS */
-#define ATIM_CCMR_ICF_FCKINT2     (1)       /* 0001: fSAMPLING=fCK_INT, N=2 */
-#define ATIM_CCMR_ICF_FCKINT4     (2)       /* 0010: fSAMPLING=fCK_INT, N=4 */
-#define ATIM_CCMR_ICF_FCKINT8     (3)       /* 0011: fSAMPLING=fCK_INT, N=8 */
-#define ATIM_CCMR_ICF_FDTSd26     (4)       /* 0100: fSAMPLING=fDTS/2, N=6 */
-#define ATIM_CCMR_ICF_FDTSd28     (5)       /* 0101: fSAMPLING=fDTS/2, N=8 */
-#define ATIM_CCMR_ICF_FDTSd46     (6)       /* 0110: fSAMPLING=fDTS/4, N=6 */
-#define ATIM_CCMR_ICF_FDTSd48     (7)       /* 0111: fSAMPLING=fDTS/4, N=8 */
-#define ATIM_CCMR_ICF_FDTSd86     (8)       /* 1000: fSAMPLING=fDTS/8, N=6 */
-#define ATIM_CCMR_ICF_FDTSd88     (9)       /* 1001: fSAMPLING=fDTS/8, N=8 */
-#define ATIM_CCMR_ICF_FDTSd165    (10)      /* 1010: fSAMPLING=fDTS/16, N=5 */
-#define ATIM_CCMR_ICF_FDTSd166    (11)      /* 1011: fSAMPLING=fDTS/16, N=6 */
-#define ATIM_CCMR_ICF_FDTSd168    (12)      /* 1100: fSAMPLING=fDTS/16, N=8 */
-#define ATIM_CCMR_ICF_FDTSd325    (13)      /* 1101: fSAMPLING=fDTS/32, N=5 */
-#define ATIM_CCMR_ICF_FDTSd326    (14)      /* 1110: fSAMPLING=fDTS/32, N=6 */
-#define ATIM_CCMR_ICF_FDTSd328    (15)      /* 1111: fSAMPLING=fDTS/32, N=8 */
 
-/* Capture/compare mode register 2 - Output Compare mode */
 
-#define ATIM_CCMR2_CC3S_SHIFT     (0)       /* Bits 1-0: Capture/Compare 3 Selection */
-#define ATIM_CCMR2_CC3S_MASK      (3 << ATIM_CCMR2_CC3S_SHIFT)
-                                            /* (See common (unshifted) bit field definitions above) */
-#define ATIM_CCMR2_OC3FE          (1 << 2)  /* Bit 2: Output Compare 3 Fast enable */
-#define ATIM_CCMR2_OC3PE          (1 << 3)  /* Bit 3: Output Compare 3 Preload enable */
-#define ATIM_CCMR2_OC3M_SHIFT     (4)       /* Bits 6-4: Output Compare 3 Mode */
-#define ATIM_CCMR2_OC3M_MASK      (7 << ATIM_CCMR2_OC3M_SHIFT)
-                                            /* (See common (unshifted) bit field definitions above) */
-#define ATIM_CCMR2_OC3CE          (1 << 7)  /* Bit 7: Output Compare 3 Clear Enable */
-#define ATIM_CCMR2_CC4S_SHIFT     (8)       /* Bits 9-8: Capture/Compare 4 Selection */
-#define ATIM_CCMR2_CC4S_MASK      (3 << ATIM_CCMR2_CC4S_SHIFT)
-                                            /* (See common (unshifted) bit field definitions above) */
-#define ATIM_CCMR2_OC4FE          (1 << 10) /* Bit 10: Output Compare 4 Fast enable */
-#define ATIM_CCMR2_OC4PE          (1 << 11) /* Bit 11: Output Compare 4 Preload enable */
-#define ATIM_CCMR2_OC4M_SHIFT     (12)      /* Bits 14-12: Output Compare 4 Mode */
-#define ATIM_CCMR2_OC4M_MASK      (7 << ATIM_CCMR2_OC4M_SHIFT)
-                                            /* (See common (unshifted) bit field definitions above) */
-#define ATIM_CCMR2_OC4CE          (1 << 15) /* Bit 15: Output Compare 4 Clear Enable */
-#define ATIM_CCMR2_OC3M           (1 << 16) /* Bit 16: Output Compare 3 mode - bit 3 */
-#define ATIM_CCMR2_OC4M           (1 << 24) /* Bit 24: Output Compare 4 mode - bit 3 */
 
-/* Capture/compare mode register 2 - Input Capture Mode */
 
-                                            /* Bits 1-0:(same as output compare mode) */
-#define ATIM_CCMR2_IC3PSC_SHIFT   (2)       /* Bits 3-2: Input Capture 3 Prescaler */
-#define ATIM_CCMR1_IC3PSC_MASK    (3 << ATIM_CCMR2_IC3PSC_SHIFT)
-                                            /* (See common (unshifted) bit field definitions above) */
-#define ATIM_CCMR2_IC3F_SHIFT     (4)       /* Bits 7-4: Input Capture 3 Filter */
-#define ATIM_CCMR2_IC3F_MASK      (0x0f << ATIM_CCMR2_IC3F_SHIFT)
-                                            /* (See common (unshifted) bit field definitions above) */
-                                            /* Bits 9:8 (same as output compare mode) */
-#define ATIM_CCMR2_IC4PSC_SHIFT   (10)      /* Bits 11:10: Input Capture 4 Prescaler */
-#define ATIM_CCMR2_IC4PSC_MASK    (3 << ATIM_CCMR2_IC4PSC_SHIFT)
-                                            /* (See common (unshifted) bit field definitions above) */
-#define ATIM_CCMR2_IC4F_SHIFT     (12)      /* Bits 15-12: Input Capture 4 Filter */
-#define ATIM_CCMR2_IC4F_MASK      (0x0f << ATIM_CCMR2_IC4F_SHIFT)
-                                            /* (See common (unshifted) bit field definitions above) */
 
-/* Capture/compare mode register 3 -- Output compare mode */
+/* Capture/compare mode registers -- capture/compare mode selection */
 
-#define ATIM_CCMR3_OC5FE          (1 << 2)  /* Bit 2: Output Compare 5 Fast enable */
-#define ATIM_CCMR3_OC5PE          (1 << 3)  /* Bit 3: Output Compare 5 Preload enable */
-#define ATIM_CCMR3_OC5M_SHIFT     (4)       /* Bits 6-4: Output Compare 5 Mode */
-#define ATIM_CCMR3_OC5M_MASK      (7 << ATIM_CCMR3_OC5M_SHIFT)
-                                              /* (See common (unshifted) bit field definitions below) */
-#define ATIM_CCMR3_OC5CE          (1 << 7)  /* Bit 7: Output Compare 5 Clear Enable */
-#define ATIM_CCMR3_OC6FE          (1 << 10) /* Bit 10: Output Compare 6 Fast enable */
-#define ATIM_CCMR3_OC6PE          (1 << 11) /* Bit 11: Output Compare 6 Preload enable */
-#define ATIM_CCMR3_OC6M_SHIFT     (12)      /* Bits 14-12: Output Compare 7 Mode */
-#define ATIM_CCMR3_OC6M_MASK      (7 << ATIM_CCMR3_OC6M_SHIFT)
-                                            /* (See common (unshifted) bit field definitions below) */
-#define ATIM_CCMR3_OC6CE          (1 << 15) /* Bit 15: Output Compare 7 Clear Enable */
+#define TIM1_CCMR1_CC1S_SHIFT       (0)       /* Bits 0-1: Capture/Compare 1 Selection */
+#define TIM1_CCMR1_CC1S_MASK        (0x3 << TIM1_CCMR1_CC1S_SHIFT)
+#  define TIM1_CCMR1_CC1S_CCOUT     (0x0 << TIM1_CCMR1_CC1S_SHIFT) /* 00: CC1 channel output */
+#  define TIM1_CCMR1_CC1S_CCIN1     (0x1 << TIM1_CCMR1_CC1S_SHIFT) /* 01: CC1 channel input, IC1 is TI1 */
+#  define TIM1_CCMR1_CC1S_CCIN2     (0x2 << TIM1_CCMR1_CC1S_SHIFT) /* 10: CC1 channel input, IC1 is TI2 */
+#  define TIM1_CCMR1_CC1S_CCINTRC   (0x3 << TIM1_CCMR1_CC1S_SHIFT) /* 11: CC1 channel input, IC1 is TRC */
 
-#define ATIM_CCMR3_OC5M           (1 << 16) /* Bit 16: Output Compare 5 mode - bit 3 */
-#define ATIM_CCMR3_OC6M           (1 << 24) /* Bit 24: Output Compare 6 mode - bit 3 */
+#define TIM1_CCMR1_CC2S_SHIFT       (8)       /* Bits 8-9: Capture/Compare 2 Selection */
+#define TIM1_CCMR1_CC2S_MASK        (0x3 << TIM1_CCMR1_CC2S_SHIFT)
+#  define TIM1_CCMR1_CC2S_CCOUT     (0x0 << TIM1_CCMR1_CC2S_SHIFT) /* 00: CC2 channel output */
+#  define TIM1_CCMR1_CC2S_CCIN1     (0x1 << TIM1_CCMR1_CC2S_SHIFT) /* 01: CC2 channel input, IC2 is TI2 */
+#  define TIM1_CCMR1_CC2S_CCIN2     (0x2 << TIM1_CCMR1_CC2S_SHIFT) /* 10: CC2 channel input, IC2 is TI1 */
+#  define TIM1_CCMR1_CC2S_CCINTRC   (0x3 << TIM1_CCMR1_CC2S_SHIFT) /* 11: CC2 channel input, IC2 is TRC */
+
+#define TIM1_CCMR2_CC3S_SHIFT       (0)       /* Bits 0-1: Capture/Compare 3 Selection */
+#define TIM1_CCMR2_CC3S_MASK        (0x3 << TIM1_CCMR2_CC3S_SHIFT)
+#  define TIM1_CCMR2_CC3S_CCOUT     (0x0 << TIM1_CCMR2_CC3S_SHIFT) /* 00: CC3 channel output */
+#  define TIM1_CCMR2_CC3S_CCIN1     (0x1 << TIM1_CCMR2_CC3S_SHIFT) /* 01: CC3 channel input, IC3 is TI3 */
+#  define TIM1_CCMR2_CC3S_CCIN2     (0x2 << TIM1_CCMR2_CC3S_SHIFT) /* 10: CC3 channel input, IC3 is TI4 */
+#  define TIM1_CCMR2_CC3S_CCINTRC   (0x3 << TIM1_CCMR2_CC3S_SHIFT) /* 11: CC3 channel input, IC3 is TRC */
+
+#define TIM1_CCMR2_CC4S_SHIFT       (8)       /* Bits 8-9: Capture/Compare 4 Selection */
+#define TIM1_CCMR2_CC4S_MASK        (0x3 << TIM1_CCMR2_CC4S_SHIFT)
+#  define TIM1_CCMR2_CC4S_CCOUT     (0x0 << TIM1_CCMR2_CC4S_SHIFT) /* 00: CC4 channel output */
+#  define TIM1_CCMR2_CC4S_CCIN1     (0x1 << TIM1_CCMR2_CC4S_SHIFT) /* 01: CC4 channel input, IC4 is TI4 */
+#  define TIM1_CCMR2_CC4S_CCIN2     (0x2 << TIM1_CCMR2_CC4S_SHIFT) /* 10: CC4 channel input, IC4 is TI3 */
+#  define TIM1_CCMR2_CC4S_CCINTRC   (0x3 << TIM1_CCMR2_CC4S_SHIFT) /* 11: CC4 channel input, IC4 is TRC */
+
+#define TIM2_CCMR1_CC1S_SHIFT       (0)       /* Bits 0-1: Capture/Compare 1 Selection */
+#define TIM2_CCMR1_CC1S_MASK        (0x3 << TIM2_CCMR1_CC1S_SHIFT)
+#  define TIM2_CCMR1_CC1S_CCOUT     (0x0 << TIM2_CCMR1_CC1S_SHIFT) /* 00: CC1 channel output */
+#  define TIM2_CCMR1_CC1S_CCIN1     (0x1 << TIM2_CCMR1_CC1S_SHIFT) /* 01: CC1 channel input, IC1 is TI1 */
+#  define TIM2_CCMR1_CC1S_CCIN2     (0x2 << TIM2_CCMR1_CC1S_SHIFT) /* 10: CC1 channel input, IC1 is TI2 */
+#  define TIM2_CCMR1_CC1S_CCINTRC   (0x3 << TIM2_CCMR1_CC1S_SHIFT) /* 11: CC1 channel input, IC1 is TRC */
+
+#define TIM2_CCMR1_CC2S_SHIFT       (8)       /* Bits 8-9: Capture/Compare 2 Selection */
+#define TIM2_CCMR1_CC2S_MASK        (0x3 << TIM2_CCMR1_CC2S_SHIFT)
+#  define TIM2_CCMR1_CC2S_CCOUT     (0x0 << TIM2_CCMR1_CC2S_SHIFT) /* 00: CC2 channel output */
+#  define TIM2_CCMR1_CC2S_CCIN1     (0x1 << TIM2_CCMR1_CC2S_SHIFT) /* 01: CC2 channel input, IC2 is TI2 */
+#  define TIM2_CCMR1_CC2S_CCIN2     (0x2 << TIM2_CCMR1_CC2S_SHIFT) /* 10: CC2 channel input, IC2 is TI1 */
+#  define TIM2_CCMR1_CC2S_CCINTRC   (0x3 << TIM2_CCMR1_CC2S_SHIFT) /* 11: CC2 channel input, IC2 is TRC */
+
+#define TIM2_CCMR2_CC3S_SHIFT       (0)       /* Bits 0-1: Capture/Compare 3 Selection */
+#define TIM2_CCMR2_CC3S_MASK        (0x3 << TIM2_CCMR2_CC3S_SHIFT)
+#  define TIM2_CCMR2_CC3S_CCOUT     (0x0 << TIM2_CCMR2_CC3S_SHIFT) /* 00: CC3 channel output */
+#  define TIM2_CCMR2_CC3S_CCIN1     (0x1 << TIM2_CCMR2_CC3S_SHIFT) /* 01: CC3 channel input, IC3 is TI3 */
+#  define TIM2_CCMR2_CC3S_CCIN2     (0x2 << TIM2_CCMR2_CC3S_SHIFT) /* 10: CC3 channel input, IC3 is TI4 */
+#  define TIM2_CCMR2_CC3S_CCINTRC   (0x3 << TIM2_CCMR2_CC3S_SHIFT) /* 11: CC3 channel input, IC3 is TRC */
+
+#define TIM2_CCMR2_CC4S_SHIFT       (8)       /* Bits 8-9: Capture/Compare 4 Selection */
+#define TIM2_CCMR2_CC4S_MASK        (0x3 << TIM2_CCMR2_CC4S_SHIFT)
+#  define TIM2_CCMR2_CC4S_CCOUT     (0x0 << TIM2_CCMR2_CC4S_SHIFT) /* 00: CC4 channel output */
+#  define TIM2_CCMR2_CC4S_CCIN1     (0x1 << TIM2_CCMR2_CC4S_SHIFT) /* 01: CC4 channel input, IC4 is TI4 */
+#  define TIM2_CCMR2_CC4S_CCIN2     (0x2 << TIM2_CCMR2_CC4S_SHIFT) /* 10: CC4 channel input, IC4 is TI3 */
+#  define TIM2_CCMR2_CC4S_CCINTRC   (0x3 << TIM2_CCMR2_CC4S_SHIFT) /* 11: CC4 channel input, IC4 is TRC */
+
+#define TIM16_CCMR1_CC1S_SHIFT      (0)       /* Bits 0-1: Capture/Compare 1 Selection */
+#define TIM16_CCMR1_CC1S_MASK       (0x3 << TIM16_CCMR1_CC1S_SHIFT)
+#  define TIM16_CCMR1_CC1S_CCOUT    (0x0 << TIM16_CCMR1_CC1S_SHIFT) /* 00: CC1 channel output */
+#  define TIM16_CCMR1_CC1S_CCIN1    (0x1 << TIM16_CCMR1_CC1S_SHIFT) /* 01: CC1 channel input, IC1 is TI1 */
+
+#define TIM17_CCMR1_CC1S_SHIFT      (0)       /* Bits 0-1: Capture/Compare 1 Selection */
+#define TIM17_CCMR1_CC1S_MASK       (0x3 << TIM17_CCMR1_CC1S_SHIFT)
+#  define TIM17_CCMR1_CC1S_CCOUT    (0x0 << TIM17_CCMR1_CC1S_SHIFT) /* 00: CC1 channel output */
+#  define TIM17_CCMR1_CC1S_CCIN1    (0x1 << TIM17_CCMR1_CC1S_SHIFT) /* 01: CC1 channel input, IC1 is TI1 */
+
+/* Capture/compare mode registers -- Output compare mode */
+
+#define TIM1_CCMR1_OC1FE            (1 << 2)  /* Bit 2: Output Compare 1 Fast enable */
+#define TIM1_CCMR1_OC1PE            (1 << 3)  /* Bit 3: Output Compare 1 Preload enable */
+#define TIM1_CCMR1_OC1M_LO_SHIFT    (4)       /* Bits 4-6: Output Compare 1 Mode, bits [2:0] */
+#define TIM1_CCMR1_OC1M_HI_SHIFT    (16)      /* Bit 16: Output Compare 1 Mode, bits [3] */
+#define TIM1_CCMR1_OC1M_BITS        (h,l)     ((h << TIM1_CCMR1_OC1M_HI_SHIFT) | (l << TIM1_CCMR1_OC1M_LO_SHIFT))
+#define TIM1_CCMR1_OC1M_MASK        TIM1_CCMR1_OC1M_BITS(0x1, 0x7)
+#  define TIM1_CCMR1_OC1M_FRZN      TIM1_CCMR1_OC1M_BITS(0x0, 0x0)  /* 0,000: Frozen */
+#  define TIM1_CCMR1_OC1M_CHACT     TIM1_CCMR1_OC1M_BITS(0x0, 0x1)  /* 0,001: Channel 1 active on match */
+#  define TIM1_CCMR1_OC1M_CHINACT   TIM1_CCMR1_OC1M_BITS(0x0, 0x2)  /* 0,010: Channel 1 inactive on match */
+#  define TIM1_CCMR1_OC1M_OCREFTOG  TIM1_CCMR1_OC1M_BITS(0x0, 0x3)  /* 0,011: OC1REF toggle TIM_CNT=TIM_CCR1 */
+#  define TIM1_CCMR1_OC1M_OCREFLO   TIM1_CCMR1_OC1M_BITS(0x0, 0x4)  /* 0,100: OC1REF forced low */
+#  define TIM1_CCMR1_OC1M_OCREFHI   TIM1_CCMR1_OC1M_BITS(0x0, 0x5)  /* 0,101: OC1REF forced high */
+#  define TIM1_CCMR1_OC1M_PWM1      TIM1_CCMR1_OC1M_BITS(0x0, 0x6)  /* 0,110: PWM mode 1 */
+#  define TIM1_CCMR1_OC1M_PWM2      TIM1_CCMR1_OC1M_BITS(0x0, 0x7)  /* 0,111: PWM mode 2 */
+#  define TIM1_CCMR1_OC1M_OPM1      TIM1_CCMR1_OC1M_BITS(0x1, 0x0)  /* 1,000: OPM mode 1 */
+#  define TIM1_CCMR1_OC1M_OPM2      TIM1_CCMR1_OC1M_BITS(0x1, 0x1)  /* 1,001: OPM mode 2 */
+#  define TIM1_CCMR1_OC1M_COMBINED1 TIM1_CCMR1_OC1M_BITS(0x1, 0x4)  /* 1,100: Combined PWM mode 1 */
+#  define TIM1_CCMR1_OC1M_COMBINED2 TIM1_CCMR1_OC1M_BITS(0x1, 0x5)  /* 1,101: Combined PWM mode 2 */
+#  define TIM1_CCMR1_OC1M_ASYMM1    TIM1_CCMR1_OC1M_BITS(0x1, 0x6)  /* 1,110: Asymmetric PWM mode 1 */
+#  define TIM1_CCMR1_OC1M_ASYMM2    TIM1_CCMR1_OC1M_BITS(0x1, 0x7)  /* 1,111: Asymmetric PWM mode 2 */
+#define TIM1_CCMR1_OC1CE            (1 << 7)  /* Bit 7: Output Compare 1 Clear Enable */
+
+#define TIM1_CCMR1_OC2FE            (1 << 10) /* Bit 10: Output Compare 2 Fast enable */
+#define TIM1_CCMR1_OC2PE            (1 << 11) /* Bit 11: Output Compare 2 Preload enable */
+#define TIM1_CCMR1_OC2M_LO_SHIFT    (12)      /* Bits 12-14: Output Compare 2 Mode, bits [2:0] */
+#define TIM1_CCMR1_OC2M_HI_SHIFT    (24)      /* Bit 24: Output Compare 2 Mode, bits [3] */
+#define TIM1_CCMR1_OC2M_BITS        (h,l)     ((h << TIM1_CCMR1_OC2M_HI_SHIFT) | (l << TIM1_CCMR1_OC2M_LO_SHIFT))
+#define TIM1_CCMR1_OC2M_MASK        TIM1_CCMR1_OC2M_BITS(0x1, 0x7)
+#  define TIM1_CCMR1_OC2M_FRZN      TIM1_CCMR1_OC2M_BITS(0x0, 0x0)  /* 0,000: Frozen */
+#  define TIM1_CCMR1_OC2M_CHACT     TIM1_CCMR1_OC2M_BITS(0x0, 0x1)  /* 0,001: Channel 2 active on match */
+#  define TIM1_CCMR1_OC2M_CHINACT   TIM1_CCMR1_OC2M_BITS(0x0, 0x2)  /* 0,010: Channel 2 inactive on match */
+#  define TIM1_CCMR1_OC2M_OCREFTOG  TIM1_CCMR1_OC2M_BITS(0x0, 0x3)  /* 0,011: OC2REF toggle TIM_CNT=TIM_CCR2 */
+#  define TIM1_CCMR1_OC2M_OCREFLO   TIM1_CCMR1_OC2M_BITS(0x0, 0x4)  /* 0,100: OC2REF forced low */
+#  define TIM1_CCMR1_OC2M_OCREFHI   TIM1_CCMR1_OC2M_BITS(0x0, 0x5)  /* 0,101: OC2REF forced high */
+#  define TIM1_CCMR1_OC2M_PWM1      TIM1_CCMR1_OC2M_BITS(0x0, 0x6)  /* 0,110: PWM mode 1 */
+#  define TIM1_CCMR1_OC2M_PWM2      TIM1_CCMR1_OC2M_BITS(0x0, 0x7)  /* 0,111: PWM mode 2 */
+#  define TIM1_CCMR1_OC2M_OPM1      TIM1_CCMR1_OC2M_BITS(0x1, 0x0)  /* 1,000: OPM mode 1 */
+#  define TIM1_CCMR1_OC2M_OPM2      TIM1_CCMR1_OC2M_BITS(0x1, 0x1)  /* 1,001: OPM mode 2 */
+#  define TIM1_CCMR1_OC2M_COMBINED1 TIM1_CCMR1_OC2M_BITS(0x1, 0x4)  /* 1,100: Combined PWM mode 1 */
+#  define TIM1_CCMR1_OC2M_COMBINED2 TIM1_CCMR1_OC2M_BITS(0x1, 0x5)  /* 1,101: Combined PWM mode 2 */
+#  define TIM1_CCMR1_OC2M_ASYMM1    TIM1_CCMR1_OC2M_BITS(0x1, 0x6)  /* 1,110: Asymmetric PWM mode 1 */
+#  define TIM1_CCMR1_OC2M_ASYMM2    TIM1_CCMR1_OC2M_BITS(0x1, 0x7)  /* 1,111: Asymmetric PWM mode 2 */
+#define TIM1_CCMR1_OC2CE            (1 << 15) /* Bit 15: Output Compare 2 Clear Enable */
+
+#define TIM1_CCMR2_OC3FE            (1 << 2)  /* Bit 2: Output Compare 3 Fast enable */
+#define TIM1_CCMR2_OC3PE            (1 << 3)  /* Bit 3: Output Compare 3 Preload enable */
+#define TIM1_CCMR2_OC3M_LO_SHIFT    (4)       /* Bits 4-6: Output Compare 3 Mode, bits [2:0] */
+#define TIM1_CCMR2_OC3M_HI_SHIFT    (16)      /* Bit 16: Output Compare 3 Mode, bits [3] */
+#define TIM1_CCMR2_OC3M_BITS        (h,l)     ((h << TIM1_CCMR2_OC3M_HI_SHIFT) | (l << TIM1_CCMR2_OC3M_LO_SHIFT))
+#define TIM1_CCMR2_OC3M_MASK        TIM1_CCMR2_OC3M_BITS(0x1, 0x7)
+#  define TIM1_CCMR2_OC3M_FRZN      TIM1_CCMR2_OC3M_BITS(0x0, 0x0)  /* 0,000: Frozen */
+#  define TIM1_CCMR2_OC3M_CHACT     TIM1_CCMR2_OC3M_BITS(0x0, 0x1)  /* 0,001: Channel 3 active on match */
+#  define TIM1_CCMR2_OC3M_CHINACT   TIM1_CCMR2_OC3M_BITS(0x0, 0x2)  /* 0,010: Channel 3 inactive on match */
+#  define TIM1_CCMR2_OC3M_OCREFTOG  TIM1_CCMR2_OC3M_BITS(0x0, 0x3)  /* 0,011: OC3REF toggle TIM_CNT=TIM_CCR3 */
+#  define TIM1_CCMR2_OC3M_OCREFLO   TIM1_CCMR2_OC3M_BITS(0x0, 0x4)  /* 0,100: OC3REF forced low */
+#  define TIM1_CCMR2_OC3M_OCREFHI   TIM1_CCMR2_OC3M_BITS(0x0, 0x5)  /* 0,101: OC3REF forced high */
+#  define TIM1_CCMR2_OC3M_PWM1      TIM1_CCMR2_OC3M_BITS(0x0, 0x6)  /* 0,110: PWM mode 1 */
+#  define TIM1_CCMR2_OC3M_PWM2      TIM1_CCMR2_OC3M_BITS(0x0, 0x7)  /* 0,111: PWM mode 2 */
+#  define TIM1_CCMR2_OC3M_OPM1      TIM1_CCMR2_OC3M_BITS(0x1, 0x0)  /* 1,000: OPM mode 1 */
+#  define TIM1_CCMR2_OC3M_OPM2      TIM1_CCMR2_OC3M_BITS(0x1, 0x1)  /* 1,001: OPM mode 2 */
+#  define TIM1_CCMR2_OC3M_COMBINED1 TIM1_CCMR2_OC3M_BITS(0x1, 0x4)  /* 1,100: Combined PWM mode 1 */
+#  define TIM1_CCMR2_OC3M_COMBINED2 TIM1_CCMR2_OC3M_BITS(0x1, 0x5)  /* 1,101: Combined PWM mode 2 */
+#  define TIM1_CCMR2_OC3M_ASYMM1    TIM1_CCMR2_OC3M_BITS(0x1, 0x6)  /* 1,110: Asymmetric PWM mode 1 */
+#  define TIM1_CCMR2_OC3M_ASYMM2    TIM1_CCMR2_OC3M_BITS(0x1, 0x7)  /* 1,111: Asymmetric PWM mode 2 */
+#define TIM1_CCMR2_OC3CE            (1 << 7)  /* Bit 7: Output Compare 1 Clear Enable */
+
+#define TIM1_CCMR2_OC4FE            (1 << 10) /* Bit 10: Output Compare 4 Fast enable */
+#define TIM1_CCMR2_OC4PE            (1 << 11) /* Bit 11: Output Compare 4 Preload enable */
+#define TIM1_CCMR2_OC4M_LO_SHIFT    (12)      /* Bits 12-14: Output Compare 4 Mode, bits [2:0] */
+#define TIM1_CCMR2_OC4M_HI_SHIFT    (24)      /* Bit 24: Output Compare 4 Mode, bits [3] */
+#define TIM1_CCMR2_OC4M_BITS        (h,l)     ((h << TIM1_CCMR2_OC4M_HI_SHIFT) | (l << TIM1_CCMR2_OC4M_LO_SHIFT))
+#define TIM1_CCMR2_OC4M_MASK        TIM1_CCMR2_OC4M_BITS(0x1, 0x7)
+#  define TIM1_CCMR2_OC4M_FRZN      TIM1_CCMR2_OC4M_BITS(0x0, 0x0)  /* 0,000: Frozen */
+#  define TIM1_CCMR2_OC4M_CHACT     TIM1_CCMR2_OC4M_BITS(0x0, 0x1)  /* 0,001: Channel 4 active on match */
+#  define TIM1_CCMR2_OC4M_CHINACT   TIM1_CCMR2_OC4M_BITS(0x0, 0x2)  /* 0,010: Channel 4 inactive on match */
+#  define TIM1_CCMR2_OC4M_OCREFTOG  TIM1_CCMR2_OC4M_BITS(0x0, 0x3)  /* 0,011: OC4REF toggle TIM_CNT=TIM_CCR4 */
+#  define TIM1_CCMR2_OC4M_OCREFLO   TIM1_CCMR2_OC4M_BITS(0x0, 0x4)  /* 0,100: OC4REF forced low */
+#  define TIM1_CCMR2_OC4M_OCREFHI   TIM1_CCMR2_OC4M_BITS(0x0, 0x5)  /* 0,101: OC4REF forced high */
+#  define TIM1_CCMR2_OC4M_PWM1      TIM1_CCMR2_OC4M_BITS(0x0, 0x6)  /* 0,110: PWM mode 1 */
+#  define TIM1_CCMR2_OC4M_PWM2      TIM1_CCMR2_OC4M_BITS(0x0, 0x7)  /* 0,111: PWM mode 2 */
+#  define TIM1_CCMR2_OC4M_OPM1      TIM1_CCMR2_OC4M_BITS(0x1, 0x0)  /* 1,000: OPM mode 1 */
+#  define TIM1_CCMR2_OC4M_OPM2      TIM1_CCMR2_OC4M_BITS(0x1, 0x1)  /* 1,001: OPM mode 2 */
+#  define TIM1_CCMR2_OC4M_COMBINED1 TIM1_CCMR2_OC4M_BITS(0x1, 0x4)  /* 1,100: Combined PWM mode 1 */
+#  define TIM1_CCMR2_OC4M_COMBINED2 TIM1_CCMR2_OC4M_BITS(0x1, 0x5)  /* 1,101: Combined PWM mode 2 */
+#  define TIM1_CCMR2_OC4M_ASYMM1    TIM1_CCMR2_OC4M_BITS(0x1, 0x6)  /* 1,110: Asymmetric PWM mode 1 */
+#  define TIM1_CCMR2_OC4M_ASYMM2    TIM1_CCMR2_OC4M_BITS(0x1, 0x7)  /* 1,111: Asymmetric PWM mode 2 */
+#define TIM1_CCMR2_OC4CE            (1 << 15) /* Bit 15: Output Compare 2 Clear Enable */
+
+#define TIM2_CCMR1_OC1FE            (1 << 2)  /* Bit 2: Output Compare 1 Fast enable */
+#define TIM2_CCMR1_OC1PE            (1 << 3)  /* Bit 3: Output Compare 1 Preload enable */
+#define TIM2_CCMR1_OC1M_LO_SHIFT    (4)       /* Bits 4-6: Output Compare 1 Mode, bits [2:0] */
+#define TIM2_CCMR1_OC1M_HI_SHIFT    (16)      /* Bit 16: Output Compare 1 Mode, bits [3] */
+#define TIM2_CCMR1_OC1M_BITS        (h,l)     ((h << TIM2_CCMR1_OC1M_HI_SHIFT) | (l << TIM2_CCMR1_OC1M_LO_SHIFT))
+#define TIM2_CCMR1_OC1M_MASK        TIM2_CCMR1_OC1M_BITS(0x1, 0x7)
+#  define TIM2_CCMR1_OC1M_FRZN      TIM2_CCMR1_OC1M_BITS(0x0, 0x0)  /* 0,000: Frozen */
+#  define TIM2_CCMR1_OC1M_CHACT     TIM2_CCMR1_OC1M_BITS(0x0, 0x1)  /* 0,001: Channel 1 active on match */
+#  define TIM2_CCMR1_OC1M_CHINACT   TIM2_CCMR1_OC1M_BITS(0x0, 0x2)  /* 0,010: Channel 1 inactive on match */
+#  define TIM2_CCMR1_OC1M_OCREFTOG  TIM2_CCMR1_OC1M_BITS(0x0, 0x3)  /* 0,011: OC1REF toggle TIM_CNT=TIM_CCR1 */
+#  define TIM2_CCMR1_OC1M_OCREFLO   TIM2_CCMR1_OC1M_BITS(0x0, 0x4)  /* 0,100: OC1REF forced low */
+#  define TIM2_CCMR1_OC1M_OCREFHI   TIM2_CCMR1_OC1M_BITS(0x0, 0x5)  /* 0,101: OC1REF forced high */
+#  define TIM2_CCMR1_OC1M_PWM1      TIM2_CCMR1_OC1M_BITS(0x0, 0x6)  /* 0,110: PWM mode 1 */
+#  define TIM2_CCMR1_OC1M_PWM2      TIM2_CCMR1_OC1M_BITS(0x0, 0x7)  /* 0,111: PWM mode 2 */
+#  define TIM2_CCMR1_OC1M_OPM1      TIM2_CCMR1_OC1M_BITS(0x1, 0x0)  /* 1,000: OPM mode 1 */
+#  define TIM2_CCMR1_OC1M_OPM2      TIM2_CCMR1_OC1M_BITS(0x1, 0x1)  /* 1,001: OPM mode 2 */
+#  define TIM2_CCMR1_OC1M_COMBINED1 TIM2_CCMR1_OC1M_BITS(0x1, 0x4)  /* 1,100: Combined PWM mode 1 */
+#  define TIM2_CCMR1_OC1M_COMBINED2 TIM2_CCMR1_OC1M_BITS(0x1, 0x5)  /* 1,101: Combined PWM mode 2 */
+#  define TIM2_CCMR1_OC1M_ASYMM1    TIM2_CCMR1_OC1M_BITS(0x1, 0x6)  /* 1,110: Asymmetric PWM mode 1 */
+#  define TIM2_CCMR1_OC1M_ASYMM2    TIM2_CCMR1_OC1M_BITS(0x1, 0x7)  /* 1,111: Asymmetric PWM mode 2 */
+#define TIM2_CCMR1_OC1CE            (1 << 7)  /* Bit 7: Output Compare 1 Clear Enable */
+
+#define TIM2_CCMR1_OC2FE            (1 << 10) /* Bit 10: Output Compare 2 Fast enable */
+#define TIM2_CCMR1_OC2PE            (1 << 11) /* Bit 11: Output Compare 2 Preload enable */
+#define TIM2_CCMR1_OC2M_LO_SHIFT    (12)      /* Bits 12-14: Output Compare 2 Mode, bits [2:0] */
+#define TIM2_CCMR1_OC2M_HI_SHIFT    (24)      /* Bit 24: Output Compare 2 Mode, bits [3] */
+#define TIM2_CCMR1_OC2M_BITS        (h,l)     ((h << TIM2_CCMR1_OC2M_HI_SHIFT) | (l << TIM2_CCMR1_OC2M_LO_SHIFT))
+#define TIM2_CCMR1_OC2M_MASK        TIM2_CCMR1_OC2M_BITS(0x1, 0x7)
+#  define TIM2_CCMR1_OC2M_FRZN      TIM2_CCMR1_OC2M_BITS(0x0, 0x0)  /* 0,000: Frozen */
+#  define TIM2_CCMR1_OC2M_CHACT     TIM2_CCMR1_OC2M_BITS(0x0, 0x1)  /* 0,001: Channel 2 active on match */
+#  define TIM2_CCMR1_OC2M_CHINACT   TIM2_CCMR1_OC2M_BITS(0x0, 0x2)  /* 0,010: Channel 2 inactive on match */
+#  define TIM2_CCMR1_OC2M_OCREFTOG  TIM2_CCMR1_OC2M_BITS(0x0, 0x3)  /* 0,011: OC2REF toggle TIM_CNT=TIM_CCR2 */
+#  define TIM2_CCMR1_OC2M_OCREFLO   TIM2_CCMR1_OC2M_BITS(0x0, 0x4)  /* 0,100: OC2REF forced low */
+#  define TIM2_CCMR1_OC2M_OCREFHI   TIM2_CCMR1_OC2M_BITS(0x0, 0x5)  /* 0,101: OC2REF forced high */
+#  define TIM2_CCMR1_OC2M_PWM1      TIM2_CCMR1_OC2M_BITS(0x0, 0x6)  /* 0,110: PWM mode 1 */
+#  define TIM2_CCMR1_OC2M_PWM2      TIM2_CCMR1_OC2M_BITS(0x0, 0x7)  /* 0,111: PWM mode 2 */
+#  define TIM2_CCMR1_OC2M_OPM1      TIM2_CCMR1_OC2M_BITS(0x1, 0x0)  /* 1,000: OPM mode 1 */
+#  define TIM2_CCMR1_OC2M_OPM2      TIM2_CCMR1_OC2M_BITS(0x1, 0x1)  /* 1,001: OPM mode 2 */
+#  define TIM2_CCMR1_OC2M_COMBINED1 TIM2_CCMR1_OC2M_BITS(0x1, 0x4)  /* 1,100: Combined PWM mode 1 */
+#  define TIM2_CCMR1_OC2M_COMBINED2 TIM2_CCMR1_OC2M_BITS(0x1, 0x5)  /* 1,101: Combined PWM mode 2 */
+#  define TIM2_CCMR1_OC2M_ASYMM1    TIM2_CCMR1_OC2M_BITS(0x1, 0x6)  /* 1,110: Asymmetric PWM mode 1 */
+#  define TIM2_CCMR1_OC2M_ASYMM2    TIM2_CCMR1_OC2M_BITS(0x1, 0x7)  /* 1,111: Asymmetric PWM mode 2 */
+#define TIM2_CCMR1_OC2CE            (1 << 15) /* Bit 15: Output Compare 2 Clear Enable */
+
+#define TIM2_CCMR2_OC3FE            (1 << 2)  /* Bit 2: Output Compare 3 Fast enable */
+#define TIM2_CCMR2_OC3PE            (1 << 3)  /* Bit 3: Output Compare 3 Preload enable */
+#define TIM2_CCMR2_OC3M_LO_SHIFT    (4)       /* Bits 4-6: Output Compare 3 Mode, bits [2:0] */
+#define TIM2_CCMR2_OC3M_HI_SHIFT    (16)      /* Bit 16: Output Compare 3 Mode, bits [3] */
+#define TIM2_CCMR2_OC3M_BITS        (h,l)     ((h << TIM2_CCMR2_OC3M_HI_SHIFT) | (l << TIM2_CCMR2_OC3M_LO_SHIFT))
+#define TIM2_CCMR2_OC3M_MASK        TIM2_CCMR2_OC3M_BITS(0x1, 0x7)
+#  define TIM2_CCMR2_OC3M_FRZN      TIM2_CCMR2_OC3M_BITS(0x0, 0x0)  /* 0,000: Frozen */
+#  define TIM2_CCMR2_OC3M_CHACT     TIM2_CCMR2_OC3M_BITS(0x0, 0x1)  /* 0,001: Channel 3 active on match */
+#  define TIM2_CCMR2_OC3M_CHINACT   TIM2_CCMR2_OC3M_BITS(0x0, 0x2)  /* 0,010: Channel 3 inactive on match */
+#  define TIM2_CCMR2_OC3M_OCREFTOG  TIM2_CCMR2_OC3M_BITS(0x0, 0x3)  /* 0,011: OC3REF toggle TIM_CNT=TIM_CCR3 */
+#  define TIM2_CCMR2_OC3M_OCREFLO   TIM2_CCMR2_OC3M_BITS(0x0, 0x4)  /* 0,100: OC3REF forced low */
+#  define TIM2_CCMR2_OC3M_OCREFHI   TIM2_CCMR2_OC3M_BITS(0x0, 0x5)  /* 0,101: OC3REF forced high */
+#  define TIM2_CCMR2_OC3M_PWM1      TIM2_CCMR2_OC3M_BITS(0x0, 0x6)  /* 0,110: PWM mode 1 */
+#  define TIM2_CCMR2_OC3M_PWM2      TIM2_CCMR2_OC3M_BITS(0x0, 0x7)  /* 0,111: PWM mode 2 */
+#  define TIM2_CCMR2_OC3M_OPM1      TIM2_CCMR2_OC3M_BITS(0x1, 0x0)  /* 1,000: OPM mode 1 */
+#  define TIM2_CCMR2_OC3M_OPM2      TIM2_CCMR2_OC3M_BITS(0x1, 0x1)  /* 1,001: OPM mode 2 */
+#  define TIM2_CCMR2_OC3M_COMBINED1 TIM2_CCMR2_OC3M_BITS(0x1, 0x4)  /* 1,100: Combined PWM mode 1 */
+#  define TIM2_CCMR2_OC3M_COMBINED2 TIM2_CCMR2_OC3M_BITS(0x1, 0x5)  /* 1,101: Combined PWM mode 2 */
+#  define TIM2_CCMR2_OC3M_ASYMM1    TIM2_CCMR2_OC3M_BITS(0x1, 0x6)  /* 1,110: Asymmetric PWM mode 1 */
+#  define TIM2_CCMR2_OC3M_ASYMM2    TIM2_CCMR2_OC3M_BITS(0x1, 0x7)  /* 1,111: Asymmetric PWM mode 2 */
+#define TIM2_CCMR2_OC3CE            (1 << 7)  /* Bit 7: Output Compare 1 Clear Enable */
+
+#define TIM2_CCMR2_OC4FE            (1 << 10) /* Bit 10: Output Compare 4 Fast enable */
+#define TIM2_CCMR2_OC4PE            (1 << 11) /* Bit 11: Output Compare 4 Preload enable */
+#define TIM2_CCMR2_OC4M_LO_SHIFT    (12)      /* Bits 12-14: Output Compare 4 Mode, bits [2:0] */
+#define TIM2_CCMR2_OC4M_HI_SHIFT    (24)      /* Bit 24: Output Compare 4 Mode, bits [3] */
+#define TIM2_CCMR2_OC4M_BITS        (h,l)     ((h << TIM2_CCMR2_OC4M_HI_SHIFT) | (l << TIM2_CCMR2_OC4M_LO_SHIFT))
+#define TIM2_CCMR2_OC4M_MASK        TIM2_CCMR2_OC4M_BITS(0x1, 0x7)
+#  define TIM2_CCMR2_OC4M_FRZN      TIM2_CCMR2_OC4M_BITS(0x0, 0x0)  /* 0,000: Frozen */
+#  define TIM2_CCMR2_OC4M_CHACT     TIM2_CCMR2_OC4M_BITS(0x0, 0x1)  /* 0,001: Channel 4 active on match */
+#  define TIM2_CCMR2_OC4M_CHINACT   TIM2_CCMR2_OC4M_BITS(0x0, 0x2)  /* 0,010: Channel 4 inactive on match */
+#  define TIM2_CCMR2_OC4M_OCREFTOG  TIM2_CCMR2_OC4M_BITS(0x0, 0x3)  /* 0,011: OC4REF toggle TIM_CNT=TIM_CCR4 */
+#  define TIM2_CCMR2_OC4M_OCREFLO   TIM2_CCMR2_OC4M_BITS(0x0, 0x4)  /* 0,100: OC4REF forced low */
+#  define TIM2_CCMR2_OC4M_OCREFHI   TIM2_CCMR2_OC4M_BITS(0x0, 0x5)  /* 0,101: OC4REF forced high */
+#  define TIM2_CCMR2_OC4M_PWM1      TIM2_CCMR2_OC4M_BITS(0x0, 0x6)  /* 0,110: PWM mode 1 */
+#  define TIM2_CCMR2_OC4M_PWM2      TIM2_CCMR2_OC4M_BITS(0x0, 0x7)  /* 0,111: PWM mode 2 */
+#  define TIM2_CCMR2_OC4M_OPM1      TIM2_CCMR2_OC4M_BITS(0x1, 0x0)  /* 1,000: OPM mode 1 */
+#  define TIM2_CCMR2_OC4M_OPM2      TIM2_CCMR2_OC4M_BITS(0x1, 0x1)  /* 1,001: OPM mode 2 */
+#  define TIM2_CCMR2_OC4M_COMBINED1 TIM2_CCMR2_OC4M_BITS(0x1, 0x4)  /* 1,100: Combined PWM mode 1 */
+#  define TIM2_CCMR2_OC4M_COMBINED2 TIM2_CCMR2_OC4M_BITS(0x1, 0x5)  /* 1,101: Combined PWM mode 2 */
+#  define TIM2_CCMR2_OC4M_ASYMM1    TIM2_CCMR2_OC4M_BITS(0x1, 0x6)  /* 1,110: Asymmetric PWM mode 1 */
+#  define TIM2_CCMR2_OC4M_ASYMM2    TIM2_CCMR2_OC4M_BITS(0x1, 0x7)  /* 1,111: Asymmetric PWM mode 2 */
+#define TIM2_CCMR2_OC4CE            (1 << 15) /* Bit 15: Output Compare 2 Clear Enable */
+
+#define TIM16_CCMR1_OC1FE           (1 << 2)  /* Bit 2: Output Compare 1 Fast enable */
+#define TIM16_CCMR1_OC1PE           (1 << 3)  /* Bit 3: Output Compare 1 Preload enable */
+#define TIM16_CCMR1_OC1M_LO_SHIFT   (4)       /* Bits 4-6: Output Compare 1 Mode, bits [2:0] */
+#define TIM16_CCMR1_OC1M_HI_SHIFT   (16)      /* Bit 16: Output Compare 1 Mode, bits [3] */
+#define TIM16_CCMR1_OC1M_BITS       (h,l)     ((h << TIM16_CCMR1_OC1M_HI_SHIFT) | (l << TIM16_CCMR1_OC1M_LO_SHIFT))
+#define TIM16_CCMR1_OC1M_MASK       TIM16_CCMR1_OC1M_BITS(0x1, 0x7)
+#  define TIM16_CCMR1_OC1M_FRZN     TIM16_CCMR1_OC1M_BITS(0x0, 0x0)  /* 0,000: Frozen */
+#  define TIM16_CCMR1_OC1M_CHACT    TIM16_CCMR1_OC1M_BITS(0x0, 0x1)  /* 0,001: Channel 1 active on match */
+#  define TIM16_CCMR1_OC1M_CHINACT  TIM16_CCMR1_OC1M_BITS(0x0, 0x2)  /* 0,010: Channel 1 inactive on match */
+#  define TIM16_CCMR1_OC1M_OCREFTOG TIM16_CCMR1_OC1M_BITS(0x0, 0x3)  /* 0,011: OC1REF toggle TIM_CNT=TIM_CCR1 */
+#  define TIM16_CCMR1_OC1M_OCREFLO  TIM16_CCMR1_OC1M_BITS(0x0, 0x4)  /* 0,100: OC1REF forced low */
+#  define TIM16_CCMR1_OC1M_OCREFHI  TIM16_CCMR1_OC1M_BITS(0x0, 0x5)  /* 0,101: OC1REF forced high */
+#  define TIM16_CCMR1_OC1M_PWM1     TIM16_CCMR1_OC1M_BITS(0x0, 0x6)  /* 0,110: PWM mode 1 */
+#  define TIM16_CCMR1_OC1M_PWM2     TIM16_CCMR1_OC1M_BITS(0x0, 0x7)  /* 0,111: PWM mode 2 */
+
+#define TIM17_CCMR1_OC1FE           (1 << 2)  /* Bit 2: Output Compare 1 Fast enable */
+#define TIM17_CCMR1_OC1PE           (1 << 3)  /* Bit 3: Output Compare 1 Preload enable */
+#define TIM17_CCMR1_OC1M_LO_SHIFT   (4)       /* Bits 4-6: Output Compare 1 Mode, bits [2:0] */
+#define TIM17_CCMR1_OC1M_HI_SHIFT   (16)      /* Bit 16: Output Compare 1 Mode, bits [3] */
+#define TIM17_CCMR1_OC1M_BITS       (h,l)     ((h << TIM17_CCMR1_OC1M_HI_SHIFT) | (l << TIM17_CCMR1_OC1M_LO_SHIFT))
+#define TIM17_CCMR1_OC1M_MASK       TIM17_CCMR1_OC1M_BITS(0x1, 0x7)
+#  define TIM17_CCMR1_OC1M_FRZN     TIM17_CCMR1_OC1M_BITS(0x0, 0x0)  /* 0,000: Frozen */
+#  define TIM17_CCMR1_OC1M_CHACT    TIM17_CCMR1_OC1M_BITS(0x0, 0x1)  /* 0,001: Channel 1 active on match */
+#  define TIM17_CCMR1_OC1M_CHINACT  TIM17_CCMR1_OC1M_BITS(0x0, 0x2)  /* 0,010: Channel 1 inactive on match */
+#  define TIM17_CCMR1_OC1M_OCREFTOG TIM17_CCMR1_OC1M_BITS(0x0, 0x3)  /* 0,011: OC1REF toggle TIM_CNT=TIM_CCR1 */
+#  define TIM17_CCMR1_OC1M_OCREFLO  TIM17_CCMR1_OC1M_BITS(0x0, 0x4)  /* 0,100: OC1REF forced low */
+#  define TIM17_CCMR1_OC1M_OCREFHI  TIM17_CCMR1_OC1M_BITS(0x0, 0x5)  /* 0,101: OC1REF forced high */
+#  define TIM17_CCMR1_OC1M_PWM1     TIM17_CCMR1_OC1M_BITS(0x0, 0x6)  /* 0,110: PWM mode 1 */
+#  define TIM17_CCMR1_OC1M_PWM2     TIM17_CCMR1_OC1M_BITS(0x0, 0x7)  /* 0,111: PWM mode 2 */
+
+/* Capture/compare mode registers -- Input Capture mode */
+
+#define TIM1_CCMR1_IC1PSC_SHIFT     (2)       /* Bits 2-3: Input Capture 1 Prescaler */
+#define TIM1_CCMR1_IC1PSC_MASK      (0x3 << TIM1_CCMR1_IC1PSC_SHIFT)
+#  define TIM1_CCMR1_IC1PSC_NOPSC   (0x0 << TIM1_CCMR1_IC1PSC_SHIFT) /* 00: no prescaler, capture each edge */
+#  define TIM1_CCMR1_IC1PSC_EVENTS2 (0x1 << TIM1_CCMR1_IC1PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM1_CCMR1_IC1PSC_EVENTS4 (0x2 << TIM1_CCMR1_IC1PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM1_CCMR1_IC1PSC_EVENTS8 (0x3 << TIM1_CCMR1_IC1PSC_SHIFT) /* 11: capture once every 8 events */
+#define TIM1_CCMR1_IC1F_SHIFT       (4)       /* Bits 4-7: Input Capture 1 Filter */
+#define TIM1_CCMR1_IC1F_MASK        (0xf << TIM1_CCMR1_IC1F_SHIFT)
+#  define TIM1_CCMR1_IC1F_NOFILT    (0x0 << TIM1_CCMR1_IC1F_SHIFT)   /* 0000: No filter, sampling at fDTS */
+#  define TIM1_CCMR1_IC1F_FCKINT2   (0x1 << TIM1_CCMR1_IC1F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
+#  define TIM1_CCMR1_IC1F_FCKINT4   (0x2 << TIM1_CCMR1_IC1F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
+#  define TIM1_CCMR1_IC1F_FCKINT8   (0x3 << TIM1_CCMR1_IC1F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
+#  define TIM1_CCMR1_IC1F_FDTSd26   (0x4 << TIM1_CCMR1_IC1F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
+#  define TIM1_CCMR1_IC1F_FDTSd28   (0x5 << TIM1_CCMR1_IC1F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
+#  define TIM1_CCMR1_IC1F_FDTSd46   (0x6 << TIM1_CCMR1_IC1F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
+#  define TIM1_CCMR1_IC1F_FDTSd48   (0x7 << TIM1_CCMR1_IC1F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
+#  define TIM1_CCMR1_IC1F_FDTSd86   (0x8 << TIM1_CCMR1_IC1F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
+#  define TIM1_CCMR1_IC1F_FDTSd88   (0x9 << TIM1_CCMR1_IC1F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
+#  define TIM1_CCMR1_IC1F_FDTSd165  (0xa << TIM1_CCMR1_IC1F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
+#  define TIM1_CCMR1_IC1F_FDTSd166  (0xb << TIM1_CCMR1_IC1F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
+#  define TIM1_CCMR1_IC1F_FDTSd168  (0xc << TIM1_CCMR1_IC1F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
+#  define TIM1_CCMR1_IC1F_FDTSd325  (0xd << TIM1_CCMR1_IC1F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
+#  define TIM1_CCMR1_IC1F_FDTSd326  (0xe << TIM1_CCMR1_IC1F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
+#  define TIM1_CCMR1_IC1F_FDTSd328  (0xf << TIM1_CCMR1_IC1F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+
+#define TIM1_CCMR1_IC2PSC_SHIFT     (10)      /* Bits 10-11: Input Capture 2 Prescaler */
+#define TIM1_CCMR1_IC2PSC_MASK      (0x3 << TIM1_CCMR1_IC2PSC_SHIFT)
+#  define TIM1_CCMR1_IC2PSC_NOPSC   (0x0 << TIM1_CCMR1_IC2PSC_SHIFT) /* 00: no prescaler, capture each edge */
+#  define TIM1_CCMR1_IC2PSC_EVENTS2 (0x1 << TIM1_CCMR1_IC2PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM1_CCMR1_IC2PSC_EVENTS4 (0x2 << TIM1_CCMR1_IC2PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM1_CCMR1_IC2PSC_EVENTS8 (0x3 << TIM1_CCMR1_IC2PSC_SHIFT) /* 11: capture once every 8 events */
+#define TIM1_CCMR1_IC2F_SHIFT       (12)      /* Bits 12-15: Input Capture 2 Filter */
+#define TIM1_CCMR1_IC2F_MASK        (0xf << TIM1_CCMR1_IC2F_SHIFT)
+#  define TIM1_CCMR1_IC2F_NOFILT    (0x0 << TIM1_CCMR1_IC2F_SHIFT)   /* 0000: No filter, sampling at fDTS */
+#  define TIM1_CCMR1_IC2F_FCKINT2   (0x1 << TIM1_CCMR1_IC2F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
+#  define TIM1_CCMR1_IC2F_FCKINT4   (0x2 << TIM1_CCMR1_IC2F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
+#  define TIM1_CCMR1_IC2F_FCKINT8   (0x3 << TIM1_CCMR1_IC2F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
+#  define TIM1_CCMR1_IC2F_FDTSd26   (0x4 << TIM1_CCMR1_IC2F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
+#  define TIM1_CCMR1_IC2F_FDTSd28   (0x5 << TIM1_CCMR1_IC2F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
+#  define TIM1_CCMR1_IC2F_FDTSd46   (0x6 << TIM1_CCMR1_IC2F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
+#  define TIM1_CCMR1_IC2F_FDTSd48   (0x7 << TIM1_CCMR1_IC2F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
+#  define TIM1_CCMR1_IC2F_FDTSd86   (0x8 << TIM1_CCMR1_IC2F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
+#  define TIM1_CCMR1_IC2F_FDTSd88   (0x9 << TIM1_CCMR1_IC2F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
+#  define TIM1_CCMR1_IC2F_FDTSd165  (0xa << TIM1_CCMR1_IC2F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
+#  define TIM1_CCMR1_IC2F_FDTSd166  (0xb << TIM1_CCMR1_IC2F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
+#  define TIM1_CCMR1_IC2F_FDTSd168  (0xc << TIM1_CCMR1_IC2F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
+#  define TIM1_CCMR1_IC2F_FDTSd325  (0xd << TIM1_CCMR1_IC2F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
+#  define TIM1_CCMR1_IC2F_FDTSd326  (0xe << TIM1_CCMR1_IC2F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
+#  define TIM1_CCMR1_IC2F_FDTSd328  (0xf << TIM1_CCMR1_IC2F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+
+#define TIM1_CCMR2_IC3PSC_SHIFT     (2)       /* Bits 2-3: Input Capture 3 Prescaler */
+#define TIM1_CCMR2_IC3PSC_MASK      (0x3 << TIM1_CCMR2_IC3PSC_SHIFT)
+#  define TIM1_CCMR2_IC3PSC_NOPSC   (0x0 << TIM1_CCMR2_IC3PSC_SHIFT) /* 00: no prescaler, capture each edge */
+#  define TIM1_CCMR2_IC3PSC_EVENTS2 (0x1 << TIM1_CCMR2_IC3PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM1_CCMR2_IC3PSC_EVENTS4 (0x2 << TIM1_CCMR2_IC3PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM1_CCMR2_IC3PSC_EVENTS8 (0x3 << TIM1_CCMR2_IC3PSC_SHIFT) /* 11: capture once every 8 events */
+#define TIM1_CCMR2_IC3F_SHIFT       (4)       /* Bits 4-7: Input Capture 3 Filter */
+#define TIM1_CCMR2_IC3F_MASK        (0xf << TIM1_CCMR2_IC3F_SHIFT)
+#  define TIM1_CCMR2_IC3F_NOFILT    (0x0 << TIM1_CCMR2_IC3F_SHIFT)   /* 0000: No filter, sampling at fDTS */
+#  define TIM1_CCMR2_IC3F_FCKINT2   (0x1 << TIM1_CCMR2_IC3F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
+#  define TIM1_CCMR2_IC3F_FCKINT4   (0x2 << TIM1_CCMR2_IC3F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
+#  define TIM1_CCMR2_IC3F_FCKINT8   (0x3 << TIM1_CCMR2_IC3F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
+#  define TIM1_CCMR2_IC3F_FDTSd26   (0x4 << TIM1_CCMR2_IC3F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
+#  define TIM1_CCMR2_IC3F_FDTSd28   (0x5 << TIM1_CCMR2_IC3F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
+#  define TIM1_CCMR2_IC3F_FDTSd46   (0x6 << TIM1_CCMR2_IC3F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
+#  define TIM1_CCMR2_IC3F_FDTSd48   (0x7 << TIM1_CCMR2_IC3F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
+#  define TIM1_CCMR2_IC3F_FDTSd86   (0x8 << TIM1_CCMR2_IC3F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
+#  define TIM1_CCMR2_IC3F_FDTSd88   (0x9 << TIM1_CCMR2_IC3F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
+#  define TIM1_CCMR2_IC3F_FDTSd165  (0xa << TIM1_CCMR2_IC3F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
+#  define TIM1_CCMR2_IC3F_FDTSd166  (0xb << TIM1_CCMR2_IC3F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
+#  define TIM1_CCMR2_IC3F_FDTSd168  (0xc << TIM1_CCMR2_IC3F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
+#  define TIM1_CCMR2_IC3F_FDTSd325  (0xd << TIM1_CCMR2_IC3F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
+#  define TIM1_CCMR2_IC3F_FDTSd326  (0xe << TIM1_CCMR2_IC3F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
+#  define TIM1_CCMR2_IC3F_FDTSd328  (0xf << TIM1_CCMR2_IC3F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+
+#define TIM1_CCMR2_IC4PSC_SHIFT     (10)      /* Bits 10-11: Input Capture 4 Prescaler */
+#define TIM1_CCMR2_IC4PSC_MASK      (0x3 << TIM1_CCMR2_IC4PSC_SHIFT)
+#  define TIM1_CCMR2_IC4PSC_NOPSC   (0x0 << TIM1_CCMR2_IC4PSC_SHIFT) /* 00: no prescaler, capture each edge */
+#  define TIM1_CCMR2_IC4PSC_EVENTS2 (0x1 << TIM1_CCMR2_IC4PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM1_CCMR2_IC4PSC_EVENTS4 (0x2 << TIM1_CCMR2_IC4PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM1_CCMR2_IC4PSC_EVENTS8 (0x3 << TIM1_CCMR2_IC4PSC_SHIFT) /* 11: capture once every 8 events */
+#define TIM1_CCMR2_IC4F_SHIFT       (12)      /* Bits 12-15: Input Capture 4 Filter */
+#define TIM1_CCMR2_IC4F_MASK        (0xf << TIM1_CCMR2_IC4F_SHIFT)
+#  define TIM1_CCMR2_IC4F_NOFILT    (0x0 << TIM1_CCMR2_IC4F_SHIFT)   /* 0000: No filter, sampling at fDTS */
+#  define TIM1_CCMR2_IC4F_FCKINT2   (0x1 << TIM1_CCMR2_IC4F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
+#  define TIM1_CCMR2_IC4F_FCKINT4   (0x2 << TIM1_CCMR2_IC4F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
+#  define TIM1_CCMR2_IC4F_FCKINT8   (0x3 << TIM1_CCMR2_IC4F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
+#  define TIM1_CCMR2_IC4F_FDTSd26   (0x4 << TIM1_CCMR2_IC4F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
+#  define TIM1_CCMR2_IC4F_FDTSd28   (0x5 << TIM1_CCMR2_IC4F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
+#  define TIM1_CCMR2_IC4F_FDTSd46   (0x6 << TIM1_CCMR2_IC4F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
+#  define TIM1_CCMR2_IC4F_FDTSd48   (0x7 << TIM1_CCMR2_IC4F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
+#  define TIM1_CCMR2_IC4F_FDTSd86   (0x8 << TIM1_CCMR2_IC4F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
+#  define TIM1_CCMR2_IC4F_FDTSd88   (0x9 << TIM1_CCMR2_IC4F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
+#  define TIM1_CCMR2_IC4F_FDTSd165  (0xa << TIM1_CCMR2_IC4F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
+#  define TIM1_CCMR2_IC4F_FDTSd166  (0xb << TIM1_CCMR2_IC4F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
+#  define TIM1_CCMR2_IC4F_FDTSd168  (0xc << TIM1_CCMR2_IC4F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
+#  define TIM1_CCMR2_IC4F_FDTSd325  (0xd << TIM1_CCMR2_IC4F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
+#  define TIM1_CCMR2_IC4F_FDTSd326  (0xe << TIM1_CCMR2_IC4F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
+#  define TIM1_CCMR2_IC4F_FDTSd328  (0xf << TIM1_CCMR2_IC4F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+
+#define TIM2_CCMR1_IC1PSC_SHIFT     (2)       /* Bits 2-3: Input Capture 1 Prescaler */
+#define TIM2_CCMR1_IC1PSC_MASK      (0x3 << TIM2_CCMR1_IC1PSC_SHIFT)
+#  define TIM2_CCMR1_IC1PSC_NOPSC   (0x0 << TIM2_CCMR1_IC1PSC_SHIFT) /* 00: no prescaler, capture each edge */
+#  define TIM2_CCMR1_IC1PSC_EVENTS2 (0x1 << TIM2_CCMR1_IC1PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM2_CCMR1_IC1PSC_EVENTS4 (0x2 << TIM2_CCMR1_IC1PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM2_CCMR1_IC1PSC_EVENTS8 (0x3 << TIM2_CCMR1_IC1PSC_SHIFT) /* 11: capture once every 8 events */
+#define TIM2_CCMR1_IC1F_SHIFT       (4)       /* Bits 4-7: Input Capture 1 Filter */
+#define TIM2_CCMR1_IC1F_MASK        (0xf << TIM2_CCMR1_IC1F_SHIFT)
+#  define TIM2_CCMR1_IC1F_NOFILT    (0x0 << TIM2_CCMR1_IC1F_SHIFT)   /* 0000: No filter, sampling at fDTS */
+#  define TIM2_CCMR1_IC1F_FCKINT2   (0x1 << TIM2_CCMR1_IC1F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
+#  define TIM2_CCMR1_IC1F_FCKINT4   (0x2 << TIM2_CCMR1_IC1F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
+#  define TIM2_CCMR1_IC1F_FCKINT8   (0x3 << TIM2_CCMR1_IC1F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
+#  define TIM2_CCMR1_IC1F_FDTSd26   (0x4 << TIM2_CCMR1_IC1F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
+#  define TIM2_CCMR1_IC1F_FDTSd28   (0x5 << TIM2_CCMR1_IC1F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
+#  define TIM2_CCMR1_IC1F_FDTSd46   (0x6 << TIM2_CCMR1_IC1F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
+#  define TIM2_CCMR1_IC1F_FDTSd48   (0x7 << TIM2_CCMR1_IC1F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
+#  define TIM2_CCMR1_IC1F_FDTSd86   (0x8 << TIM2_CCMR1_IC1F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
+#  define TIM2_CCMR1_IC1F_FDTSd88   (0x9 << TIM2_CCMR1_IC1F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
+#  define TIM2_CCMR1_IC1F_FDTSd165  (0xa << TIM2_CCMR1_IC1F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
+#  define TIM2_CCMR1_IC1F_FDTSd166  (0xb << TIM2_CCMR1_IC1F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
+#  define TIM2_CCMR1_IC1F_FDTSd168  (0xc << TIM2_CCMR1_IC1F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
+#  define TIM2_CCMR1_IC1F_FDTSd325  (0xd << TIM2_CCMR1_IC1F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
+#  define TIM2_CCMR1_IC1F_FDTSd326  (0xe << TIM2_CCMR1_IC1F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
+#  define TIM2_CCMR1_IC1F_FDTSd328  (0xf << TIM2_CCMR1_IC1F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+
+#define TIM2_CCMR1_IC2PSC_SHIFT     (10)      /* Bits 10-11: Input Capture 2 Prescaler */
+#define TIM2_CCMR1_IC2PSC_MASK      (0x3 << TIM2_CCMR1_IC2PSC_SHIFT)
+#  define TIM2_CCMR1_IC2PSC_NOPSC   (0x0 << TIM2_CCMR1_IC2PSC_SHIFT) /* 00: no prescaler, capture each edge */
+#  define TIM2_CCMR1_IC2PSC_EVENTS2 (0x1 << TIM2_CCMR1_IC2PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM2_CCMR1_IC2PSC_EVENTS4 (0x2 << TIM2_CCMR1_IC2PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM2_CCMR1_IC2PSC_EVENTS8 (0x3 << TIM2_CCMR1_IC2PSC_SHIFT) /* 11: capture once every 8 events */
+#define TIM2_CCMR1_IC2F_SHIFT       (12)      /* Bits 12-15: Input Capture 2 Filter */
+#define TIM2_CCMR1_IC2F_MASK        (0xf << TIM2_CCMR1_IC2F_SHIFT)
+#  define TIM2_CCMR1_IC2F_NOFILT    (0x0 << TIM2_CCMR1_IC2F_SHIFT)   /* 0000: No filter, sampling at fDTS */
+#  define TIM2_CCMR1_IC2F_FCKINT2   (0x1 << TIM2_CCMR1_IC2F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
+#  define TIM2_CCMR1_IC2F_FCKINT4   (0x2 << TIM2_CCMR1_IC2F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
+#  define TIM2_CCMR1_IC2F_FCKINT8   (0x3 << TIM2_CCMR1_IC2F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
+#  define TIM2_CCMR1_IC2F_FDTSd26   (0x4 << TIM2_CCMR1_IC2F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
+#  define TIM2_CCMR1_IC2F_FDTSd28   (0x5 << TIM2_CCMR1_IC2F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
+#  define TIM2_CCMR1_IC2F_FDTSd46   (0x6 << TIM2_CCMR1_IC2F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
+#  define TIM2_CCMR1_IC2F_FDTSd48   (0x7 << TIM2_CCMR1_IC2F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
+#  define TIM2_CCMR1_IC2F_FDTSd86   (0x8 << TIM2_CCMR1_IC2F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
+#  define TIM2_CCMR1_IC2F_FDTSd88   (0x9 << TIM2_CCMR1_IC2F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
+#  define TIM2_CCMR1_IC2F_FDTSd165  (0xa << TIM2_CCMR1_IC2F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
+#  define TIM2_CCMR1_IC2F_FDTSd166  (0xb << TIM2_CCMR1_IC2F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
+#  define TIM2_CCMR1_IC2F_FDTSd168  (0xc << TIM2_CCMR1_IC2F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
+#  define TIM2_CCMR1_IC2F_FDTSd325  (0xd << TIM2_CCMR1_IC2F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
+#  define TIM2_CCMR1_IC2F_FDTSd326  (0xe << TIM2_CCMR1_IC2F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
+#  define TIM2_CCMR1_IC2F_FDTSd328  (0xf << TIM2_CCMR1_IC2F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+
+#define TIM2_CCMR2_IC3PSC_SHIFT     (2)       /* Bits 2-3: Input Capture 3 Prescaler */
+#define TIM2_CCMR2_IC3PSC_MASK      (0x3 << TIM2_CCMR2_IC3PSC_SHIFT)
+#  define TIM2_CCMR2_IC3PSC_NOPSC   (0x0 << TIM2_CCMR2_IC3PSC_SHIFT) /* 00: no prescaler, capture each edge */
+#  define TIM2_CCMR2_IC3PSC_EVENTS2 (0x1 << TIM2_CCMR2_IC3PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM2_CCMR2_IC3PSC_EVENTS4 (0x2 << TIM2_CCMR2_IC3PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM2_CCMR2_IC3PSC_EVENTS8 (0x3 << TIM2_CCMR2_IC3PSC_SHIFT) /* 11: capture once every 8 events */
+#define TIM2_CCMR2_IC3F_SHIFT       (4)       /* Bits 4-7: Input Capture 3 Filter */
+#define TIM2_CCMR2_IC3F_MASK        (0xf << TIM2_CCMR2_IC3F_SHIFT)
+#  define TIM2_CCMR2_IC3F_NOFILT    (0x0 << TIM2_CCMR2_IC3F_SHIFT)   /* 0000: No filter, sampling at fDTS */
+#  define TIM2_CCMR2_IC3F_FCKINT2   (0x1 << TIM2_CCMR2_IC3F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
+#  define TIM2_CCMR2_IC3F_FCKINT4   (0x2 << TIM2_CCMR2_IC3F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
+#  define TIM2_CCMR2_IC3F_FCKINT8   (0x3 << TIM2_CCMR2_IC3F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
+#  define TIM2_CCMR2_IC3F_FDTSd26   (0x4 << TIM2_CCMR2_IC3F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
+#  define TIM2_CCMR2_IC3F_FDTSd28   (0x5 << TIM2_CCMR2_IC3F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
+#  define TIM2_CCMR2_IC3F_FDTSd46   (0x6 << TIM2_CCMR2_IC3F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
+#  define TIM2_CCMR2_IC3F_FDTSd48   (0x7 << TIM2_CCMR2_IC3F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
+#  define TIM2_CCMR2_IC3F_FDTSd86   (0x8 << TIM2_CCMR2_IC3F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
+#  define TIM2_CCMR2_IC3F_FDTSd88   (0x9 << TIM2_CCMR2_IC3F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
+#  define TIM2_CCMR2_IC3F_FDTSd165  (0xa << TIM2_CCMR2_IC3F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
+#  define TIM2_CCMR2_IC3F_FDTSd166  (0xb << TIM2_CCMR2_IC3F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
+#  define TIM2_CCMR2_IC3F_FDTSd168  (0xc << TIM2_CCMR2_IC3F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
+#  define TIM2_CCMR2_IC3F_FDTSd325  (0xd << TIM2_CCMR2_IC3F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
+#  define TIM2_CCMR2_IC3F_FDTSd326  (0xe << TIM2_CCMR2_IC3F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
+#  define TIM2_CCMR2_IC3F_FDTSd328  (0xf << TIM2_CCMR2_IC3F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+
+#define TIM2_CCMR2_IC4PSC_SHIFT     (10)      /* Bits 10-11: Input Capture 4 Prescaler */
+#define TIM2_CCMR2_IC4PSC_MASK      (0x3 << TIM2_CCMR2_IC4PSC_SHIFT)
+#  define TIM2_CCMR2_IC4PSC_NOPSC   (0x0 << TIM2_CCMR2_IC4PSC_SHIFT) /* 00: no prescaler, capture each edge */
+#  define TIM2_CCMR2_IC4PSC_EVENTS2 (0x1 << TIM2_CCMR2_IC4PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM2_CCMR2_IC4PSC_EVENTS4 (0x2 << TIM2_CCMR2_IC4PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM2_CCMR2_IC4PSC_EVENTS8 (0x3 << TIM2_CCMR2_IC4PSC_SHIFT) /* 11: capture once every 8 events */
+#define TIM2_CCMR2_IC4F_SHIFT       (12)      /* Bits 12-15: Input Capture 4 Filter */
+#define TIM2_CCMR2_IC4F_MASK        (0xf << TIM2_CCMR2_IC4F_SHIFT)
+#  define TIM2_CCMR2_IC4F_NOFILT    (0x0 << TIM2_CCMR2_IC4F_SHIFT)   /* 0000: No filter, sampling at fDTS */
+#  define TIM2_CCMR2_IC4F_FCKINT2   (0x1 << TIM2_CCMR2_IC4F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
+#  define TIM2_CCMR2_IC4F_FCKINT4   (0x2 << TIM2_CCMR2_IC4F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
+#  define TIM2_CCMR2_IC4F_FCKINT8   (0x3 << TIM2_CCMR2_IC4F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
+#  define TIM2_CCMR2_IC4F_FDTSd26   (0x4 << TIM2_CCMR2_IC4F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
+#  define TIM2_CCMR2_IC4F_FDTSd28   (0x5 << TIM2_CCMR2_IC4F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
+#  define TIM2_CCMR2_IC4F_FDTSd46   (0x6 << TIM2_CCMR2_IC4F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
+#  define TIM2_CCMR2_IC4F_FDTSd48   (0x7 << TIM2_CCMR2_IC4F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
+#  define TIM2_CCMR2_IC4F_FDTSd86   (0x8 << TIM2_CCMR2_IC4F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
+#  define TIM2_CCMR2_IC4F_FDTSd88   (0x9 << TIM2_CCMR2_IC4F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
+#  define TIM2_CCMR2_IC4F_FDTSd165  (0xa << TIM2_CCMR2_IC4F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
+#  define TIM2_CCMR2_IC4F_FDTSd166  (0xb << TIM2_CCMR2_IC4F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
+#  define TIM2_CCMR2_IC4F_FDTSd168  (0xc << TIM2_CCMR2_IC4F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
+#  define TIM2_CCMR2_IC4F_FDTSd325  (0xd << TIM2_CCMR2_IC4F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
+#  define TIM2_CCMR2_IC4F_FDTSd326  (0xe << TIM2_CCMR2_IC4F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
+#  define TIM2_CCMR2_IC4F_FDTSd328  (0xf << TIM2_CCMR2_IC4F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+
+#define TIM16_CCMR1_IC1PSC_SHIFT     (2)       /* Bits 2-3: Input Capture 1 Prescaler */
+#define TIM16_CCMR1_IC1PSC_MASK      (0x3 << TIM16_CCMR1_IC1PSC_SHIFT)
+#  define TIM16_CCMR1_IC1PSC_NOPSC   (0x0 << TIM16_CCMR1_IC1PSC_SHIFT) /* 00: no prescaler, capture each edge */
+#  define TIM16_CCMR1_IC1PSC_EVENTS2 (0x1 << TIM16_CCMR1_IC1PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM16_CCMR1_IC1PSC_EVENTS4 (0x2 << TIM16_CCMR1_IC1PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM16_CCMR1_IC1PSC_EVENTS8 (0x3 << TIM16_CCMR1_IC1PSC_SHIFT) /* 11: capture once every 8 events */
+#define TIM16_CCMR1_IC1F_SHIFT       (4)       /* Bits 4-7: Input Capture 1 Filter */
+#define TIM16_CCMR1_IC1F_MASK        (0xf << TIM16_CCMR1_IC1F_SHIFT)
+#  define TIM16_CCMR1_IC1F_NOFILT    (0x0 << TIM16_CCMR1_IC1F_SHIFT)   /* 0000: No filter, sampling at fDTS */
+#  define TIM16_CCMR1_IC1F_FCKINT2   (0x1 << TIM16_CCMR1_IC1F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
+#  define TIM16_CCMR1_IC1F_FCKINT4   (0x2 << TIM16_CCMR1_IC1F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
+#  define TIM16_CCMR1_IC1F_FCKINT8   (0x3 << TIM16_CCMR1_IC1F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
+#  define TIM16_CCMR1_IC1F_FDTSd26   (0x4 << TIM16_CCMR1_IC1F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
+#  define TIM16_CCMR1_IC1F_FDTSd28   (0x5 << TIM16_CCMR1_IC1F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
+#  define TIM16_CCMR1_IC1F_FDTSd46   (0x6 << TIM16_CCMR1_IC1F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
+#  define TIM16_CCMR1_IC1F_FDTSd48   (0x7 << TIM16_CCMR1_IC1F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
+#  define TIM16_CCMR1_IC1F_FDTSd86   (0x8 << TIM16_CCMR1_IC1F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
+#  define TIM16_CCMR1_IC1F_FDTSd88   (0x9 << TIM16_CCMR1_IC1F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
+#  define TIM16_CCMR1_IC1F_FDTSd165  (0xa << TIM16_CCMR1_IC1F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
+#  define TIM16_CCMR1_IC1F_FDTSd166  (0xb << TIM16_CCMR1_IC1F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
+#  define TIM16_CCMR1_IC1F_FDTSd168  (0xc << TIM16_CCMR1_IC1F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
+#  define TIM16_CCMR1_IC1F_FDTSd325  (0xd << TIM16_CCMR1_IC1F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
+#  define TIM16_CCMR1_IC1F_FDTSd326  (0xe << TIM16_CCMR1_IC1F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
+#  define TIM16_CCMR1_IC1F_FDTSd328  (0xf << TIM16_CCMR1_IC1F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+
+#define TIM17_CCMR1_IC1PSC_SHIFT     (2)       /* Bits 2-3: Input Capture 1 Prescaler */
+#define TIM17_CCMR1_IC1PSC_MASK      (0x3 << TIM17_CCMR1_IC1PSC_SHIFT)
+#  define TIM17_CCMR1_IC1PSC_NOPSC   (0x0 << TIM17_CCMR1_IC1PSC_SHIFT) /* 00: no prescaler, capture each edge */
+#  define TIM17_CCMR1_IC1PSC_EVENTS2 (0x1 << TIM17_CCMR1_IC1PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM17_CCMR1_IC1PSC_EVENTS4 (0x2 << TIM17_CCMR1_IC1PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM17_CCMR1_IC1PSC_EVENTS8 (0x3 << TIM17_CCMR1_IC1PSC_SHIFT) /* 11: capture once every 8 events */
+#define TIM17_CCMR1_IC1F_SHIFT       (4)       /* Bits 4-7: Input Capture 1 Filter */
+#define TIM17_CCMR1_IC1F_MASK        (0xf << TIM17_CCMR1_IC1F_SHIFT)
+#  define TIM17_CCMR1_IC1F_NOFILT    (0x0 << TIM17_CCMR1_IC1F_SHIFT)   /* 0000: No filter, sampling at fDTS */
+#  define TIM17_CCMR1_IC1F_FCKINT2   (0x1 << TIM17_CCMR1_IC1F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
+#  define TIM17_CCMR1_IC1F_FCKINT4   (0x2 << TIM17_CCMR1_IC1F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
+#  define TIM17_CCMR1_IC1F_FCKINT8   (0x3 << TIM17_CCMR1_IC1F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
+#  define TIM17_CCMR1_IC1F_FDTSd26   (0x4 << TIM17_CCMR1_IC1F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
+#  define TIM17_CCMR1_IC1F_FDTSd28   (0x5 << TIM17_CCMR1_IC1F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
+#  define TIM17_CCMR1_IC1F_FDTSd46   (0x6 << TIM17_CCMR1_IC1F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
+#  define TIM17_CCMR1_IC1F_FDTSd48   (0x7 << TIM17_CCMR1_IC1F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
+#  define TIM17_CCMR1_IC1F_FDTSd86   (0x8 << TIM17_CCMR1_IC1F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
+#  define TIM17_CCMR1_IC1F_FDTSd88   (0x9 << TIM17_CCMR1_IC1F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
+#  define TIM17_CCMR1_IC1F_FDTSd165  (0xa << TIM17_CCMR1_IC1F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
+#  define TIM17_CCMR1_IC1F_FDTSd166  (0xb << TIM17_CCMR1_IC1F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
+#  define TIM17_CCMR1_IC1F_FDTSd168  (0xc << TIM17_CCMR1_IC1F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
+#  define TIM17_CCMR1_IC1F_FDTSd325  (0xd << TIM17_CCMR1_IC1F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
+#  define TIM17_CCMR1_IC1F_FDTSd326  (0xe << TIM17_CCMR1_IC1F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
+#  define TIM17_CCMR1_IC1F_FDTSd328  (0xf << TIM17_CCMR1_IC1F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
 
 /* Capture/compare enable register */
 
-#define ATIM_CCER_CC1E            (1 << 0)  /* Bit 0: Capture/Compare 1 output enable */
-#define ATIM_CCER_CC1P            (1 << 1)  /* Bit 1: Capture/Compare 1 output Polarity */
-#define ATIM_CCER_CC1NE           (1 << 2)  /* Bit 2: Capture/Compare 1 Complementary output enable */
-#define ATIM_CCER_CC1NP           (1 << 3)  /* Bit 3: Capture/Compare 1 Complementary output polarity */
-#define ATIM_CCER_CC2E            (1 << 4)  /* Bit 4: Capture/Compare 2 output enable */
-#define ATIM_CCER_CC2P            (1 << 5)  /* Bit 5: Capture/Compare 2 output Polarity */
-#define ATIM_CCER_CC2NE           (1 << 6)  /* Bit 6: Capture/Compare 2 Complementary output enable */
-#define ATIM_CCER_CC2NP           (1 << 7)  /* Bit 7: Capture/Compare 2 Complementary output polarity */
-#define ATIM_CCER_CC3E            (1 << 8)  /* Bit 8: Capture/Compare 3 output enable */
-#define ATIM_CCER_CC3P            (1 << 9)  /* Bit 9: Capture/Compare 3 output Polarity */
-#define ATIM_CCER_CC3NE           (1 << 10) /* Bit 10: Capture/Compare 3 Complementary output enable */
-#define ATIM_CCER_CC3NP           (1 << 11) /* Bit 11: Capture/Compare 3 Complementary output polarity */
-#define ATIM_CCER_CC4E            (1 << 12) /* Bit 12: Capture/Compare 4 output enable */
-#define ATIM_CCER_CC4P            (1 << 13) /* Bit 13: Capture/Compare 4 output Polarity */
-#define ATIM_CCER_CC4NP           (1 << 15) /* Bit 15: Capture/Compare 4 Complementary output polarity */
-#define ATIM_CCER_CC5E            (1 << 16) /* Bit 16: Capture/Compare 5 output enable */
-#define ATIM_CCER_CC5P            (1 << 17) /* Bit 17: Capture/Compare 5 output Polarity */
-#define ATIM_CCER_CC6E            (1 << 20) /* Bit 20: Capture/Compare 6 output enable */
-#define ATIM_CCER_CC6P            (1 << 21) /* Bit 21: Capture/Compare 6 output Polarity */
+#define TIM1_CCER_CC1E              (1 << 0)  /* Bit 0: Capture/Compare 1 output enable */
+#define TIM1_CCER_CC1P              (1 << 1)  /* Bit 1: Capture/Compare 1 output polarity */
+#define TIM1_CCER_CC1NE             (1 << 2)  /* Bit 2: Capture/Compare 1 complementary output enable */
+#define TIM1_CCER_CC1NP             (1 << 3)  /* Bit 3: Capture/Compare 1 complementary output polarity */
+#define TIM1_CCER_CC2E              (1 << 4)  /* Bit 4: Capture/Compare 2 output enable */
+#define TIM1_CCER_CC2P              (1 << 5)  /* Bit 5: Capture/Compare 2 output polarity */
+#define TIM1_CCER_CC2NE             (1 << 6)  /* Bit 6: Capture/Compare 2 complementary output enable */
+#define TIM1_CCER_CC2NP             (1 << 7)  /* Bit 7: Capture/Compare 2 complementary output polarity */
+#define TIM1_CCER_CC3E              (1 << 8)  /* Bit 8: Capture/Compare 3 output enable */
+#define TIM1_CCER_CC3P              (1 << 9)  /* Bit 9: Capture/Compare 3 output polarity */
+#define TIM1_CCER_CC3NE             (1 << 10) /* Bit 10: Capture/Compare 3 complementary output enable */
+#define TIM1_CCER_CC3NP             (1 << 11) /* Bit 11: Capture/Compare 3 complementary output polarity */
+#define TIM1_CCER_CC4E              (1 << 12) /* Bit 12: Capture/Compare 4 output enable */
+#define TIM1_CCER_CC4P              (1 << 13) /* Bit 13: Capture/Compare 4 output polarity */
+#define TIM1_CCER_CC4NP             (1 << 15) /* Bit 15: Capture/Compare 4 complementary output polarity */
+#define TIM1_CCER_CC5E              (1 << 16) /* Bit 16: Capture/Compare 5 output enable */
+#define TIM1_CCER_CC5P              (1 << 17) /* Bit 17: Capture/Compare 5 output polarity */
+#define TIM1_CCER_CC6E              (1 << 20) /* Bit 20: Capture/Compare 6 output enable */
+#define TIM1_CCER_CC6P              (1 << 21) /* Bit 21: Capture/Compare 6 output polarity */
 
-/* 16-bit counter register */
+#define TIM2_CCER_CC1E              (1 << 0)  /* Bit 0: Capture/Compare 1 output enable */
+#define TIM2_CCER_CC1P              (1 << 1)  /* Bit 1: Capture/Compare 1 output polarity */
+#define TIM2_CCER_CC1NP             (1 << 3)  /* Bit 3: Capture/Compare 1 complementary output polarity */
+#define TIM2_CCER_CC2E              (1 << 4)  /* Bit 4: Capture/Compare 2 output enable */
+#define TIM2_CCER_CC2P              (1 << 5)  /* Bit 5: Capture/Compare 2 output polarity */
+#define TIM2_CCER_CC2NP             (1 << 7)  /* Bit 7: Capture/Compare 2 complementary output polarity */
+#define TIM2_CCER_CC3E              (1 << 8)  /* Bit 8: Capture/Compare 3 output enable */
+#define TIM2_CCER_CC3P              (1 << 9)  /* Bit 9: Capture/Compare 3 output polarity */
+#define TIM2_CCER_CC3NP             (1 << 11) /* Bit 11: Capture/Compare 3 complementary output polarity */
+#define TIM2_CCER_CC4E              (1 << 12) /* Bit 12: Capture/Compare 4 output enable */
+#define TIM2_CCER_CC4P              (1 << 13) /* Bit 13: Capture/Compare 4 output polarity */
+#define TIM2_CCER_CC4NP             (1 << 15) /* Bit 15: Capture/Compare 4 complementary output polarity */
 
-#define ATIM_CNT_SHIFT            (0)       /* Bits 0-15: Timer counter value */
-#define ATIM_CNT_MASK             (0xffff << ATIM_CNT_SHIFT)
-#define ATIM_CCER_UIFCPY          (1 << 31) /* Bit 31: UIF copy */
+#define TIM16_CCER_CC1E             (1 << 0)  /* Bit 0: Capture/Compare 1 output enable */
+#define TIM16_CCER_CC1P             (1 << 1)  /* Bit 1: Capture/Compare 1 output polarity */
+#define TIM16_CCER_CC1NE            (1 << 2)  /* Bit 2: Capture/Compare 1 complementary output enable */
+#define TIM16_CCER_CC1NP            (1 << 3)  /* Bit 3: Capture/Compare 1 complementary output polarity */
+
+#define TIM17_CCER_CC1E             (1 << 0)  /* Bit 0: Capture/Compare 1 output enable */
+#define TIM17_CCER_CC1P             (1 << 1)  /* Bit 1: Capture/Compare 1 output polarity */
+#define TIM17_CCER_CC1NE            (1 << 2)  /* Bit 2: Capture/Compare 1 complementary output enable */
+#define TIM17_CCER_CC1NP            (1 << 3)  /* Bit 3: Capture/Compare 1 complementary output polarity */
+
+/* Counter register */
+
+#define TIM1_CNT_SHIFT              (0)       /* Bits 0-15: Timer counter value */
+#define TIM1_CNT_MASK               (0xffff << TIM1_CNT_SHIFT)
+#define TIM1_CNT_UIFCPY             (1 << 31) /* Bit 31: UIF copy */
+
+#define TIM2_CNT_SHIFT              (0)       /* Bits 0-31: Timer counter value */
+#define TIM2_CNT_MASK               (0xffffffff << TIM2_CNT_SHIFT)  /* if UIFREMAP = 0 */
+#define TIM2_CNT_MASK31             (0x7fffffff << TIM2_CNT_SHIFT)  /* if UIFREMAP = 1 */
+#define TIM2_CNT_UIFCPY             (1 << 31) /* Bit 31: UIF copy, if UIFREMAP = 1 */
+
+#define TIM16_CNT_SHIFT             (0)       /* Bits 0-15: Timer counter value */
+#define TIM16_CNT_MASK              (0xffff << TIM16_CNT_SHIFT)
+#define TIM16_CNT_UIFCPY            (1 << 31) /* Bit 31: UIF copy */
+
+#define TIM17_CNT_SHIFT             (0)       /* Bits 0-15: Timer counter value */
+#define TIM17_CNT_MASK              (0xffff << TIM17_CNT_SHIFT)
+#define TIM17_CNT_UIFCPY            (1 << 31) /* Bit 31: UIF copy */
+
+/* Prescaler register */
+
+#define TIM1_PSC_SHIFT              (0)       /* Bits 0-15: Timer prescaler value */
+#define TIM1_PSC_MASK               (0xffff << TIM1_PSC_SHIFT)
+
+#define TIM2_PSC_SHIFT              (0)       /* Bits 0-15: Timer prescaler value */
+#define TIM2_PSC_MASK               (0xffff << TIM2_PSC_SHIFT)
+
+#define TIM16_PSC_SHIFT             (0)       /* Bits 0-15: Timer prescaler value */
+#define TIM16_PSC_MASK              (0xffff << TIM16_PSC_SHIFT)
+
+#define TIM17_PSC_SHIFT             (0)       /* Bits 0-15: Timer prescaler value */
+#define TIM17_PSC_MASK              (0xffff << TIM17_PSC_SHIFT)
+
+/* Auto-reload register */
+
+#define TIM1_ARR_SHIFT              (0)       /* Bits 0-15: Timer auto-reload value */
+#define TIM1_ARR_MASK               (0xffff << TIM1_ARR_SHIFT)
+
+#define TIM2_ARR_SHIFT              (0)       /* Bits 0-31: Timer auto-reload value */
+#define TIM2_ARR_MASK               (0xffffffff << TIM2_ARR_SHIFT)
+
+#define TIM16_ARR_SHIFT             (0)       /* Bits 0-15: Timer auto-reload value */
+#define TIM16_ARR_MASK              (0xffff << TIM16_ARR_SHIFT)
+
+#define TIM17_ARR_SHIFT             (0)       /* Bits 0-15: Timer auto-reload value */
+#define TIM17_ARR_MASK              (0xffff << TIM17_ARR_SHIFT)
 
 /* Repetition counter register */
 
-#define ATIM_RCR_REP_SHIFT        (0)       /* Bits 0-15: Repetition Counter Value */
-#define ATIM_RCR_REP_MASK         (0xffff << ATIM_RCR_REP_SHIFT)
-#define ATIM_RCR_REP_MAX          32768     /* REVISIT */
+#define TIM1_RCR_SHIFT              (0)       /* Bits 0-15: Repetition Counter Value */
+#define TIM1_RCR_MASK               (0xffff << TIM1_RCR_SHIFT)
 
-/* Capture/compare registers (CCR) */
+#define TIM16_RCR_SHIFT             (0)       /* Bits 0-7: Repetition Counter Value */
+#define TIM16_RCR_MASK              (0xff << TIM16_RCR_SHIFT)
 
-#define ATIM_CCR5_GC5C1           (1 << 29) /* Bit 29: Group Channel 5 and Channel 1 */
-#define ATIM_CCR5_GC5C2           (1 << 30) /* Bit 30: Group Channel 5 and Channel 2 */
-#define ATIM_CCR5_GC5C3           (1 << 31) /* Bit 31: Group Channel 5 and Channel 3 */
+#define TIM17_RCR_SHIFT             (0)       /* Bits 0-7: Repetition Counter Value */
+#define TIM17_RCR_MASK              (0xff << TIM17_RCR_SHIFT)
 
-#define ATIM_CCR_MASK             (0xffff)
+/* Capture/compare registers */
+
+#define TIM1_CCR1_SHIFT             (0)       /* Bits 0-15: Capture/Compare 1 value */
+#define TIM1_CCR1_MASK              (0xffff << TIM1_CCR1_SHIFT)
+#define TIM1_CCR2_SHIFT             (0)       /* Bits 0-15: Capture/Compare 2 value */
+#define TIM1_CCR2_MASK              (0xffff << TIM1_CCR2_SHIFT)
+#define TIM1_CCR3_SHIFT             (0)       /* Bits 0-15: Capture/Compare 3 value */
+#define TIM1_CCR3_MASK              (0xffff << TIM1_CCR3_SHIFT)
+#define TIM1_CCR4_SHIFT             (0)       /* Bits 0-15: Capture/Compare 4 value */
+#define TIM1_CCR4_MASK              (0xffff << TIM1_CCR4_SHIFT)
+
+#define TIM2_CCR1_SHIFT             (0)       /* Bits 0-31: Capture/Compare 1 value */
+#define TIM2_CCR1_MASK              (0xffffffff << TIM2_CCR1_SHIFT)
+#define TIM2_CCR2_SHIFT             (0)       /* Bits 0-31: Capture/Compare 2 value */
+#define TIM2_CCR2_MASK              (0xffffffff << TIM2_CCR2_SHIFT)
+#define TIM2_CCR3_SHIFT             (0)       /* Bits 0-31: Capture/Compare 3 value */
+#define TIM2_CCR3_MASK              (0xffffffff << TIM2_CCR3_SHIFT)
+#define TIM2_CCR4_SHIFT             (0)       /* Bits 0-31: Capture/Compare 4 value */
+#define TIM2_CCR4_MASK              (0xffffffff << TIM2_CCR4_SHIFT)
+
+#define TIM16_CCR1_SHIFT            (0)       /* Bits 0-15: Capture/Compare 1 value */
+#define TIM16_CCR1_MASK             (0xffff << TIM16_CCR1_SHIFT)
+
+#define TIM17_CCR1_SHIFT            (0)       /* Bits 0-15: Capture/Compare 1 value */
+#define TIM17_CCR1_MASK             (0xffff << TIM17_CCR1_SHIFT)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /* Break and dead-time register */
 
@@ -777,126 +1365,6 @@
 #define GTIM_EGR_BG               (1 << 7)  /* Bit 7: Break generation (TIM15-17 only) */
 
 /* Capture/compare mode register 1 - Output compare mode (TIM2-5) */
-
-#define GTIM_CCMR1_CC1S_SHIFT     (0)       /* Bits 1-0: Capture/Compare 1 Selection */
-#define GTIM_CCMR1_CC1S_MASK      (3 << GTIM_CCMR1_CC1S_SHIFT)
-                                            /* (See common CCMR Capture/Compare Selection definitions below) */
-#define GTIM_CCMR1_OC1FE          (1 << 2)  /* Bit 2: Output Compare 1 Fast enable */
-#define GTIM_CCMR1_OC1PE          (1 << 3)  /* Bit 3: Output Compare 1 Preload enable */
-#define GTIM_CCMR1_OC1M_SHIFT     (4)       /* Bits 6-4: Output Compare 1 Mode */
-#define GTIM_CCMR1_OC1M_MASK      (7 << GTIM_CCMR1_OC1M_SHIFT)
-                                            /* (See common CCMR Output Compare Mode definitions below) */
-#define GTIM_CCMR1_OC1CE          (1 << 7)  /* Bit 7: Output Compare 1Clear Enable */
-#define GTIM_CCMR1_CC2S_SHIFT     (8)       /* Bits 9-8: Capture/Compare 2 Selection */
-#define GTIM_CCMR1_CC2S_MASK      (3 << GTIM_CCMR1_CC2S_SHIFT)
-                                            /* (See common CCMR Capture/Compare Selection definitions below) */
-#define GTIM_CCMR1_OC2FE          (1 << 10) /* Bit 10: Output Compare 2 Fast enable */
-#define GTIM_CCMR1_OC2PE          (1 << 11) /* Bit 11: Output Compare 2 Preload enable */
-#define GTIM_CCMR1_OC2M_SHIFT     (12)      /* Bits 14-12: Output Compare 2 Mode */
-#define GTIM_CCMR1_OC2M_MASK      (7 << GTIM_CCMR1_OC2M_SHIFT)
-                                            /* (See common CCMR Output Compare Mode definitions below) */
-#define GTIM_CCMR1_OC2CE          (1 << 15) /* Bit 15: Output Compare 2 Clear Enable */
-#define GTIM_CCMR1_OC1M           (1 << 16) /* Bit 16: Output Compare 1 mode - bit 3 */
-#define GTIM_CCMR1_OC2M           (1 << 24) /* Bit 24: Output Compare 2 mode - bit 3 */
-
-/* Common CCMR (unshifted) Capture/Compare Selection bit-field definitions */
-
-#define GTIM_CCMR_CCS_CCOUT       (0)       /* 00: CCx channel output */
-#define GTIM_CCMR_CCS_CCIN1       (1)       /* 01: CCx channel input, ICx is TIx */
-#define GTIM_CCMR_CCS_CCIN2       (2)       /* 10: CCx channel input, ICx is TIy */
-#define GTIM_CCMR_CCS_CCINTRC     (3)       /* 11: CCx channel input, ICx is TRC */
-
-/* Common CCMR (unshifted) Compare Mode bit field definitions */
-
-#define GTIM_CCMR_MODE_FRZN       (0)       /* 000: Frozen */
-#define GTIM_CCMR_MODE_CHACT      (1)       /* 001: Channel x active on match */
-#define GTIM_CCMR_MODE_CHINACT    (2)       /* 010: Channel x inactive on match */
-#define GTIM_CCMR_MODE_OCREFTOG   (3)       /* 011: OCxREF toggle ATIM_CNT=ATIM_CCRx */
-#define GTIM_CCMR_MODE_OCREFLO    (4)       /* 100: OCxREF forced low */
-#define GTIM_CCMR_MODE_OCREFHI    (5)       /* 101: OCxREF forced high */
-#define GTIM_CCMR_MODE_PWM1       (6)       /* 110: PWM mode 1 */
-#define GTIM_CCMR_MODE_PWM2       (7)       /* 111: PWM mode 2 */
-
-/* Capture/compare mode register 1 - Input capture mode (TIM2-5 and TIM9-14) */
-
-                                            /* Bits 1-0 (Same as Output Compare Mode) */
-#define GTIM_CCMR1_IC1PSC_SHIFT   (2)       /* Bits 3-2: Input Capture 1 Prescaler */
-#define GTIM_CCMR1_IC1PSC_MASK    (3 << GTIM_CCMR1_IC1PSC_SHIFT)
-                                            /* (See common CCMR Input Capture Prescaler definitions below) */
-#define GTIM_CCMR1_IC1F_SHIFT     (4)       /* Bits 7-4: Input Capture 1 Filter */
-#define GTIM_CCMR1_IC1F_MASK      (0x0f << GTIM_CCMR1_IC1F_SHIFT)
-                                            /* (See common CCMR Input Capture Filter definitions below) */
-                                            /* Bits 9-8: (Same as Output Compare Mode) */
-#define GTIM_CCMR1_IC2PSC_SHIFT   (10)      /* Bits 11-10: Input Capture 2 Prescaler */
-#define GTIM_CCMR1_IC2PSC_MASK    (3 << GTIM_CCMR1_IC2PSC_SHIFT)
-                                            /* (See common CCMR Input Capture Prescaler definitions below) */
-#define GTIM_CCMR1_IC2F_SHIFT     (12)      /* Bits 15-12: Input Capture 2 Filter */
-#define GTIM_CCMR1_IC2F_MASK      (0x0f << GTIM_CCMR1_IC2F_SHIFT)
-                                            /* (See common CCMR Input Capture Filter definitions below) */
-
-/* Common CCMR (unshifted) Input Capture Prescaler bit-field definitions */
-
-#define GTIM_CCMR_ICPSC_NOPSC     (0)       /* 00: no prescaler, capture each edge */
-#define GTIM_CCMR_ICPSC_EVENTS2   (1)       /* 01: capture once every 2 events */
-#define GTIM_CCMR_ICPSC_EVENTS4   (2)       /* 10: capture once every 4 events */
-#define GTIM_CCMR_ICPSC_EVENTS8   (3)       /* 11: capture once every 8 events */
-
-/* Common CCMR (unshifted) Input Capture Filter bit-field definitions */
-
-#define GTIM_CCMR_ICF_NOFILT      (0)       /* 0000: No filter, sampling at fDTS */
-#define GTIM_CCMR_ICF_FCKINT2     (1)       /* 0001: fSAMPLING=fCK_INT, N=2 */
-#define GTIM_CCMR_ICF_FCKINT4     (2)       /* 0010: fSAMPLING=fCK_INT, N=4 */
-#define GTIM_CCMR_ICF_FCKINT8     (3)       /* 0011: fSAMPLING=fCK_INT, N=8 */
-#define GTIM_CCMR_ICF_FDTSd26     (4)       /* 0100: fSAMPLING=fDTS/2, N=6 */
-#define GTIM_CCMR_ICF_FDTSd28     (5)       /* 0101: fSAMPLING=fDTS/2, N=8 */
-#define GTIM_CCMR_ICF_FDTSd46     (6)       /* 0110: fSAMPLING=fDTS/4, N=6 */
-#define GTIM_CCMR_ICF_FDTSd48     (7)       /* 0111: fSAMPLING=fDTS/4, N=8 */
-#define GTIM_CCMR_ICF_FDTSd86     (8)       /* 1000: fSAMPLING=fDTS/8, N=6 */
-#define GTIM_CCMR_ICF_FDTSd88     (9)       /* 1001: fSAMPLING=fDTS/8, N=8 */
-#define GTIM_CCMR_ICF_FDTSd165    (10)      /* 1010: fSAMPLING=fDTS/16, N=5 */
-#define GTIM_CCMR_ICF_FDTSd166    (11)      /* 1011: fSAMPLING=fDTS/16, N=6 */
-#define GTIM_CCMR_ICF_FDTSd168    (12)      /* 1100: fSAMPLING=fDTS/16, N=8 */
-#define GTIM_CCMR_ICF_FDTSd325    (13)      /* 1101: fSAMPLING=fDTS/32, N=5 */
-#define GTIM_CCMR_ICF_FDTSd326    (14)      /* 1110: fSAMPLING=fDTS/32, N=6 */
-#define GTIM_CCMR_ICF_FDTSd328    (15)      /* 1111: fSAMPLING=fDTS/32, N=8 */
-
-/* Capture/compare mode register 2 - Output Compare mode (TIM2-5 only) */
-
-#define GTIM_CCMR2_CC3S_SHIFT     (0)       /* Bits 1-0: Capture/Compare 3 Selection */
-#define GTIM_CCMR2_CC3S_MASK      (3 << GTIM_CCMR2_CC3S_SHIFT)
-                                            /* (See common CCMR Capture/Compare Selection definitions above) */
-#define GTIM_CCMR2_OC3FE          (1 << 2)  /* Bit 2: Output Compare 3 Fast enable */
-#define GTIM_CCMR2_OC3PE          (1 << 3)  /* Bit 3: Output Compare 3 Preload enable */
-#define GTIM_CCMR2_OC3M_SHIFT     (4)       /* Bits 6-4: Output Compare 3 Mode */
-#define GTIM_CCMR2_OC3M_MASK      (7 << GTIM_CCMR2_OC3M_SHIFT)
-                                            /* (See common CCMR Output Compare Mode definitions above) */
-#define GTIM_CCMR2_OC3CE          (1 << 7)  /* Bit 7: Output Compare 3 Clear Enable */
-#define GTIM_CCMR2_CC4S_SHIFT     (8)       /* Bits 9-8: Capture/Compare 4 Selection */
-#define GTIM_CCMR2_CC4S_MASK      (3 << GTIM_CCMR2_CC4S_SHIFT)
-                                            /* (See common CCMR Capture/Compare Selection definitions above) */
-#define GTIM_CCMR2_OC4FE          (1 << 10) /* Bit 10: Output Compare 4 Fast enable */
-#define GTIM_CCMR2_OC4PE          (1 << 11) /* Bit 11: Output Compare 4 Preload enable */
-#define GTIM_CCMR2_OC4M_SHIFT     (12)      /* Bits 14-12: Output Compare 4 Mode */
-#define GTIM_CCMR2_OC4M_MASK      (7 << GTIM_CCMR2_OC4M_SHIFT)
-                                            /* (See common CCMR Output Compare Mode definitions above) */
-#define GTIM_CCMR2_OC4CE          (1 << 15) /* Bit 15: Output Compare 4 Clear Enable */
-
-/* Capture/compare mode register 2 - Input capture mode (TIM2-5 only) */
-
-                                            /* Bits 1-0 (Same as Output Compare Mode) */
-#define GTIM_CCMR2_IC3PSC_SHIFT   (2)       /* Bits 3-2: Input Capture 3 Prescaler */
-#define GTIM_CCMR2_IC3PSC_MASK    (3 << GTIM_CCMR2_IC3PSC_SHIFT)
-                                            /* (See common CCMR Input Capture Prescaler definitions below) */
-#define GTIM_CCMR2_IC3F_SHIFT     (4)       /* Bits 7-4: Input Capture 3 Filter */
-#define GTIM_CCMR2_IC3F_MASK      (0x0f << GTIM_CCMR2_IC3F_SHIFT)
-                                            /* (See common CCMR Input Capture Filter definitions below) */
-                                            /* Bits 9-8: (Same as Output Compare Mode) */
-#define GTIM_CCMR2_IC4PSC_SHIFT   (10)      /* Bits 11-10: Input Capture 4 Prescaler */
-#define GTIM_CCMR2_IC4PSC_MASK    (3 << GTIM_CCMR2_IC4PSC_SHIFT)
-                                            /* (See common CCMR Input Capture Prescaler definitions below) */
-#define GTIM_CCMR2_IC4F_SHIFT     (12)      /* Bits 15-12: Input Capture 4 Filter */
-#define GTIM_CCMR2_IC4F_MASK      (0x0f << GTIM_CCMR2_IC4F_SHIFT)
-                                            /* (See common CCMR Input Capture Filter definitions below) */
 
 /* Capture/compare enable register (TIM1 and TIM8, TIM2-5) */
 
