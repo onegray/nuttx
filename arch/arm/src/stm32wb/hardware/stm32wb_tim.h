@@ -151,6 +151,8 @@
 #define STM32WB_TIM17_AF1           (STM32WB_TIM17_BASE + STM32WB_TIM_AF1_OFFSET)
 #define STM32WB_TIM17_TISEL         (STM32WB_TIM17_BASE + STM32WB_TIM_TISEL_OFFSET)
 
+/* Register Value Constants *************************************************/
+
 /* Digital Filter options */
 
 #define STM32WB_DF_NOFILT           (0x0) /* 0000: No filter */
@@ -368,22 +370,7 @@
 #define TIM1_SMCR_MSM               (1 << 7)  /* Bit 7: Master/slave mode */
 #define TIM1_SMCR_ETF_SHIFT         (8)       /* Bits 8-11: External trigger filter */
 #define TIM1_SMCR_ETF_MASK          (0xf << TIM1_SMCR_ETF_SHIFT)
-#  define TIM1_SMCR_NOFILT          (0x0 << TIM1_SMCR_ETF_SHIFT) /* 0000: No filter, sampling is done at fDTS */
-#  define TIM1_SMCR_FCKINT2         (0x1 << TIM1_SMCR_ETF_SHIFT) /* 0001: fSAMPLING=fCK_INT, N=2 */
-#  define TIM1_SMCR_FCKINT4         (0x2 << TIM1_SMCR_ETF_SHIFT) /* 0010: fSAMPLING=fCK_INT, N=4 */
-#  define TIM1_SMCR_FCKINT8         (0x3 << TIM1_SMCR_ETF_SHIFT) /* 0011: fSAMPLING=fCK_INT, N=8 */
-#  define TIM1_SMCR_FDTSd26         (0x4 << TIM1_SMCR_ETF_SHIFT) /* 0100: fSAMPLING=fDTS/2, N=6 */
-#  define TIM1_SMCR_FDTSd28         (0x5 << TIM1_SMCR_ETF_SHIFT) /* 0101: fSAMPLING=fDTS/2, N=8 */
-#  define TIM1_SMCR_FDTSd46         (0x6 << TIM1_SMCR_ETF_SHIFT) /* 0110: fSAMPLING=fDTS/4, N=6 */
-#  define TIM1_SMCR_FDTSd48         (0x7 << TIM1_SMCR_ETF_SHIFT) /* 0111: fSAMPLING=fDTS/4, N=8 */
-#  define TIM1_SMCR_FDTSd86         (0x8 << TIM1_SMCR_ETF_SHIFT) /* 1000: fSAMPLING=fDTS/8, N=6 */
-#  define TIM1_SMCR_FDTSd88         (0x9 << TIM1_SMCR_ETF_SHIFT) /* 1001: fSAMPLING=fDTS/8, N=8 */
-#  define TIM1_SMCR_FDTSd165        (0xa << TIM1_SMCR_ETF_SHIFT) /* 1010: fSAMPLING=fDTS/16, N=5 */
-#  define TIM1_SMCR_FDTSd166        (0xb << TIM1_SMCR_ETF_SHIFT) /* 1011: fSAMPLING=fDTS/16, N=6 */
-#  define TIM1_SMCR_FDTSd168        (0xc << TIM1_SMCR_ETF_SHIFT) /* 1100: fSAMPLING=fDTS/16, N=8 */
-#  define TIM1_SMCR_FDTSd325        (0xd << TIM1_SMCR_ETF_SHIFT) /* 1101: fSAMPLING=fDTS/32, N=5 */
-#  define TIM1_SMCR_FDTSd326        (0xe << TIM1_SMCR_ETF_SHIFT) /* 1110: fSAMPLING=fDTS/32, N=6 */
-#  define TIM1_SMCR_FDTSd328        (0xf << TIM1_SMCR_ETF_SHIFT) /* 1111: fSAMPLING=fDTS/32, N=8 */
+#  define TIM1_SMCR_ETF(f)          ((f) << TIM1_SMCR_ETF_SHIFT) /* f = STM32WB_DF_[digital filter option] */
 #define TIM1_SMCR_ETPS_SHIFT        (12)      /* Bits 12-13: External trigger prescaler */
 #define TIM1_SMCR_ETPS_MASK         (0x3 << TIM1_SMCR_ETPS_SHIFT)
 #  define TIM1_SMCR_PSCOFF          (0x0 << TIM1_SMCR_ETPS_SHIFT) /* 00: Prescaler OFF */
@@ -431,22 +418,7 @@
 #define TIM2_SMCR_MSM               (1 << 7)  /* Bit 7: Master/slave mode */
 #define TIM2_SMCR_ETF_SHIFT         (8)       /* Bits 8-11: External trigger filter */
 #define TIM2_SMCR_ETF_MASK          (0xf << TIM2_SMCR_ETF_SHIFT)
-#  define TIM2_SMCR_NOFILT          (0x0 << TIM2_SMCR_ETF_SHIFT) /* 0000: No filter, sampling is done at fDTS */
-#  define TIM2_SMCR_FCKINT2         (0x1 << TIM2_SMCR_ETF_SHIFT) /* 0001: fSAMPLING=fCK_INT, N=2 */
-#  define TIM2_SMCR_FCKINT4         (0x2 << TIM2_SMCR_ETF_SHIFT) /* 0010: fSAMPLING=fCK_INT, N=4 */
-#  define TIM2_SMCR_FCKINT8         (0x3 << TIM2_SMCR_ETF_SHIFT) /* 0011: fSAMPLING=fCK_INT, N=8 */
-#  define TIM2_SMCR_FDTSd26         (0x4 << TIM2_SMCR_ETF_SHIFT) /* 0100: fSAMPLING=fDTS/2, N=6 */
-#  define TIM2_SMCR_FDTSd28         (0x5 << TIM2_SMCR_ETF_SHIFT) /* 0101: fSAMPLING=fDTS/2, N=8 */
-#  define TIM2_SMCR_FDTSd46         (0x6 << TIM2_SMCR_ETF_SHIFT) /* 0110: fSAMPLING=fDTS/4, N=6 */
-#  define TIM2_SMCR_FDTSd48         (0x7 << TIM2_SMCR_ETF_SHIFT) /* 0111: fSAMPLING=fDTS/4, N=8 */
-#  define TIM2_SMCR_FDTSd86         (0x8 << TIM2_SMCR_ETF_SHIFT) /* 1000: fSAMPLING=fDTS/8, N=6 */
-#  define TIM2_SMCR_FDTSd88         (0x9 << TIM2_SMCR_ETF_SHIFT) /* 1001: fSAMPLING=fDTS/8, N=8 */
-#  define TIM2_SMCR_FDTSd165        (0xa << TIM2_SMCR_ETF_SHIFT) /* 1010: fSAMPLING=fDTS/16, N=5 */
-#  define TIM2_SMCR_FDTSd166        (0xb << TIM2_SMCR_ETF_SHIFT) /* 1011: fSAMPLING=fDTS/16, N=6 */
-#  define TIM2_SMCR_FDTSd168        (0xc << TIM2_SMCR_ETF_SHIFT) /* 1100: fSAMPLING=fDTS/16, N=8 */
-#  define TIM2_SMCR_FDTSd325        (0xd << TIM2_SMCR_ETF_SHIFT) /* 1101: fSAMPLING=fDTS/32, N=5 */
-#  define TIM2_SMCR_FDTSd326        (0xe << TIM2_SMCR_ETF_SHIFT) /* 1110: fSAMPLING=fDTS/32, N=6 */
-#  define TIM2_SMCR_FDTSd328        (0xf << TIM2_SMCR_ETF_SHIFT) /* 1111: fSAMPLING=fDTS/32, N=8 */
+#  define TIM2_SMCR_ETF(f)          ((f) << TIM2_SMCR_ETF_SHIFT) /* f = STM32WB_DF_[digital filter option] */
 #define TIM2_SMCR_ETPS_SHIFT        (12)      /* Bits 12-13: External trigger prescaler */
 #define TIM2_SMCR_ETPS_MASK         (0x3 << TIM2_SMCR_ETPS_SHIFT)
 #  define TIM2_SMCR_PSCOFF          (0x0 << TIM2_SMCR_ETPS_SHIFT) /* 00: Prescaler OFF */
@@ -903,23 +875,7 @@
 #  define TIM1_CCMR1_IC1PSC_EVERY8  (0x3 << TIM1_CCMR1_IC1PSC_SHIFT) /* 11: capture once every 8 events */
 #define TIM1_CCMR1_IC1F_SHIFT       (4)       /* Bits 4-7: Input Capture 1 Filter */
 #define TIM1_CCMR1_IC1F_MASK        (0xf << TIM1_CCMR1_IC1F_SHIFT)
-#  define TIM1_CCMR1_IC1F_NOFILT    (0x0 << TIM1_CCMR1_IC1F_SHIFT)   /* 0000: No filter, sampling at fDTS */
-#  define TIM1_CCMR1_IC1F_FCKINT2   (0x1 << TIM1_CCMR1_IC1F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
-#  define TIM1_CCMR1_IC1F_FCKINT4   (0x2 << TIM1_CCMR1_IC1F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
-#  define TIM1_CCMR1_IC1F_FCKINT8   (0x3 << TIM1_CCMR1_IC1F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
-#  define TIM1_CCMR1_IC1F_FDTSd26   (0x4 << TIM1_CCMR1_IC1F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
-#  define TIM1_CCMR1_IC1F_FDTSd28   (0x5 << TIM1_CCMR1_IC1F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
-#  define TIM1_CCMR1_IC1F_FDTSd46   (0x6 << TIM1_CCMR1_IC1F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
-#  define TIM1_CCMR1_IC1F_FDTSd48   (0x7 << TIM1_CCMR1_IC1F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
-#  define TIM1_CCMR1_IC1F_FDTSd86   (0x8 << TIM1_CCMR1_IC1F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
-#  define TIM1_CCMR1_IC1F_FDTSd88   (0x9 << TIM1_CCMR1_IC1F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
-#  define TIM1_CCMR1_IC1F_FDTSd165  (0xa << TIM1_CCMR1_IC1F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
-#  define TIM1_CCMR1_IC1F_FDTSd166  (0xb << TIM1_CCMR1_IC1F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
-#  define TIM1_CCMR1_IC1F_FDTSd168  (0xc << TIM1_CCMR1_IC1F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
-#  define TIM1_CCMR1_IC1F_FDTSd325  (0xd << TIM1_CCMR1_IC1F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
-#  define TIM1_CCMR1_IC1F_FDTSd326  (0xe << TIM1_CCMR1_IC1F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
-#  define TIM1_CCMR1_IC1F_FDTSd328  (0xf << TIM1_CCMR1_IC1F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
-
+#  define TIM1_CCMR1_IC1F(f)        ((f) << TIM1_CCMR1_IC1F_SHIFT)   /* f = STM32WB_DF_[digital filter option] */
 #define TIM1_CCMR1_IC2PSC_SHIFT     (10)      /* Bits 10-11: Input Capture 2 Prescaler */
 #define TIM1_CCMR1_IC2PSC_MASK      (0x3 << TIM1_CCMR1_IC2PSC_SHIFT)
 #  define TIM1_CCMR1_IC2PSC_NOPSC   (0x0 << TIM1_CCMR1_IC2PSC_SHIFT) /* 00: no prescaler, capture each edge */
@@ -928,22 +884,7 @@
 #  define TIM1_CCMR1_IC2PSC_EVERY8  (0x3 << TIM1_CCMR1_IC2PSC_SHIFT) /* 11: capture once every 8 events */
 #define TIM1_CCMR1_IC2F_SHIFT       (12)      /* Bits 12-15: Input Capture 2 Filter */
 #define TIM1_CCMR1_IC2F_MASK        (0xf << TIM1_CCMR1_IC2F_SHIFT)
-#  define TIM1_CCMR1_IC2F_NOFILT    (0x0 << TIM1_CCMR1_IC2F_SHIFT)   /* 0000: No filter, sampling at fDTS */
-#  define TIM1_CCMR1_IC2F_FCKINT2   (0x1 << TIM1_CCMR1_IC2F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
-#  define TIM1_CCMR1_IC2F_FCKINT4   (0x2 << TIM1_CCMR1_IC2F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
-#  define TIM1_CCMR1_IC2F_FCKINT8   (0x3 << TIM1_CCMR1_IC2F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
-#  define TIM1_CCMR1_IC2F_FDTSd26   (0x4 << TIM1_CCMR1_IC2F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
-#  define TIM1_CCMR1_IC2F_FDTSd28   (0x5 << TIM1_CCMR1_IC2F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
-#  define TIM1_CCMR1_IC2F_FDTSd46   (0x6 << TIM1_CCMR1_IC2F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
-#  define TIM1_CCMR1_IC2F_FDTSd48   (0x7 << TIM1_CCMR1_IC2F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
-#  define TIM1_CCMR1_IC2F_FDTSd86   (0x8 << TIM1_CCMR1_IC2F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
-#  define TIM1_CCMR1_IC2F_FDTSd88   (0x9 << TIM1_CCMR1_IC2F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
-#  define TIM1_CCMR1_IC2F_FDTSd165  (0xa << TIM1_CCMR1_IC2F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
-#  define TIM1_CCMR1_IC2F_FDTSd166  (0xb << TIM1_CCMR1_IC2F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
-#  define TIM1_CCMR1_IC2F_FDTSd168  (0xc << TIM1_CCMR1_IC2F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
-#  define TIM1_CCMR1_IC2F_FDTSd325  (0xd << TIM1_CCMR1_IC2F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
-#  define TIM1_CCMR1_IC2F_FDTSd326  (0xe << TIM1_CCMR1_IC2F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
-#  define TIM1_CCMR1_IC2F_FDTSd328  (0xf << TIM1_CCMR1_IC2F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+#  define TIM1_CCMR1_IC2F(f)        ((f) << TIM1_CCMR1_IC2F_SHIFT)   /* f = STM32WB_DF_[digital filter option] */
 
 #define TIM1_CCMR2_IC3PSC_SHIFT     (2)       /* Bits 2-3: Input Capture 3 Prescaler */
 #define TIM1_CCMR2_IC3PSC_MASK      (0x3 << TIM1_CCMR2_IC3PSC_SHIFT)
@@ -953,22 +894,7 @@
 #  define TIM1_CCMR2_IC3PSC_EVERY8  (0x3 << TIM1_CCMR2_IC3PSC_SHIFT) /* 11: capture once every 8 events */
 #define TIM1_CCMR2_IC3F_SHIFT       (4)       /* Bits 4-7: Input Capture 3 Filter */
 #define TIM1_CCMR2_IC3F_MASK        (0xf << TIM1_CCMR2_IC3F_SHIFT)
-#  define TIM1_CCMR2_IC3F_NOFILT    (0x0 << TIM1_CCMR2_IC3F_SHIFT)   /* 0000: No filter, sampling at fDTS */
-#  define TIM1_CCMR2_IC3F_FCKINT2   (0x1 << TIM1_CCMR2_IC3F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
-#  define TIM1_CCMR2_IC3F_FCKINT4   (0x2 << TIM1_CCMR2_IC3F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
-#  define TIM1_CCMR2_IC3F_FCKINT8   (0x3 << TIM1_CCMR2_IC3F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
-#  define TIM1_CCMR2_IC3F_FDTSd26   (0x4 << TIM1_CCMR2_IC3F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
-#  define TIM1_CCMR2_IC3F_FDTSd28   (0x5 << TIM1_CCMR2_IC3F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
-#  define TIM1_CCMR2_IC3F_FDTSd46   (0x6 << TIM1_CCMR2_IC3F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
-#  define TIM1_CCMR2_IC3F_FDTSd48   (0x7 << TIM1_CCMR2_IC3F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
-#  define TIM1_CCMR2_IC3F_FDTSd86   (0x8 << TIM1_CCMR2_IC3F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
-#  define TIM1_CCMR2_IC3F_FDTSd88   (0x9 << TIM1_CCMR2_IC3F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
-#  define TIM1_CCMR2_IC3F_FDTSd165  (0xa << TIM1_CCMR2_IC3F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
-#  define TIM1_CCMR2_IC3F_FDTSd166  (0xb << TIM1_CCMR2_IC3F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
-#  define TIM1_CCMR2_IC3F_FDTSd168  (0xc << TIM1_CCMR2_IC3F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
-#  define TIM1_CCMR2_IC3F_FDTSd325  (0xd << TIM1_CCMR2_IC3F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
-#  define TIM1_CCMR2_IC3F_FDTSd326  (0xe << TIM1_CCMR2_IC3F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
-#  define TIM1_CCMR2_IC3F_FDTSd328  (0xf << TIM1_CCMR2_IC3F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+#  define TIM1_CCMR2_IC3F(f)        ((f) << TIM1_CCMR2_IC3F_SHIFT)   /* f = STM32WB_DF_[digital filter option] */
 
 #define TIM1_CCMR2_IC4PSC_SHIFT     (10)      /* Bits 10-11: Input Capture 4 Prescaler */
 #define TIM1_CCMR2_IC4PSC_MASK      (0x3 << TIM1_CCMR2_IC4PSC_SHIFT)
@@ -978,22 +904,7 @@
 #  define TIM1_CCMR2_IC4PSC_EVERY8  (0x3 << TIM1_CCMR2_IC4PSC_SHIFT) /* 11: capture once every 8 events */
 #define TIM1_CCMR2_IC4F_SHIFT       (12)      /* Bits 12-15: Input Capture 4 Filter */
 #define TIM1_CCMR2_IC4F_MASK        (0xf << TIM1_CCMR2_IC4F_SHIFT)
-#  define TIM1_CCMR2_IC4F_NOFILT    (0x0 << TIM1_CCMR2_IC4F_SHIFT)   /* 0000: No filter, sampling at fDTS */
-#  define TIM1_CCMR2_IC4F_FCKINT2   (0x1 << TIM1_CCMR2_IC4F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
-#  define TIM1_CCMR2_IC4F_FCKINT4   (0x2 << TIM1_CCMR2_IC4F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
-#  define TIM1_CCMR2_IC4F_FCKINT8   (0x3 << TIM1_CCMR2_IC4F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
-#  define TIM1_CCMR2_IC4F_FDTSd26   (0x4 << TIM1_CCMR2_IC4F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
-#  define TIM1_CCMR2_IC4F_FDTSd28   (0x5 << TIM1_CCMR2_IC4F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
-#  define TIM1_CCMR2_IC4F_FDTSd46   (0x6 << TIM1_CCMR2_IC4F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
-#  define TIM1_CCMR2_IC4F_FDTSd48   (0x7 << TIM1_CCMR2_IC4F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
-#  define TIM1_CCMR2_IC4F_FDTSd86   (0x8 << TIM1_CCMR2_IC4F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
-#  define TIM1_CCMR2_IC4F_FDTSd88   (0x9 << TIM1_CCMR2_IC4F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
-#  define TIM1_CCMR2_IC4F_FDTSd165  (0xa << TIM1_CCMR2_IC4F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
-#  define TIM1_CCMR2_IC4F_FDTSd166  (0xb << TIM1_CCMR2_IC4F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
-#  define TIM1_CCMR2_IC4F_FDTSd168  (0xc << TIM1_CCMR2_IC4F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
-#  define TIM1_CCMR2_IC4F_FDTSd325  (0xd << TIM1_CCMR2_IC4F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
-#  define TIM1_CCMR2_IC4F_FDTSd326  (0xe << TIM1_CCMR2_IC4F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
-#  define TIM1_CCMR2_IC4F_FDTSd328  (0xf << TIM1_CCMR2_IC4F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+#  define TIM1_CCMR2_IC4F(f)        ((f) << TIM1_CCMR2_IC4F_SHIFT)   /* f = STM32WB_DF_[digital filter option] */
 
 #define TIM2_CCMR1_IC1PSC_SHIFT     (2)       /* Bits 2-3: Input Capture 1 Prescaler */
 #define TIM2_CCMR1_IC1PSC_MASK      (0x3 << TIM2_CCMR1_IC1PSC_SHIFT)
@@ -1003,22 +914,7 @@
 #  define TIM2_CCMR1_IC1PSC_EVERY8  (0x3 << TIM2_CCMR1_IC1PSC_SHIFT) /* 11: capture once every 8 events */
 #define TIM2_CCMR1_IC1F_SHIFT       (4)       /* Bits 4-7: Input Capture 1 Filter */
 #define TIM2_CCMR1_IC1F_MASK        (0xf << TIM2_CCMR1_IC1F_SHIFT)
-#  define TIM2_CCMR1_IC1F_NOFILT    (0x0 << TIM2_CCMR1_IC1F_SHIFT)   /* 0000: No filter, sampling at fDTS */
-#  define TIM2_CCMR1_IC1F_FCKINT2   (0x1 << TIM2_CCMR1_IC1F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
-#  define TIM2_CCMR1_IC1F_FCKINT4   (0x2 << TIM2_CCMR1_IC1F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
-#  define TIM2_CCMR1_IC1F_FCKINT8   (0x3 << TIM2_CCMR1_IC1F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
-#  define TIM2_CCMR1_IC1F_FDTSd26   (0x4 << TIM2_CCMR1_IC1F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
-#  define TIM2_CCMR1_IC1F_FDTSd28   (0x5 << TIM2_CCMR1_IC1F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
-#  define TIM2_CCMR1_IC1F_FDTSd46   (0x6 << TIM2_CCMR1_IC1F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
-#  define TIM2_CCMR1_IC1F_FDTSd48   (0x7 << TIM2_CCMR1_IC1F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
-#  define TIM2_CCMR1_IC1F_FDTSd86   (0x8 << TIM2_CCMR1_IC1F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
-#  define TIM2_CCMR1_IC1F_FDTSd88   (0x9 << TIM2_CCMR1_IC1F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
-#  define TIM2_CCMR1_IC1F_FDTSd165  (0xa << TIM2_CCMR1_IC1F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
-#  define TIM2_CCMR1_IC1F_FDTSd166  (0xb << TIM2_CCMR1_IC1F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
-#  define TIM2_CCMR1_IC1F_FDTSd168  (0xc << TIM2_CCMR1_IC1F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
-#  define TIM2_CCMR1_IC1F_FDTSd325  (0xd << TIM2_CCMR1_IC1F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
-#  define TIM2_CCMR1_IC1F_FDTSd326  (0xe << TIM2_CCMR1_IC1F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
-#  define TIM2_CCMR1_IC1F_FDTSd328  (0xf << TIM2_CCMR1_IC1F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+#  define TIM2_CCMR1_IC1F(f)        ((f) << TIM2_CCMR1_IC1F_SHIFT)   /* f = STM32WB_DF_[digital filter option] */
 
 #define TIM2_CCMR1_IC2PSC_SHIFT     (10)      /* Bits 10-11: Input Capture 2 Prescaler */
 #define TIM2_CCMR1_IC2PSC_MASK      (0x3 << TIM2_CCMR1_IC2PSC_SHIFT)
@@ -1028,22 +924,7 @@
 #  define TIM2_CCMR1_IC2PSC_EVERY8  (0x3 << TIM2_CCMR1_IC2PSC_SHIFT) /* 11: capture once every 8 events */
 #define TIM2_CCMR1_IC2F_SHIFT       (12)      /* Bits 12-15: Input Capture 2 Filter */
 #define TIM2_CCMR1_IC2F_MASK        (0xf << TIM2_CCMR1_IC2F_SHIFT)
-#  define TIM2_CCMR1_IC2F_NOFILT    (0x0 << TIM2_CCMR1_IC2F_SHIFT)   /* 0000: No filter, sampling at fDTS */
-#  define TIM2_CCMR1_IC2F_FCKINT2   (0x1 << TIM2_CCMR1_IC2F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
-#  define TIM2_CCMR1_IC2F_FCKINT4   (0x2 << TIM2_CCMR1_IC2F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
-#  define TIM2_CCMR1_IC2F_FCKINT8   (0x3 << TIM2_CCMR1_IC2F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
-#  define TIM2_CCMR1_IC2F_FDTSd26   (0x4 << TIM2_CCMR1_IC2F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
-#  define TIM2_CCMR1_IC2F_FDTSd28   (0x5 << TIM2_CCMR1_IC2F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
-#  define TIM2_CCMR1_IC2F_FDTSd46   (0x6 << TIM2_CCMR1_IC2F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
-#  define TIM2_CCMR1_IC2F_FDTSd48   (0x7 << TIM2_CCMR1_IC2F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
-#  define TIM2_CCMR1_IC2F_FDTSd86   (0x8 << TIM2_CCMR1_IC2F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
-#  define TIM2_CCMR1_IC2F_FDTSd88   (0x9 << TIM2_CCMR1_IC2F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
-#  define TIM2_CCMR1_IC2F_FDTSd165  (0xa << TIM2_CCMR1_IC2F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
-#  define TIM2_CCMR1_IC2F_FDTSd166  (0xb << TIM2_CCMR1_IC2F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
-#  define TIM2_CCMR1_IC2F_FDTSd168  (0xc << TIM2_CCMR1_IC2F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
-#  define TIM2_CCMR1_IC2F_FDTSd325  (0xd << TIM2_CCMR1_IC2F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
-#  define TIM2_CCMR1_IC2F_FDTSd326  (0xe << TIM2_CCMR1_IC2F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
-#  define TIM2_CCMR1_IC2F_FDTSd328  (0xf << TIM2_CCMR1_IC2F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+#  define TIM2_CCMR1_IC2F(f)        ((f) << TIM2_CCMR1_IC2F_SHIFT)   /* f = STM32WB_DF_[digital filter option] */
 
 #define TIM2_CCMR2_IC3PSC_SHIFT     (2)       /* Bits 2-3: Input Capture 3 Prescaler */
 #define TIM2_CCMR2_IC3PSC_MASK      (0x3 << TIM2_CCMR2_IC3PSC_SHIFT)
@@ -1053,22 +934,7 @@
 #  define TIM2_CCMR2_IC3PSC_EVERY8  (0x3 << TIM2_CCMR2_IC3PSC_SHIFT) /* 11: capture once every 8 events */
 #define TIM2_CCMR2_IC3F_SHIFT       (4)       /* Bits 4-7: Input Capture 3 Filter */
 #define TIM2_CCMR2_IC3F_MASK        (0xf << TIM2_CCMR2_IC3F_SHIFT)
-#  define TIM2_CCMR2_IC3F_NOFILT    (0x0 << TIM2_CCMR2_IC3F_SHIFT)   /* 0000: No filter, sampling at fDTS */
-#  define TIM2_CCMR2_IC3F_FCKINT2   (0x1 << TIM2_CCMR2_IC3F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
-#  define TIM2_CCMR2_IC3F_FCKINT4   (0x2 << TIM2_CCMR2_IC3F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
-#  define TIM2_CCMR2_IC3F_FCKINT8   (0x3 << TIM2_CCMR2_IC3F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
-#  define TIM2_CCMR2_IC3F_FDTSd26   (0x4 << TIM2_CCMR2_IC3F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
-#  define TIM2_CCMR2_IC3F_FDTSd28   (0x5 << TIM2_CCMR2_IC3F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
-#  define TIM2_CCMR2_IC3F_FDTSd46   (0x6 << TIM2_CCMR2_IC3F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
-#  define TIM2_CCMR2_IC3F_FDTSd48   (0x7 << TIM2_CCMR2_IC3F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
-#  define TIM2_CCMR2_IC3F_FDTSd86   (0x8 << TIM2_CCMR2_IC3F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
-#  define TIM2_CCMR2_IC3F_FDTSd88   (0x9 << TIM2_CCMR2_IC3F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
-#  define TIM2_CCMR2_IC3F_FDTSd165  (0xa << TIM2_CCMR2_IC3F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
-#  define TIM2_CCMR2_IC3F_FDTSd166  (0xb << TIM2_CCMR2_IC3F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
-#  define TIM2_CCMR2_IC3F_FDTSd168  (0xc << TIM2_CCMR2_IC3F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
-#  define TIM2_CCMR2_IC3F_FDTSd325  (0xd << TIM2_CCMR2_IC3F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
-#  define TIM2_CCMR2_IC3F_FDTSd326  (0xe << TIM2_CCMR2_IC3F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
-#  define TIM2_CCMR2_IC3F_FDTSd328  (0xf << TIM2_CCMR2_IC3F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+#  define TIM2_CCMR2_IC3F(f)        ((f) << TIM2_CCMR2_IC3F_SHIFT)   /* f = STM32WB_DF_[digital filter option] */
 
 #define TIM2_CCMR2_IC4PSC_SHIFT     (10)      /* Bits 10-11: Input Capture 4 Prescaler */
 #define TIM2_CCMR2_IC4PSC_MASK      (0x3 << TIM2_CCMR2_IC4PSC_SHIFT)
@@ -1078,22 +944,7 @@
 #  define TIM2_CCMR2_IC4PSC_EVERY8  (0x3 << TIM2_CCMR2_IC4PSC_SHIFT) /* 11: capture once every 8 events */
 #define TIM2_CCMR2_IC4F_SHIFT       (12)      /* Bits 12-15: Input Capture 4 Filter */
 #define TIM2_CCMR2_IC4F_MASK        (0xf << TIM2_CCMR2_IC4F_SHIFT)
-#  define TIM2_CCMR2_IC4F_NOFILT    (0x0 << TIM2_CCMR2_IC4F_SHIFT)   /* 0000: No filter, sampling at fDTS */
-#  define TIM2_CCMR2_IC4F_FCKINT2   (0x1 << TIM2_CCMR2_IC4F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
-#  define TIM2_CCMR2_IC4F_FCKINT4   (0x2 << TIM2_CCMR2_IC4F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
-#  define TIM2_CCMR2_IC4F_FCKINT8   (0x3 << TIM2_CCMR2_IC4F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
-#  define TIM2_CCMR2_IC4F_FDTSd26   (0x4 << TIM2_CCMR2_IC4F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
-#  define TIM2_CCMR2_IC4F_FDTSd28   (0x5 << TIM2_CCMR2_IC4F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
-#  define TIM2_CCMR2_IC4F_FDTSd46   (0x6 << TIM2_CCMR2_IC4F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
-#  define TIM2_CCMR2_IC4F_FDTSd48   (0x7 << TIM2_CCMR2_IC4F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
-#  define TIM2_CCMR2_IC4F_FDTSd86   (0x8 << TIM2_CCMR2_IC4F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
-#  define TIM2_CCMR2_IC4F_FDTSd88   (0x9 << TIM2_CCMR2_IC4F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
-#  define TIM2_CCMR2_IC4F_FDTSd165  (0xa << TIM2_CCMR2_IC4F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
-#  define TIM2_CCMR2_IC4F_FDTSd166  (0xb << TIM2_CCMR2_IC4F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
-#  define TIM2_CCMR2_IC4F_FDTSd168  (0xc << TIM2_CCMR2_IC4F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
-#  define TIM2_CCMR2_IC4F_FDTSd325  (0xd << TIM2_CCMR2_IC4F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
-#  define TIM2_CCMR2_IC4F_FDTSd326  (0xe << TIM2_CCMR2_IC4F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
-#  define TIM2_CCMR2_IC4F_FDTSd328  (0xf << TIM2_CCMR2_IC4F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+#  define TIM2_CCMR2_IC4F(f)        ((f) << TIM2_CCMR2_IC4F_SHIFT)   /* f = STM32WB_DF_[digital filter option] */
 
 #define TIM16_CCMR1_IC1PSC_SHIFT    (2)       /* Bits 2-3: Input Capture 1 Prescaler */
 #define TIM16_CCMR1_IC1PSC_MASK     (0x3 << TIM16_CCMR1_IC1PSC_SHIFT)
@@ -1103,22 +954,7 @@
 #  define TIM16_CCMR1_IC1PSC_EVERY8 (0x3 << TIM16_CCMR1_IC1PSC_SHIFT) /* 11: capture once every 8 events */
 #define TIM16_CCMR1_IC1F_SHIFT      (4)       /* Bits 4-7: Input Capture 1 Filter */
 #define TIM16_CCMR1_IC1F_MASK       (0xf << TIM16_CCMR1_IC1F_SHIFT)
-#  define TIM16_CCMR1_IC1F_NOFILT   (0x0 << TIM16_CCMR1_IC1F_SHIFT)   /* 0000: No filter, sampling at fDTS */
-#  define TIM16_CCMR1_IC1F_FCKINT2  (0x1 << TIM16_CCMR1_IC1F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
-#  define TIM16_CCMR1_IC1F_FCKINT4  (0x2 << TIM16_CCMR1_IC1F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
-#  define TIM16_CCMR1_IC1F_FCKINT8  (0x3 << TIM16_CCMR1_IC1F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
-#  define TIM16_CCMR1_IC1F_FDTSd26  (0x4 << TIM16_CCMR1_IC1F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
-#  define TIM16_CCMR1_IC1F_FDTSd28  (0x5 << TIM16_CCMR1_IC1F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
-#  define TIM16_CCMR1_IC1F_FDTSd46  (0x6 << TIM16_CCMR1_IC1F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
-#  define TIM16_CCMR1_IC1F_FDTSd48  (0x7 << TIM16_CCMR1_IC1F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
-#  define TIM16_CCMR1_IC1F_FDTSd86  (0x8 << TIM16_CCMR1_IC1F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
-#  define TIM16_CCMR1_IC1F_FDTSd88  (0x9 << TIM16_CCMR1_IC1F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
-#  define TIM16_CCMR1_IC1F_FDTSd165 (0xa << TIM16_CCMR1_IC1F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
-#  define TIM16_CCMR1_IC1F_FDTSd166 (0xb << TIM16_CCMR1_IC1F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
-#  define TIM16_CCMR1_IC1F_FDTSd168 (0xc << TIM16_CCMR1_IC1F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
-#  define TIM16_CCMR1_IC1F_FDTSd325 (0xd << TIM16_CCMR1_IC1F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
-#  define TIM16_CCMR1_IC1F_FDTSd326 (0xe << TIM16_CCMR1_IC1F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
-#  define TIM16_CCMR1_IC1F_FDTSd328 (0xf << TIM16_CCMR1_IC1F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+#  define TIM16_CCMR1_IC1F(f)       ((f) << TIM16_CCMR1_IC1F_SHIFT)   /* f = STM32WB_DF_[digital filter option] */
 
 #define TIM17_CCMR1_IC1PSC_SHIFT    (2)       /* Bits 2-3: Input Capture 1 Prescaler */
 #define TIM17_CCMR1_IC1PSC_MASK     (0x3 << TIM17_CCMR1_IC1PSC_SHIFT)
@@ -1128,22 +964,7 @@
 #  define TIM17_CCMR1_IC1PSC_EVERY8 (0x3 << TIM17_CCMR1_IC1PSC_SHIFT) /* 11: capture once every 8 events */
 #define TIM17_CCMR1_IC1F_SHIFT      (4)       /* Bits 4-7: Input Capture 1 Filter */
 #define TIM17_CCMR1_IC1F_MASK       (0xf << TIM17_CCMR1_IC1F_SHIFT)
-#  define TIM17_CCMR1_IC1F_NOFILT   (0x0 << TIM17_CCMR1_IC1F_SHIFT)   /* 0000: No filter, sampling at fDTS */
-#  define TIM17_CCMR1_IC1F_FCKINT2  (0x1 << TIM17_CCMR1_IC1F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
-#  define TIM17_CCMR1_IC1F_FCKINT4  (0x2 << TIM17_CCMR1_IC1F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
-#  define TIM17_CCMR1_IC1F_FCKINT8  (0x3 << TIM17_CCMR1_IC1F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
-#  define TIM17_CCMR1_IC1F_FDTSd26  (0x4 << TIM17_CCMR1_IC1F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
-#  define TIM17_CCMR1_IC1F_FDTSd28  (0x5 << TIM17_CCMR1_IC1F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
-#  define TIM17_CCMR1_IC1F_FDTSd46  (0x6 << TIM17_CCMR1_IC1F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
-#  define TIM17_CCMR1_IC1F_FDTSd48  (0x7 << TIM17_CCMR1_IC1F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
-#  define TIM17_CCMR1_IC1F_FDTSd86  (0x8 << TIM17_CCMR1_IC1F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
-#  define TIM17_CCMR1_IC1F_FDTSd88  (0x9 << TIM17_CCMR1_IC1F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
-#  define TIM17_CCMR1_IC1F_FDTSd165 (0xa << TIM17_CCMR1_IC1F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
-#  define TIM17_CCMR1_IC1F_FDTSd166 (0xb << TIM17_CCMR1_IC1F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
-#  define TIM17_CCMR1_IC1F_FDTSd168 (0xc << TIM17_CCMR1_IC1F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
-#  define TIM17_CCMR1_IC1F_FDTSd325 (0xd << TIM17_CCMR1_IC1F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
-#  define TIM17_CCMR1_IC1F_FDTSd326 (0xe << TIM17_CCMR1_IC1F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
-#  define TIM17_CCMR1_IC1F_FDTSd328 (0xf << TIM17_CCMR1_IC1F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+#  define TIM17_CCMR1_IC1F(f)       ((f) << TIM17_CCMR1_IC1F_SHIFT)   /* f = STM32WB_DF_[digital filter option] */
 
 /* Capture/compare enable register */
 
@@ -1299,10 +1120,10 @@
 #define TIM1_BDTR_MOE               (1 << 15) /* Bit 15: Main Output enable */
 #define TIM1_BDTR_BKF_SHIFT         (16)      /* Bits 16-19: Break filter */
 #define TIM1_BDTR_BKF_MASK          (0xf << TIM1_BDTR_BKF_SHIFT)
-#  define TIM1_BDTR_BKF(f)          ((f) << TIM1_BDTR_BKF_SHIFT) /* STM32WB_DF_x digital filter param */
+#  define TIM1_BDTR_BKF(f)          ((f) << TIM1_BDTR_BKF_SHIFT) /* f = STM32WB_DF_[digital filter option] */
 #define TIM1_BDTR_BK2F_SHIFT        (20)      /* Bits 20-23: Break 2 filter */
 #define TIM1_BDTR_BK2F_MASK         (0xf << TIM1_BDTR_BK2F_SHIFT)
-#  define TIM1_BDTR_BK2F(f)         ((f) << TIM1_BDTR_BK2F_SHIFT) /* STM32WB_DF_x digital filter param */
+#  define TIM1_BDTR_BK2F(f)         ((f) << TIM1_BDTR_BK2F_SHIFT) /* f = STM32WB_DF_[digital filter option] */
 #define TIM1_BDTR_BK2E              (1 << 24) /* Bit 24: Break 2 enable */
 #define TIM1_BDTR_BK2P              (1 << 25) /* Bit 25: Break 2 polarity */
 #define TIM1_BDTR_BKDSRM            (1 << 26) /* Bit 26: Break Disarm */
