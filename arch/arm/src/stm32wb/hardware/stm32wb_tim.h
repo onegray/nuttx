@@ -1,171 +1,155 @@
-/************************************************************************************
- * arch/arm/src/stm32l4/hardware/stm32l4_tim.h
+/****************************************************************************
+ * arch/arm/src/stm32wb/hardware/stm32wb_tim.h
  *
- *   Copyright (C) 2009, 2011-2012 Gregory Nutt. All rights reserved.
- *   Author: Gregory Nutt <gnutt@nuttx.org>
- *           dev@ziggurat29.com
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.  The
+ * ASF licenses this file to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance with the
+ * License.  You may obtain a copy of the License at
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
- * 3. Neither the name NuttX nor the names of its contributors may be
- *    used to endorse or promote products derived from this software
- *    without specific prior written permission.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
  *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
- * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
- * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
- * OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
- * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
- * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
- * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
- *
- ************************************************************************************/
+ ****************************************************************************/
 
-#ifndef __ARCH_ARM_SRC_STM32L4_HARDWARE_STM32L4_TIM_H
-#define __ARCH_ARM_SRC_STM32L4_HARDWARE_STM32L4_TIM_H
+#ifndef __ARCH_ARM_SRC_STM32WB_HARDWARE_STM32WB_TIM_H
+#define __ARCH_ARM_SRC_STM32WB_HARDWARE_STM32WB_TIM_H
 
-/************************************************************************************
+/****************************************************************************
  * Pre-processor Definitions
- ************************************************************************************/
+ ****************************************************************************/
 
-/* Register Offsets *****************************************************************/
+/* Register Offsets *********************************************************/
 
-#define STM32L4_TIM_CR1_OFFSET      0x0000  /* Control register 1 */
-#define STM32L4_TIM_CR2_OFFSET      0x0004  /* Control register 2 */
-#define STM32L4_TIM_SMCR_OFFSET     0x0008  /* Slave mode control register (TIM1, TIM2) */
-#define STM32L4_TIM_DIER_OFFSET     0x000c  /* DMA / Interrupt enable register */
-#define STM32L4_TIM_SR_OFFSET       0x0010  /* Status register */
-#define STM32L4_TIM_EGR_OFFSET      0x0014  /* Event generation register */
-#define STM32L4_TIM_CCMR1_OFFSET    0x0018  /* Capture/compare mode register 1 */
-#define STM32L4_TIM_CCMR2_OFFSET    0x001c  /* Capture/compare mode register 2 (TIM1, TIM2) */
-#define STM32L4_TIM_CCER_OFFSET     0x0020  /* Capture/compare enable register */
-#define STM32L4_TIM_CNT_OFFSET      0x0024  /* Counter */
-#define STM32L4_TIM_PSC_OFFSET      0x0028  /* Prescaler */
-#define STM32L4_TIM_ARR_OFFSET      0x002c  /* Auto-reload register */
-#define STM32L4_TIM_RCR_OFFSET      0x0030  /* Repetition counter register (TIM1, TIM16/TIM17) */
-#define STM32L4_TIM_CCR1_OFFSET     0x0034  /* Capture/compare register 1 */
-#define STM32L4_TIM_CCR2_OFFSET     0x0038  /* Capture/compare register 2 (TIM1, TIM2) */
-#define STM32L4_TIM_CCR3_OFFSET     0x003c  /* Capture/compare register 3 (TIM1, TIM2) */
-#define STM32L4_TIM_CCR4_OFFSET     0x0040  /* Capture/compare register 4 (TIM1, TIM2) */
-#define STM32L4_TIM_BDTR_OFFSET     0x0044  /* Break and dead-time register (TIM1, TIM16/17) */
-#define STM32L4_TIM_DCR_OFFSET      0x0048  /* DMA control register */
-#define STM32L4_TIM_DMAR_OFFSET     0x004c  /* DMA address for burst mode */
-#define STM32L4_TIM_OR1_OFFSET      0x0050  /* Option register 1 */
-#define STM32L4_TIM_CCMR3_OFFSET    0x0054  /* Capture/compare mode register 3 (TIM1) */
-#define STM32L4_TIM_CCR5_OFFSET     0x0058  /* Capture/compare register 5 (TIM1) */
-#define STM32L4_TIM_CCR6_OFFSET     0x005C  /* Capture/compare register 6 (TIM1) */
-#define STM32L4_TIM_AF1_OFFSET      0x0060  /* Alternate function register 1 */
-#define STM32L4_TIM_AF2_OFFSET      0x0064  /* Alternate function register 2 (TIM1) */
-#define STM32L4_TIM_TISEL_OFFSET    0x0068  /* Input selector register */
+#define STM32WB_TIM_CR1_OFFSET      0x0000  /* Control register 1 */
+#define STM32WB_TIM_CR2_OFFSET      0x0004  /* Control register 2 */
+#define STM32WB_TIM_SMCR_OFFSET     0x0008  /* Slave mode control register (TIM1, TIM2) */
+#define STM32WB_TIM_DIER_OFFSET     0x000c  /* DMA / Interrupt enable register */
+#define STM32WB_TIM_SR_OFFSET       0x0010  /* Status register */
+#define STM32WB_TIM_EGR_OFFSET      0x0014  /* Event generation register */
+#define STM32WB_TIM_CCMR1_OFFSET    0x0018  /* Capture/compare mode register 1 */
+#define STM32WB_TIM_CCMR2_OFFSET    0x001c  /* Capture/compare mode register 2 (TIM1, TIM2) */
+#define STM32WB_TIM_CCER_OFFSET     0x0020  /* Capture/compare enable register */
+#define STM32WB_TIM_CNT_OFFSET      0x0024  /* Counter */
+#define STM32WB_TIM_PSC_OFFSET      0x0028  /* Prescaler */
+#define STM32WB_TIM_ARR_OFFSET      0x002c  /* Auto-reload register */
+#define STM32WB_TIM_RCR_OFFSET      0x0030  /* Repetition counter register (TIM1, TIM16/TIM17) */
+#define STM32WB_TIM_CCR1_OFFSET     0x0034  /* Capture/compare register 1 */
+#define STM32WB_TIM_CCR2_OFFSET     0x0038  /* Capture/compare register 2 (TIM1, TIM2) */
+#define STM32WB_TIM_CCR3_OFFSET     0x003c  /* Capture/compare register 3 (TIM1, TIM2) */
+#define STM32WB_TIM_CCR4_OFFSET     0x0040  /* Capture/compare register 4 (TIM1, TIM2) */
+#define STM32WB_TIM_BDTR_OFFSET     0x0044  /* Break and dead-time register (TIM1, TIM16/17) */
+#define STM32WB_TIM_DCR_OFFSET      0x0048  /* DMA control register */
+#define STM32WB_TIM_DMAR_OFFSET     0x004c  /* DMA address for burst mode */
+#define STM32WB_TIM_OR1_OFFSET      0x0050  /* Option register 1 */
+#define STM32WB_TIM_CCMR3_OFFSET    0x0054  /* Capture/compare mode register 3 (TIM1) */
+#define STM32WB_TIM_CCR5_OFFSET     0x0058  /* Capture/compare register 5 (TIM1) */
+#define STM32WB_TIM_CCR6_OFFSET     0x005C  /* Capture/compare register 6 (TIM1) */
+#define STM32WB_TIM_AF1_OFFSET      0x0060  /* Alternate function register 1 */
+#define STM32WB_TIM_AF2_OFFSET      0x0064  /* Alternate function register 2 (TIM1) */
+#define STM32WB_TIM_TISEL_OFFSET    0x0068  /* Input selector register */
 
-/* Register Addresses ***************************************************************/
+/* Register Addresses *******************************************************/
 
 /* Advanced Timer TIM1 */
 
-#define STM32L4_TIM1_CR1            (STM32L4_TIM1_BASE + STM32L4_TIM_CR1_OFFSET)
-#define STM32L4_TIM1_CR2            (STM32L4_TIM1_BASE + STM32L4_TIM_CR2_OFFSET)
-#define STM32L4_TIM1_SMCR           (STM32L4_TIM1_BASE + STM32L4_TIM_SMCR_OFFSET)
-#define STM32L4_TIM1_DIER           (STM32L4_TIM1_BASE + STM32L4_TIM_DIER_OFFSET)
-#define STM32L4_TIM1_SR             (STM32L4_TIM1_BASE + STM32L4_TIM_SR_OFFSET)
-#define STM32L4_TIM1_EGR            (STM32L4_TIM1_BASE + STM32L4_TIM_EGR_OFFSET)
-#define STM32L4_TIM1_CCMR1          (STM32L4_TIM1_BASE + STM32L4_TIM_CCMR1_OFFSET)
-#define STM32L4_TIM1_CCMR2          (STM32L4_TIM1_BASE + STM32L4_TIM_CCMR2_OFFSET)
-#define STM32L4_TIM1_CCER           (STM32L4_TIM1_BASE + STM32L4_TIM_CCER_OFFSET)
-#define STM32L4_TIM1_CNT            (STM32L4_TIM1_BASE + STM32L4_TIM_CNT_OFFSET)
-#define STM32L4_TIM1_PSC            (STM32L4_TIM1_BASE + STM32L4_TIM_PSC_OFFSET)
-#define STM32L4_TIM1_ARR            (STM32L4_TIM1_BASE + STM32L4_TIM_ARR_OFFSET)
-#define STM32L4_TIM1_RCR            (STM32L4_TIM1_BASE + STM32L4_TIM_RCR_OFFSET)
-#define STM32L4_TIM1_CCR1           (STM32L4_TIM1_BASE + STM32L4_TIM_CCR1_OFFSET)
-#define STM32L4_TIM1_CCR2           (STM32L4_TIM1_BASE + STM32L4_TIM_CCR2_OFFSET)
-#define STM32L4_TIM1_CCR3           (STM32L4_TIM1_BASE + STM32L4_TIM_CCR3_OFFSET)
-#define STM32L4_TIM1_CCR4           (STM32L4_TIM1_BASE + STM32L4_TIM_CCR4_OFFSET)
-#define STM32L4_TIM1_BDTR           (STM32L4_TIM1_BASE + STM32L4_TIM_BDTR_OFFSET)
-#define STM32L4_TIM1_DCR            (STM32L4_TIM1_BASE + STM32L4_TIM_DCR_OFFSET)
-#define STM32L4_TIM1_DMAR           (STM32L4_TIM1_BASE + STM32L4_TIM_DMAR_OFFSET)
-#define STM32L4_TIM1_OR1            (STM32L4_TIM1_BASE + STM32L4_TIM_OR1_OFFSET)
-#define STM32L4_TIM1_CCMR3          (STM32L4_TIM1_BASE + STM32L4_TIM_CCMR3_OFFSET)
-#define STM32L4_TIM1_CCR5           (STM32L4_TIM1_BASE + STM32L4_TIM_CCR5_OFFSET)
-#define STM32L4_TIM1_CCR6           (STM32L4_TIM1_BASE + STM32L4_TIM_CCR6_OFFSET)
-#define STM32L4_TIM1_AF1            (STM32L4_TIM1_BASE + STM32L4_TIM_AF1_OFFSET)
-#define STM32L4_TIM1_AF2            (STM32L4_TIM1_BASE + STM32L4_TIM_AF2_OFFSET)
-#define STM32L4_TIM1_TISEL          (STM32L4_TIM1_BASE + STM32L4_TIM_TISEL_OFFSET)
+#define STM32WB_TIM1_CR1            (STM32WB_TIM1_BASE + STM32WB_TIM_CR1_OFFSET)
+#define STM32WB_TIM1_CR2            (STM32WB_TIM1_BASE + STM32WB_TIM_CR2_OFFSET)
+#define STM32WB_TIM1_SMCR           (STM32WB_TIM1_BASE + STM32WB_TIM_SMCR_OFFSET)
+#define STM32WB_TIM1_DIER           (STM32WB_TIM1_BASE + STM32WB_TIM_DIER_OFFSET)
+#define STM32WB_TIM1_SR             (STM32WB_TIM1_BASE + STM32WB_TIM_SR_OFFSET)
+#define STM32WB_TIM1_EGR            (STM32WB_TIM1_BASE + STM32WB_TIM_EGR_OFFSET)
+#define STM32WB_TIM1_CCMR1          (STM32WB_TIM1_BASE + STM32WB_TIM_CCMR1_OFFSET)
+#define STM32WB_TIM1_CCMR2          (STM32WB_TIM1_BASE + STM32WB_TIM_CCMR2_OFFSET)
+#define STM32WB_TIM1_CCER           (STM32WB_TIM1_BASE + STM32WB_TIM_CCER_OFFSET)
+#define STM32WB_TIM1_CNT            (STM32WB_TIM1_BASE + STM32WB_TIM_CNT_OFFSET)
+#define STM32WB_TIM1_PSC            (STM32WB_TIM1_BASE + STM32WB_TIM_PSC_OFFSET)
+#define STM32WB_TIM1_ARR            (STM32WB_TIM1_BASE + STM32WB_TIM_ARR_OFFSET)
+#define STM32WB_TIM1_RCR            (STM32WB_TIM1_BASE + STM32WB_TIM_RCR_OFFSET)
+#define STM32WB_TIM1_CCR1           (STM32WB_TIM1_BASE + STM32WB_TIM_CCR1_OFFSET)
+#define STM32WB_TIM1_CCR2           (STM32WB_TIM1_BASE + STM32WB_TIM_CCR2_OFFSET)
+#define STM32WB_TIM1_CCR3           (STM32WB_TIM1_BASE + STM32WB_TIM_CCR3_OFFSET)
+#define STM32WB_TIM1_CCR4           (STM32WB_TIM1_BASE + STM32WB_TIM_CCR4_OFFSET)
+#define STM32WB_TIM1_BDTR           (STM32WB_TIM1_BASE + STM32WB_TIM_BDTR_OFFSET)
+#define STM32WB_TIM1_DCR            (STM32WB_TIM1_BASE + STM32WB_TIM_DCR_OFFSET)
+#define STM32WB_TIM1_DMAR           (STM32WB_TIM1_BASE + STM32WB_TIM_DMAR_OFFSET)
+#define STM32WB_TIM1_OR1            (STM32WB_TIM1_BASE + STM32WB_TIM_OR1_OFFSET)
+#define STM32WB_TIM1_CCMR3          (STM32WB_TIM1_BASE + STM32WB_TIM_CCMR3_OFFSET)
+#define STM32WB_TIM1_CCR5           (STM32WB_TIM1_BASE + STM32WB_TIM_CCR5_OFFSET)
+#define STM32WB_TIM1_CCR6           (STM32WB_TIM1_BASE + STM32WB_TIM_CCR6_OFFSET)
+#define STM32WB_TIM1_AF1            (STM32WB_TIM1_BASE + STM32WB_TIM_AF1_OFFSET)
+#define STM32WB_TIM1_AF2            (STM32WB_TIM1_BASE + STM32WB_TIM_AF2_OFFSET)
+#define STM32WB_TIM1_TISEL          (STM32WB_TIM1_BASE + STM32WB_TIM_TISEL_OFFSET)
 
 /* General 32-bit Timer TIM2 */
 
-#define STM32L4_TIM2_CR1            (STM32L4_TIM2_BASE + STM32L4_TIM_CR1_OFFSET)
-#define STM32L4_TIM2_CR2            (STM32L4_TIM2_BASE + STM32L4_TIM_CR2_OFFSET)
-#define STM32L4_TIM2_SMCR           (STM32L4_TIM2_BASE + STM32L4_TIM_SMCR_OFFSET)
-#define STM32L4_TIM2_DIER           (STM32L4_TIM2_BASE + STM32L4_TIM_DIER_OFFSET)
-#define STM32L4_TIM2_SR             (STM32L4_TIM2_BASE + STM32L4_TIM_SR_OFFSET)
-#define STM32L4_TIM2_EGR            (STM32L4_TIM2_BASE + STM32L4_TIM_EGR_OFFSET)
-#define STM32L4_TIM2_CCMR1          (STM32L4_TIM2_BASE + STM32L4_TIM_CCMR1_OFFSET)
-#define STM32L4_TIM2_CCMR2          (STM32L4_TIM2_BASE + STM32L4_TIM_CCMR2_OFFSET)
-#define STM32L4_TIM2_CCER           (STM32L4_TIM2_BASE + STM32L4_TIM_CCER_OFFSET)
-#define STM32L4_TIM2_CNT            (STM32L4_TIM2_BASE + STM32L4_TIM_CNT_OFFSET)
-#define STM32L4_TIM2_PSC            (STM32L4_TIM2_BASE + STM32L4_TIM_PSC_OFFSET)
-#define STM32L4_TIM2_ARR            (STM32L4_TIM2_BASE + STM32L4_TIM_ARR_OFFSET)
-#define STM32L4_TIM2_CCR1           (STM32L4_TIM2_BASE + STM32L4_TIM_CCR1_OFFSET)
-#define STM32L4_TIM2_CCR2           (STM32L4_TIM2_BASE + STM32L4_TIM_CCR2_OFFSET)
-#define STM32L4_TIM2_CCR3           (STM32L4_TIM2_BASE + STM32L4_TIM_CCR3_OFFSET)
-#define STM32L4_TIM2_CCR4           (STM32L4_TIM2_BASE + STM32L4_TIM_CCR4_OFFSET)
-#define STM32L4_TIM2_DCR            (STM32L4_TIM2_BASE + STM32L4_TIM_DCR_OFFSET)
-#define STM32L4_TIM2_DMAR           (STM32L4_TIM2_BASE + STM32L4_TIM_DMAR_OFFSET)
-#define STM32L4_TIM2_OR1            (STM32L4_TIM2_BASE + STM32L4_TIM_OR1_OFFSET)
-#define STM32L4_TIM2_AF1            (STM32L4_TIM2_BASE + STM32L4_TIM_AF1_OFFSET)
-#define STM32L4_TIM2_TISEL          (STM32L4_TIM2_BASE + STM32L4_TIM_TISEL_OFFSET)
+#define STM32WB_TIM2_CR1            (STM32WB_TIM2_BASE + STM32WB_TIM_CR1_OFFSET)
+#define STM32WB_TIM2_CR2            (STM32WB_TIM2_BASE + STM32WB_TIM_CR2_OFFSET)
+#define STM32WB_TIM2_SMCR           (STM32WB_TIM2_BASE + STM32WB_TIM_SMCR_OFFSET)
+#define STM32WB_TIM2_DIER           (STM32WB_TIM2_BASE + STM32WB_TIM_DIER_OFFSET)
+#define STM32WB_TIM2_SR             (STM32WB_TIM2_BASE + STM32WB_TIM_SR_OFFSET)
+#define STM32WB_TIM2_EGR            (STM32WB_TIM2_BASE + STM32WB_TIM_EGR_OFFSET)
+#define STM32WB_TIM2_CCMR1          (STM32WB_TIM2_BASE + STM32WB_TIM_CCMR1_OFFSET)
+#define STM32WB_TIM2_CCMR2          (STM32WB_TIM2_BASE + STM32WB_TIM_CCMR2_OFFSET)
+#define STM32WB_TIM2_CCER           (STM32WB_TIM2_BASE + STM32WB_TIM_CCER_OFFSET)
+#define STM32WB_TIM2_CNT            (STM32WB_TIM2_BASE + STM32WB_TIM_CNT_OFFSET)
+#define STM32WB_TIM2_PSC            (STM32WB_TIM2_BASE + STM32WB_TIM_PSC_OFFSET)
+#define STM32WB_TIM2_ARR            (STM32WB_TIM2_BASE + STM32WB_TIM_ARR_OFFSET)
+#define STM32WB_TIM2_CCR1           (STM32WB_TIM2_BASE + STM32WB_TIM_CCR1_OFFSET)
+#define STM32WB_TIM2_CCR2           (STM32WB_TIM2_BASE + STM32WB_TIM_CCR2_OFFSET)
+#define STM32WB_TIM2_CCR3           (STM32WB_TIM2_BASE + STM32WB_TIM_CCR3_OFFSET)
+#define STM32WB_TIM2_CCR4           (STM32WB_TIM2_BASE + STM32WB_TIM_CCR4_OFFSET)
+#define STM32WB_TIM2_DCR            (STM32WB_TIM2_BASE + STM32WB_TIM_DCR_OFFSET)
+#define STM32WB_TIM2_DMAR           (STM32WB_TIM2_BASE + STM32WB_TIM_DMAR_OFFSET)
+#define STM32WB_TIM2_OR1            (STM32WB_TIM2_BASE + STM32WB_TIM_OR1_OFFSET)
+#define STM32WB_TIM2_AF1            (STM32WB_TIM2_BASE + STM32WB_TIM_AF1_OFFSET)
+#define STM32WB_TIM2_TISEL          (STM32WB_TIM2_BASE + STM32WB_TIM_TISEL_OFFSET)
 
 /* General Timers TIM16/TIM17 */
 
-#define STM32L4_TIM16_CR1           (STM32L4_TIM16_BASE + STM32L4_TIM_CR1_OFFSET)
-#define STM32L4_TIM16_CR2           (STM32L4_TIM16_BASE + STM32L4_TIM_CR2_OFFSET)
-#define STM32L4_TIM16_DIER          (STM32L4_TIM16_BASE + STM32L4_TIM_DIER_OFFSET)
-#define STM32L4_TIM16_SR            (STM32L4_TIM16_BASE + STM32L4_TIM_SR_OFFSET)
-#define STM32L4_TIM16_EGR           (STM32L4_TIM16_BASE + STM32L4_TIM_EGR_OFFSET)
-#define STM32L4_TIM16_CCMR1         (STM32L4_TIM16_BASE + STM32L4_TIM_CCMR1_OFFSET)
-#define STM32L4_TIM16_CCER          (STM32L4_TIM16_BASE + STM32L4_TIM_CCER_OFFSET)
-#define STM32L4_TIM16_CNT           (STM32L4_TIM16_BASE + STM32L4_TIM_CNT_OFFSET)
-#define STM32L4_TIM16_PSC           (STM32L4_TIM16_BASE + STM32L4_TIM_PSC_OFFSET)
-#define STM32L4_TIM16_ARR           (STM32L4_TIM16_BASE + STM32L4_TIM_ARR_OFFSET)
-#define STM32L4_TIM16_RCR           (STM32L4_TIM16_BASE + STM32L4_TIM_RCR_OFFSET)
-#define STM32L4_TIM16_CCR1          (STM32L4_TIM16_BASE + STM32L4_TIM_CCR1_OFFSET)
-#define STM32L4_TIM16_BDTR          (STM32L4_TIM16_BASE + STM32L4_TIM_BDTR_OFFSET)
-#define STM32L4_TIM16_DCR           (STM32L4_TIM16_BASE + STM32L4_TIM_DCR_OFFSET)
-#define STM32L4_TIM16_DMAR          (STM32L4_TIM16_BASE + STM32L4_TIM_DMAR_OFFSET)
-#define STM32L4_TIM16_OR1           (STM32L4_TIM16_BASE + STM32L4_TIM_OR1_OFFSET)
-#define STM32L4_TIM16_AF1           (STM32L4_TIM16_BASE + STM32L4_TIM_AF1_OFFSET)
-#define STM32L4_TIM16_TISEL         (STM32L4_TIM16_BASE + STM32L4_TIM_TISEL_OFFSET)
+#define STM32WB_TIM16_CR1           (STM32WB_TIM16_BASE + STM32WB_TIM_CR1_OFFSET)
+#define STM32WB_TIM16_CR2           (STM32WB_TIM16_BASE + STM32WB_TIM_CR2_OFFSET)
+#define STM32WB_TIM16_DIER          (STM32WB_TIM16_BASE + STM32WB_TIM_DIER_OFFSET)
+#define STM32WB_TIM16_SR            (STM32WB_TIM16_BASE + STM32WB_TIM_SR_OFFSET)
+#define STM32WB_TIM16_EGR           (STM32WB_TIM16_BASE + STM32WB_TIM_EGR_OFFSET)
+#define STM32WB_TIM16_CCMR1         (STM32WB_TIM16_BASE + STM32WB_TIM_CCMR1_OFFSET)
+#define STM32WB_TIM16_CCER          (STM32WB_TIM16_BASE + STM32WB_TIM_CCER_OFFSET)
+#define STM32WB_TIM16_CNT           (STM32WB_TIM16_BASE + STM32WB_TIM_CNT_OFFSET)
+#define STM32WB_TIM16_PSC           (STM32WB_TIM16_BASE + STM32WB_TIM_PSC_OFFSET)
+#define STM32WB_TIM16_ARR           (STM32WB_TIM16_BASE + STM32WB_TIM_ARR_OFFSET)
+#define STM32WB_TIM16_RCR           (STM32WB_TIM16_BASE + STM32WB_TIM_RCR_OFFSET)
+#define STM32WB_TIM16_CCR1          (STM32WB_TIM16_BASE + STM32WB_TIM_CCR1_OFFSET)
+#define STM32WB_TIM16_BDTR          (STM32WB_TIM16_BASE + STM32WB_TIM_BDTR_OFFSET)
+#define STM32WB_TIM16_DCR           (STM32WB_TIM16_BASE + STM32WB_TIM_DCR_OFFSET)
+#define STM32WB_TIM16_DMAR          (STM32WB_TIM16_BASE + STM32WB_TIM_DMAR_OFFSET)
+#define STM32WB_TIM16_OR1           (STM32WB_TIM16_BASE + STM32WB_TIM_OR1_OFFSET)
+#define STM32WB_TIM16_AF1           (STM32WB_TIM16_BASE + STM32WB_TIM_AF1_OFFSET)
+#define STM32WB_TIM16_TISEL         (STM32WB_TIM16_BASE + STM32WB_TIM_TISEL_OFFSET)
 
-#define STM32L4_TIM17_CR1           (STM32L4_TIM17_BASE + STM32L4_TIM_CR1_OFFSET)
-#define STM32L4_TIM17_CR2           (STM32L4_TIM17_BASE + STM32L4_TIM_CR2_OFFSET)
-#define STM32L4_TIM17_DIER          (STM32L4_TIM17_BASE + STM32L4_TIM_DIER_OFFSET)
-#define STM32L4_TIM17_SR            (STM32L4_TIM17_BASE + STM32L4_TIM_SR_OFFSET)
-#define STM32L4_TIM17_EGR           (STM32L4_TIM17_BASE + STM32L4_TIM_EGR_OFFSET)
-#define STM32L4_TIM17_CCMR1         (STM32L4_TIM17_BASE + STM32L4_TIM_CCMR1_OFFSET)
-#define STM32L4_TIM17_CCER          (STM32L4_TIM17_BASE + STM32L4_TIM_CCER_OFFSET)
-#define STM32L4_TIM17_CNT           (STM32L4_TIM17_BASE + STM32L4_TIM_CNT_OFFSET)
-#define STM32L4_TIM17_PSC           (STM32L4_TIM17_BASE + STM32L4_TIM_PSC_OFFSET)
-#define STM32L4_TIM17_ARR           (STM32L4_TIM17_BASE + STM32L4_TIM_ARR_OFFSET)
-#define STM32L4_TIM17_RCR           (STM32L4_TIM17_BASE + STM32L4_TIM_RCR_OFFSET)
-#define STM32L4_TIM17_CCR1          (STM32L4_TIM17_BASE + STM32L4_TIM_CCR1_OFFSET)
-#define STM32L4_TIM17_BDTR          (STM32L4_TIM17_BASE + STM32L4_TIM_BDTR_OFFSET)
-#define STM32L4_TIM17_DCR           (STM32L4_TIM17_BASE + STM32L4_TIM_DCR_OFFSET)
-#define STM32L4_TIM17_DMAR          (STM32L4_TIM17_BASE + STM32L4_TIM_DMAR_OFFSET)
-#define STM32L4_TIM17_OR1           (STM32L4_TIM17_BASE + STM32L4_TIM_OR1_OFFSET)
-#define STM32L4_TIM17_AF1           (STM32L4_TIM17_BASE + STM32L4_TIM_AF1_OFFSET)
-#define STM32L4_TIM17_TISEL         (STM32L4_TIM17_BASE + STM32L4_TIM_TISEL_OFFSET)
+#define STM32WB_TIM17_CR1           (STM32WB_TIM17_BASE + STM32WB_TIM_CR1_OFFSET)
+#define STM32WB_TIM17_CR2           (STM32WB_TIM17_BASE + STM32WB_TIM_CR2_OFFSET)
+#define STM32WB_TIM17_DIER          (STM32WB_TIM17_BASE + STM32WB_TIM_DIER_OFFSET)
+#define STM32WB_TIM17_SR            (STM32WB_TIM17_BASE + STM32WB_TIM_SR_OFFSET)
+#define STM32WB_TIM17_EGR           (STM32WB_TIM17_BASE + STM32WB_TIM_EGR_OFFSET)
+#define STM32WB_TIM17_CCMR1         (STM32WB_TIM17_BASE + STM32WB_TIM_CCMR1_OFFSET)
+#define STM32WB_TIM17_CCER          (STM32WB_TIM17_BASE + STM32WB_TIM_CCER_OFFSET)
+#define STM32WB_TIM17_CNT           (STM32WB_TIM17_BASE + STM32WB_TIM_CNT_OFFSET)
+#define STM32WB_TIM17_PSC           (STM32WB_TIM17_BASE + STM32WB_TIM_PSC_OFFSET)
+#define STM32WB_TIM17_ARR           (STM32WB_TIM17_BASE + STM32WB_TIM_ARR_OFFSET)
+#define STM32WB_TIM17_RCR           (STM32WB_TIM17_BASE + STM32WB_TIM_RCR_OFFSET)
+#define STM32WB_TIM17_CCR1          (STM32WB_TIM17_BASE + STM32WB_TIM_CCR1_OFFSET)
+#define STM32WB_TIM17_BDTR          (STM32WB_TIM17_BASE + STM32WB_TIM_BDTR_OFFSET)
+#define STM32WB_TIM17_DCR           (STM32WB_TIM17_BASE + STM32WB_TIM_DCR_OFFSET)
+#define STM32WB_TIM17_DMAR          (STM32WB_TIM17_BASE + STM32WB_TIM_DMAR_OFFSET)
+#define STM32WB_TIM17_OR1           (STM32WB_TIM17_BASE + STM32WB_TIM_OR1_OFFSET)
+#define STM32WB_TIM17_AF1           (STM32WB_TIM17_BASE + STM32WB_TIM_AF1_OFFSET)
+#define STM32WB_TIM17_TISEL         (STM32WB_TIM17_BASE + STM32WB_TIM_TISEL_OFFSET)
 
 /* Digital Filter options */
 
@@ -186,8 +170,7 @@
 #define STM32WB_DF_FDTSd32n6        (0xe) /* 1110: fSAMPLING = fDTS/32, N=6 */
 #define STM32WB_DF_FDTSd32n8        (0xf) /* 1111: fSAMPLING = fDTS/32, N=8 */
 
-
-/* Register Bitfield Definitions ****************************************************/
+/* Register Bitfield Definitions ********************************************/
 
 /* Control register 1 */
 
@@ -590,7 +573,7 @@
 #define TIM17_EGR_COMG              (1 << 5)  /* Bit 5: Capture/Compare Control Update Generation */
 #define TIM17_EGR_BG                (1 << 7)  /* Bit 7: Break Generation */
 
-/* Capture/compare mode registers -- capture/compare mode selection */
+/* Capture/compare mode registers - capture/compare mode selection */
 
 #define TIM1_CCMR1_CC1S_SHIFT       (0)       /* Bits 0-1: Capture/Compare 1 Selection */
 #define TIM1_CCMR1_CC1S_MASK        (0x3 << TIM1_CCMR1_CC1S_SHIFT)
@@ -658,7 +641,7 @@
 #  define TIM17_CCMR1_CC1S_CCOUT    (0x0 << TIM17_CCMR1_CC1S_SHIFT) /* 00: CC1 channel output */
 #  define TIM17_CCMR1_CC1S_CCIN1    (0x1 << TIM17_CCMR1_CC1S_SHIFT) /* 01: CC1 channel input, IC1 is TI1 */
 
-/* Capture/compare mode registers -- Output compare mode */
+/* Capture/compare mode registers - Output compare mode */
 
 #define TIM1_CCMR1_OC1FE            (1 << 2)  /* Bit 2: Output Compare 1 Fast enable */
 #define TIM1_CCMR1_OC1PE            (1 << 3)  /* Bit 3: Output Compare 1 Preload enable */
@@ -915,9 +898,9 @@
 #define TIM1_CCMR1_IC1PSC_SHIFT     (2)       /* Bits 2-3: Input Capture 1 Prescaler */
 #define TIM1_CCMR1_IC1PSC_MASK      (0x3 << TIM1_CCMR1_IC1PSC_SHIFT)
 #  define TIM1_CCMR1_IC1PSC_NOPSC   (0x0 << TIM1_CCMR1_IC1PSC_SHIFT) /* 00: no prescaler, capture each edge */
-#  define TIM1_CCMR1_IC1PSC_EVENTS2 (0x1 << TIM1_CCMR1_IC1PSC_SHIFT) /* 01: capture once every 2 events */
-#  define TIM1_CCMR1_IC1PSC_EVENTS4 (0x2 << TIM1_CCMR1_IC1PSC_SHIFT) /* 10: capture once every 4 events */
-#  define TIM1_CCMR1_IC1PSC_EVENTS8 (0x3 << TIM1_CCMR1_IC1PSC_SHIFT) /* 11: capture once every 8 events */
+#  define TIM1_CCMR1_IC1PSC_EVERY2  (0x1 << TIM1_CCMR1_IC1PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM1_CCMR1_IC1PSC_EVERY4  (0x2 << TIM1_CCMR1_IC1PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM1_CCMR1_IC1PSC_EVERY8  (0x3 << TIM1_CCMR1_IC1PSC_SHIFT) /* 11: capture once every 8 events */
 #define TIM1_CCMR1_IC1F_SHIFT       (4)       /* Bits 4-7: Input Capture 1 Filter */
 #define TIM1_CCMR1_IC1F_MASK        (0xf << TIM1_CCMR1_IC1F_SHIFT)
 #  define TIM1_CCMR1_IC1F_NOFILT    (0x0 << TIM1_CCMR1_IC1F_SHIFT)   /* 0000: No filter, sampling at fDTS */
@@ -940,9 +923,9 @@
 #define TIM1_CCMR1_IC2PSC_SHIFT     (10)      /* Bits 10-11: Input Capture 2 Prescaler */
 #define TIM1_CCMR1_IC2PSC_MASK      (0x3 << TIM1_CCMR1_IC2PSC_SHIFT)
 #  define TIM1_CCMR1_IC2PSC_NOPSC   (0x0 << TIM1_CCMR1_IC2PSC_SHIFT) /* 00: no prescaler, capture each edge */
-#  define TIM1_CCMR1_IC2PSC_EVENTS2 (0x1 << TIM1_CCMR1_IC2PSC_SHIFT) /* 01: capture once every 2 events */
-#  define TIM1_CCMR1_IC2PSC_EVENTS4 (0x2 << TIM1_CCMR1_IC2PSC_SHIFT) /* 10: capture once every 4 events */
-#  define TIM1_CCMR1_IC2PSC_EVENTS8 (0x3 << TIM1_CCMR1_IC2PSC_SHIFT) /* 11: capture once every 8 events */
+#  define TIM1_CCMR1_IC2PSC_EVERY2  (0x1 << TIM1_CCMR1_IC2PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM1_CCMR1_IC2PSC_EVERY4  (0x2 << TIM1_CCMR1_IC2PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM1_CCMR1_IC2PSC_EVERY8  (0x3 << TIM1_CCMR1_IC2PSC_SHIFT) /* 11: capture once every 8 events */
 #define TIM1_CCMR1_IC2F_SHIFT       (12)      /* Bits 12-15: Input Capture 2 Filter */
 #define TIM1_CCMR1_IC2F_MASK        (0xf << TIM1_CCMR1_IC2F_SHIFT)
 #  define TIM1_CCMR1_IC2F_NOFILT    (0x0 << TIM1_CCMR1_IC2F_SHIFT)   /* 0000: No filter, sampling at fDTS */
@@ -965,9 +948,9 @@
 #define TIM1_CCMR2_IC3PSC_SHIFT     (2)       /* Bits 2-3: Input Capture 3 Prescaler */
 #define TIM1_CCMR2_IC3PSC_MASK      (0x3 << TIM1_CCMR2_IC3PSC_SHIFT)
 #  define TIM1_CCMR2_IC3PSC_NOPSC   (0x0 << TIM1_CCMR2_IC3PSC_SHIFT) /* 00: no prescaler, capture each edge */
-#  define TIM1_CCMR2_IC3PSC_EVENTS2 (0x1 << TIM1_CCMR2_IC3PSC_SHIFT) /* 01: capture once every 2 events */
-#  define TIM1_CCMR2_IC3PSC_EVENTS4 (0x2 << TIM1_CCMR2_IC3PSC_SHIFT) /* 10: capture once every 4 events */
-#  define TIM1_CCMR2_IC3PSC_EVENTS8 (0x3 << TIM1_CCMR2_IC3PSC_SHIFT) /* 11: capture once every 8 events */
+#  define TIM1_CCMR2_IC3PSC_EVERY2  (0x1 << TIM1_CCMR2_IC3PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM1_CCMR2_IC3PSC_EVERY4  (0x2 << TIM1_CCMR2_IC3PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM1_CCMR2_IC3PSC_EVERY8  (0x3 << TIM1_CCMR2_IC3PSC_SHIFT) /* 11: capture once every 8 events */
 #define TIM1_CCMR2_IC3F_SHIFT       (4)       /* Bits 4-7: Input Capture 3 Filter */
 #define TIM1_CCMR2_IC3F_MASK        (0xf << TIM1_CCMR2_IC3F_SHIFT)
 #  define TIM1_CCMR2_IC3F_NOFILT    (0x0 << TIM1_CCMR2_IC3F_SHIFT)   /* 0000: No filter, sampling at fDTS */
@@ -990,9 +973,9 @@
 #define TIM1_CCMR2_IC4PSC_SHIFT     (10)      /* Bits 10-11: Input Capture 4 Prescaler */
 #define TIM1_CCMR2_IC4PSC_MASK      (0x3 << TIM1_CCMR2_IC4PSC_SHIFT)
 #  define TIM1_CCMR2_IC4PSC_NOPSC   (0x0 << TIM1_CCMR2_IC4PSC_SHIFT) /* 00: no prescaler, capture each edge */
-#  define TIM1_CCMR2_IC4PSC_EVENTS2 (0x1 << TIM1_CCMR2_IC4PSC_SHIFT) /* 01: capture once every 2 events */
-#  define TIM1_CCMR2_IC4PSC_EVENTS4 (0x2 << TIM1_CCMR2_IC4PSC_SHIFT) /* 10: capture once every 4 events */
-#  define TIM1_CCMR2_IC4PSC_EVENTS8 (0x3 << TIM1_CCMR2_IC4PSC_SHIFT) /* 11: capture once every 8 events */
+#  define TIM1_CCMR2_IC4PSC_EVERY2  (0x1 << TIM1_CCMR2_IC4PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM1_CCMR2_IC4PSC_EVERY4  (0x2 << TIM1_CCMR2_IC4PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM1_CCMR2_IC4PSC_EVERY8  (0x3 << TIM1_CCMR2_IC4PSC_SHIFT) /* 11: capture once every 8 events */
 #define TIM1_CCMR2_IC4F_SHIFT       (12)      /* Bits 12-15: Input Capture 4 Filter */
 #define TIM1_CCMR2_IC4F_MASK        (0xf << TIM1_CCMR2_IC4F_SHIFT)
 #  define TIM1_CCMR2_IC4F_NOFILT    (0x0 << TIM1_CCMR2_IC4F_SHIFT)   /* 0000: No filter, sampling at fDTS */
@@ -1015,9 +998,9 @@
 #define TIM2_CCMR1_IC1PSC_SHIFT     (2)       /* Bits 2-3: Input Capture 1 Prescaler */
 #define TIM2_CCMR1_IC1PSC_MASK      (0x3 << TIM2_CCMR1_IC1PSC_SHIFT)
 #  define TIM2_CCMR1_IC1PSC_NOPSC   (0x0 << TIM2_CCMR1_IC1PSC_SHIFT) /* 00: no prescaler, capture each edge */
-#  define TIM2_CCMR1_IC1PSC_EVENTS2 (0x1 << TIM2_CCMR1_IC1PSC_SHIFT) /* 01: capture once every 2 events */
-#  define TIM2_CCMR1_IC1PSC_EVENTS4 (0x2 << TIM2_CCMR1_IC1PSC_SHIFT) /* 10: capture once every 4 events */
-#  define TIM2_CCMR1_IC1PSC_EVENTS8 (0x3 << TIM2_CCMR1_IC1PSC_SHIFT) /* 11: capture once every 8 events */
+#  define TIM2_CCMR1_IC1PSC_EVERY2  (0x1 << TIM2_CCMR1_IC1PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM2_CCMR1_IC1PSC_EVERY4  (0x2 << TIM2_CCMR1_IC1PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM2_CCMR1_IC1PSC_EVERY8  (0x3 << TIM2_CCMR1_IC1PSC_SHIFT) /* 11: capture once every 8 events */
 #define TIM2_CCMR1_IC1F_SHIFT       (4)       /* Bits 4-7: Input Capture 1 Filter */
 #define TIM2_CCMR1_IC1F_MASK        (0xf << TIM2_CCMR1_IC1F_SHIFT)
 #  define TIM2_CCMR1_IC1F_NOFILT    (0x0 << TIM2_CCMR1_IC1F_SHIFT)   /* 0000: No filter, sampling at fDTS */
@@ -1040,9 +1023,9 @@
 #define TIM2_CCMR1_IC2PSC_SHIFT     (10)      /* Bits 10-11: Input Capture 2 Prescaler */
 #define TIM2_CCMR1_IC2PSC_MASK      (0x3 << TIM2_CCMR1_IC2PSC_SHIFT)
 #  define TIM2_CCMR1_IC2PSC_NOPSC   (0x0 << TIM2_CCMR1_IC2PSC_SHIFT) /* 00: no prescaler, capture each edge */
-#  define TIM2_CCMR1_IC2PSC_EVENTS2 (0x1 << TIM2_CCMR1_IC2PSC_SHIFT) /* 01: capture once every 2 events */
-#  define TIM2_CCMR1_IC2PSC_EVENTS4 (0x2 << TIM2_CCMR1_IC2PSC_SHIFT) /* 10: capture once every 4 events */
-#  define TIM2_CCMR1_IC2PSC_EVENTS8 (0x3 << TIM2_CCMR1_IC2PSC_SHIFT) /* 11: capture once every 8 events */
+#  define TIM2_CCMR1_IC2PSC_EVERY2  (0x1 << TIM2_CCMR1_IC2PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM2_CCMR1_IC2PSC_EVERY4  (0x2 << TIM2_CCMR1_IC2PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM2_CCMR1_IC2PSC_EVERY8  (0x3 << TIM2_CCMR1_IC2PSC_SHIFT) /* 11: capture once every 8 events */
 #define TIM2_CCMR1_IC2F_SHIFT       (12)      /* Bits 12-15: Input Capture 2 Filter */
 #define TIM2_CCMR1_IC2F_MASK        (0xf << TIM2_CCMR1_IC2F_SHIFT)
 #  define TIM2_CCMR1_IC2F_NOFILT    (0x0 << TIM2_CCMR1_IC2F_SHIFT)   /* 0000: No filter, sampling at fDTS */
@@ -1065,9 +1048,9 @@
 #define TIM2_CCMR2_IC3PSC_SHIFT     (2)       /* Bits 2-3: Input Capture 3 Prescaler */
 #define TIM2_CCMR2_IC3PSC_MASK      (0x3 << TIM2_CCMR2_IC3PSC_SHIFT)
 #  define TIM2_CCMR2_IC3PSC_NOPSC   (0x0 << TIM2_CCMR2_IC3PSC_SHIFT) /* 00: no prescaler, capture each edge */
-#  define TIM2_CCMR2_IC3PSC_EVENTS2 (0x1 << TIM2_CCMR2_IC3PSC_SHIFT) /* 01: capture once every 2 events */
-#  define TIM2_CCMR2_IC3PSC_EVENTS4 (0x2 << TIM2_CCMR2_IC3PSC_SHIFT) /* 10: capture once every 4 events */
-#  define TIM2_CCMR2_IC3PSC_EVENTS8 (0x3 << TIM2_CCMR2_IC3PSC_SHIFT) /* 11: capture once every 8 events */
+#  define TIM2_CCMR2_IC3PSC_EVERY2  (0x1 << TIM2_CCMR2_IC3PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM2_CCMR2_IC3PSC_EVERY4  (0x2 << TIM2_CCMR2_IC3PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM2_CCMR2_IC3PSC_EVERY8  (0x3 << TIM2_CCMR2_IC3PSC_SHIFT) /* 11: capture once every 8 events */
 #define TIM2_CCMR2_IC3F_SHIFT       (4)       /* Bits 4-7: Input Capture 3 Filter */
 #define TIM2_CCMR2_IC3F_MASK        (0xf << TIM2_CCMR2_IC3F_SHIFT)
 #  define TIM2_CCMR2_IC3F_NOFILT    (0x0 << TIM2_CCMR2_IC3F_SHIFT)   /* 0000: No filter, sampling at fDTS */
@@ -1090,9 +1073,9 @@
 #define TIM2_CCMR2_IC4PSC_SHIFT     (10)      /* Bits 10-11: Input Capture 4 Prescaler */
 #define TIM2_CCMR2_IC4PSC_MASK      (0x3 << TIM2_CCMR2_IC4PSC_SHIFT)
 #  define TIM2_CCMR2_IC4PSC_NOPSC   (0x0 << TIM2_CCMR2_IC4PSC_SHIFT) /* 00: no prescaler, capture each edge */
-#  define TIM2_CCMR2_IC4PSC_EVENTS2 (0x1 << TIM2_CCMR2_IC4PSC_SHIFT) /* 01: capture once every 2 events */
-#  define TIM2_CCMR2_IC4PSC_EVENTS4 (0x2 << TIM2_CCMR2_IC4PSC_SHIFT) /* 10: capture once every 4 events */
-#  define TIM2_CCMR2_IC4PSC_EVENTS8 (0x3 << TIM2_CCMR2_IC4PSC_SHIFT) /* 11: capture once every 8 events */
+#  define TIM2_CCMR2_IC4PSC_EVERY2  (0x1 << TIM2_CCMR2_IC4PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM2_CCMR2_IC4PSC_EVERY4  (0x2 << TIM2_CCMR2_IC4PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM2_CCMR2_IC4PSC_EVERY8  (0x3 << TIM2_CCMR2_IC4PSC_SHIFT) /* 11: capture once every 8 events */
 #define TIM2_CCMR2_IC4F_SHIFT       (12)      /* Bits 12-15: Input Capture 4 Filter */
 #define TIM2_CCMR2_IC4F_MASK        (0xf << TIM2_CCMR2_IC4F_SHIFT)
 #  define TIM2_CCMR2_IC4F_NOFILT    (0x0 << TIM2_CCMR2_IC4F_SHIFT)   /* 0000: No filter, sampling at fDTS */
@@ -1112,55 +1095,55 @@
 #  define TIM2_CCMR2_IC4F_FDTSd326  (0xe << TIM2_CCMR2_IC4F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
 #  define TIM2_CCMR2_IC4F_FDTSd328  (0xf << TIM2_CCMR2_IC4F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
 
-#define TIM16_CCMR1_IC1PSC_SHIFT     (2)       /* Bits 2-3: Input Capture 1 Prescaler */
-#define TIM16_CCMR1_IC1PSC_MASK      (0x3 << TIM16_CCMR1_IC1PSC_SHIFT)
-#  define TIM16_CCMR1_IC1PSC_NOPSC   (0x0 << TIM16_CCMR1_IC1PSC_SHIFT) /* 00: no prescaler, capture each edge */
-#  define TIM16_CCMR1_IC1PSC_EVENTS2 (0x1 << TIM16_CCMR1_IC1PSC_SHIFT) /* 01: capture once every 2 events */
-#  define TIM16_CCMR1_IC1PSC_EVENTS4 (0x2 << TIM16_CCMR1_IC1PSC_SHIFT) /* 10: capture once every 4 events */
-#  define TIM16_CCMR1_IC1PSC_EVENTS8 (0x3 << TIM16_CCMR1_IC1PSC_SHIFT) /* 11: capture once every 8 events */
-#define TIM16_CCMR1_IC1F_SHIFT       (4)       /* Bits 4-7: Input Capture 1 Filter */
-#define TIM16_CCMR1_IC1F_MASK        (0xf << TIM16_CCMR1_IC1F_SHIFT)
-#  define TIM16_CCMR1_IC1F_NOFILT    (0x0 << TIM16_CCMR1_IC1F_SHIFT)   /* 0000: No filter, sampling at fDTS */
-#  define TIM16_CCMR1_IC1F_FCKINT2   (0x1 << TIM16_CCMR1_IC1F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
-#  define TIM16_CCMR1_IC1F_FCKINT4   (0x2 << TIM16_CCMR1_IC1F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
-#  define TIM16_CCMR1_IC1F_FCKINT8   (0x3 << TIM16_CCMR1_IC1F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
-#  define TIM16_CCMR1_IC1F_FDTSd26   (0x4 << TIM16_CCMR1_IC1F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
-#  define TIM16_CCMR1_IC1F_FDTSd28   (0x5 << TIM16_CCMR1_IC1F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
-#  define TIM16_CCMR1_IC1F_FDTSd46   (0x6 << TIM16_CCMR1_IC1F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
-#  define TIM16_CCMR1_IC1F_FDTSd48   (0x7 << TIM16_CCMR1_IC1F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
-#  define TIM16_CCMR1_IC1F_FDTSd86   (0x8 << TIM16_CCMR1_IC1F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
-#  define TIM16_CCMR1_IC1F_FDTSd88   (0x9 << TIM16_CCMR1_IC1F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
-#  define TIM16_CCMR1_IC1F_FDTSd165  (0xa << TIM16_CCMR1_IC1F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
-#  define TIM16_CCMR1_IC1F_FDTSd166  (0xb << TIM16_CCMR1_IC1F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
-#  define TIM16_CCMR1_IC1F_FDTSd168  (0xc << TIM16_CCMR1_IC1F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
-#  define TIM16_CCMR1_IC1F_FDTSd325  (0xd << TIM16_CCMR1_IC1F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
-#  define TIM16_CCMR1_IC1F_FDTSd326  (0xe << TIM16_CCMR1_IC1F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
-#  define TIM16_CCMR1_IC1F_FDTSd328  (0xf << TIM16_CCMR1_IC1F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+#define TIM16_CCMR1_IC1PSC_SHIFT    (2)       /* Bits 2-3: Input Capture 1 Prescaler */
+#define TIM16_CCMR1_IC1PSC_MASK     (0x3 << TIM16_CCMR1_IC1PSC_SHIFT)
+#  define TIM16_CCMR1_IC1PSC_NOPSC  (0x0 << TIM16_CCMR1_IC1PSC_SHIFT) /* 00: no prescaler, capture each edge */
+#  define TIM16_CCMR1_IC1PSC_EVERY2 (0x1 << TIM16_CCMR1_IC1PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM16_CCMR1_IC1PSC_EVERY4 (0x2 << TIM16_CCMR1_IC1PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM16_CCMR1_IC1PSC_EVERY8 (0x3 << TIM16_CCMR1_IC1PSC_SHIFT) /* 11: capture once every 8 events */
+#define TIM16_CCMR1_IC1F_SHIFT      (4)       /* Bits 4-7: Input Capture 1 Filter */
+#define TIM16_CCMR1_IC1F_MASK       (0xf << TIM16_CCMR1_IC1F_SHIFT)
+#  define TIM16_CCMR1_IC1F_NOFILT   (0x0 << TIM16_CCMR1_IC1F_SHIFT)   /* 0000: No filter, sampling at fDTS */
+#  define TIM16_CCMR1_IC1F_FCKINT2  (0x1 << TIM16_CCMR1_IC1F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
+#  define TIM16_CCMR1_IC1F_FCKINT4  (0x2 << TIM16_CCMR1_IC1F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
+#  define TIM16_CCMR1_IC1F_FCKINT8  (0x3 << TIM16_CCMR1_IC1F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
+#  define TIM16_CCMR1_IC1F_FDTSd26  (0x4 << TIM16_CCMR1_IC1F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
+#  define TIM16_CCMR1_IC1F_FDTSd28  (0x5 << TIM16_CCMR1_IC1F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
+#  define TIM16_CCMR1_IC1F_FDTSd46  (0x6 << TIM16_CCMR1_IC1F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
+#  define TIM16_CCMR1_IC1F_FDTSd48  (0x7 << TIM16_CCMR1_IC1F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
+#  define TIM16_CCMR1_IC1F_FDTSd86  (0x8 << TIM16_CCMR1_IC1F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
+#  define TIM16_CCMR1_IC1F_FDTSd88  (0x9 << TIM16_CCMR1_IC1F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
+#  define TIM16_CCMR1_IC1F_FDTSd165 (0xa << TIM16_CCMR1_IC1F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
+#  define TIM16_CCMR1_IC1F_FDTSd166 (0xb << TIM16_CCMR1_IC1F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
+#  define TIM16_CCMR1_IC1F_FDTSd168 (0xc << TIM16_CCMR1_IC1F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
+#  define TIM16_CCMR1_IC1F_FDTSd325 (0xd << TIM16_CCMR1_IC1F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
+#  define TIM16_CCMR1_IC1F_FDTSd326 (0xe << TIM16_CCMR1_IC1F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
+#  define TIM16_CCMR1_IC1F_FDTSd328 (0xf << TIM16_CCMR1_IC1F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
 
-#define TIM17_CCMR1_IC1PSC_SHIFT     (2)       /* Bits 2-3: Input Capture 1 Prescaler */
-#define TIM17_CCMR1_IC1PSC_MASK      (0x3 << TIM17_CCMR1_IC1PSC_SHIFT)
-#  define TIM17_CCMR1_IC1PSC_NOPSC   (0x0 << TIM17_CCMR1_IC1PSC_SHIFT) /* 00: no prescaler, capture each edge */
-#  define TIM17_CCMR1_IC1PSC_EVENTS2 (0x1 << TIM17_CCMR1_IC1PSC_SHIFT) /* 01: capture once every 2 events */
-#  define TIM17_CCMR1_IC1PSC_EVENTS4 (0x2 << TIM17_CCMR1_IC1PSC_SHIFT) /* 10: capture once every 4 events */
-#  define TIM17_CCMR1_IC1PSC_EVENTS8 (0x3 << TIM17_CCMR1_IC1PSC_SHIFT) /* 11: capture once every 8 events */
-#define TIM17_CCMR1_IC1F_SHIFT       (4)       /* Bits 4-7: Input Capture 1 Filter */
-#define TIM17_CCMR1_IC1F_MASK        (0xf << TIM17_CCMR1_IC1F_SHIFT)
-#  define TIM17_CCMR1_IC1F_NOFILT    (0x0 << TIM17_CCMR1_IC1F_SHIFT)   /* 0000: No filter, sampling at fDTS */
-#  define TIM17_CCMR1_IC1F_FCKINT2   (0x1 << TIM17_CCMR1_IC1F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
-#  define TIM17_CCMR1_IC1F_FCKINT4   (0x2 << TIM17_CCMR1_IC1F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
-#  define TIM17_CCMR1_IC1F_FCKINT8   (0x3 << TIM17_CCMR1_IC1F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
-#  define TIM17_CCMR1_IC1F_FDTSd26   (0x4 << TIM17_CCMR1_IC1F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
-#  define TIM17_CCMR1_IC1F_FDTSd28   (0x5 << TIM17_CCMR1_IC1F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
-#  define TIM17_CCMR1_IC1F_FDTSd46   (0x6 << TIM17_CCMR1_IC1F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
-#  define TIM17_CCMR1_IC1F_FDTSd48   (0x7 << TIM17_CCMR1_IC1F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
-#  define TIM17_CCMR1_IC1F_FDTSd86   (0x8 << TIM17_CCMR1_IC1F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
-#  define TIM17_CCMR1_IC1F_FDTSd88   (0x9 << TIM17_CCMR1_IC1F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
-#  define TIM17_CCMR1_IC1F_FDTSd165  (0xa << TIM17_CCMR1_IC1F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
-#  define TIM17_CCMR1_IC1F_FDTSd166  (0xb << TIM17_CCMR1_IC1F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
-#  define TIM17_CCMR1_IC1F_FDTSd168  (0xc << TIM17_CCMR1_IC1F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
-#  define TIM17_CCMR1_IC1F_FDTSd325  (0xd << TIM17_CCMR1_IC1F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
-#  define TIM17_CCMR1_IC1F_FDTSd326  (0xe << TIM17_CCMR1_IC1F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
-#  define TIM17_CCMR1_IC1F_FDTSd328  (0xf << TIM17_CCMR1_IC1F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
+#define TIM17_CCMR1_IC1PSC_SHIFT    (2)       /* Bits 2-3: Input Capture 1 Prescaler */
+#define TIM17_CCMR1_IC1PSC_MASK     (0x3 << TIM17_CCMR1_IC1PSC_SHIFT)
+#  define TIM17_CCMR1_IC1PSC_NOPSC  (0x0 << TIM17_CCMR1_IC1PSC_SHIFT) /* 00: no prescaler, capture each edge */
+#  define TIM17_CCMR1_IC1PSC_EVERY2 (0x1 << TIM17_CCMR1_IC1PSC_SHIFT) /* 01: capture once every 2 events */
+#  define TIM17_CCMR1_IC1PSC_EVERY4 (0x2 << TIM17_CCMR1_IC1PSC_SHIFT) /* 10: capture once every 4 events */
+#  define TIM17_CCMR1_IC1PSC_EVERY8 (0x3 << TIM17_CCMR1_IC1PSC_SHIFT) /* 11: capture once every 8 events */
+#define TIM17_CCMR1_IC1F_SHIFT      (4)       /* Bits 4-7: Input Capture 1 Filter */
+#define TIM17_CCMR1_IC1F_MASK       (0xf << TIM17_CCMR1_IC1F_SHIFT)
+#  define TIM17_CCMR1_IC1F_NOFILT   (0x0 << TIM17_CCMR1_IC1F_SHIFT)   /* 0000: No filter, sampling at fDTS */
+#  define TIM17_CCMR1_IC1F_FCKINT2  (0x1 << TIM17_CCMR1_IC1F_SHIFT)   /* 0001: fSAMPLING=fCK_INT, N=2 */
+#  define TIM17_CCMR1_IC1F_FCKINT4  (0x2 << TIM17_CCMR1_IC1F_SHIFT)   /* 0010: fSAMPLING=fCK_INT, N=4 */
+#  define TIM17_CCMR1_IC1F_FCKINT8  (0x3 << TIM17_CCMR1_IC1F_SHIFT)   /* 0011: fSAMPLING=fCK_INT, N=8 */
+#  define TIM17_CCMR1_IC1F_FDTSd26  (0x4 << TIM17_CCMR1_IC1F_SHIFT)   /* 0100: fSAMPLING=fDTS/2, N=6 */
+#  define TIM17_CCMR1_IC1F_FDTSd28  (0x5 << TIM17_CCMR1_IC1F_SHIFT)   /* 0101: fSAMPLING=fDTS/2, N=8 */
+#  define TIM17_CCMR1_IC1F_FDTSd46  (0x6 << TIM17_CCMR1_IC1F_SHIFT)   /* 0110: fSAMPLING=fDTS/4, N=6 */
+#  define TIM17_CCMR1_IC1F_FDTSd48  (0x7 << TIM17_CCMR1_IC1F_SHIFT)   /* 0111: fSAMPLING=fDTS/4, N=8 */
+#  define TIM17_CCMR1_IC1F_FDTSd86  (0x8 << TIM17_CCMR1_IC1F_SHIFT)   /* 1000: fSAMPLING=fDTS/8, N=6 */
+#  define TIM17_CCMR1_IC1F_FDTSd88  (0x9 << TIM17_CCMR1_IC1F_SHIFT)   /* 1001: fSAMPLING=fDTS/8, N=8 */
+#  define TIM17_CCMR1_IC1F_FDTSd165 (0xa << TIM17_CCMR1_IC1F_SHIFT)   /* 1010: fSAMPLING=fDTS/16, N=5 */
+#  define TIM17_CCMR1_IC1F_FDTSd166 (0xb << TIM17_CCMR1_IC1F_SHIFT)   /* 1011: fSAMPLING=fDTS/16, N=6 */
+#  define TIM17_CCMR1_IC1F_FDTSd168 (0xc << TIM17_CCMR1_IC1F_SHIFT)   /* 1100: fSAMPLING=fDTS/16, N=8 */
+#  define TIM17_CCMR1_IC1F_FDTSd325 (0xd << TIM17_CCMR1_IC1F_SHIFT)   /* 1101: fSAMPLING=fDTS/32, N=5 */
+#  define TIM17_CCMR1_IC1F_FDTSd326 (0xe << TIM17_CCMR1_IC1F_SHIFT)   /* 1110: fSAMPLING=fDTS/32, N=6 */
+#  define TIM17_CCMR1_IC1F_FDTSd328 (0xf << TIM17_CCMR1_IC1F_SHIFT)   /* 1111: fSAMPLING=fDTS/32, N=8 */
 
 /* Capture/compare enable register */
 
@@ -1514,4 +1497,4 @@
 #define TIM17_TISEL_TI1SEL_MASK     (0xf << TIM17_TISEL_TI1SEL_SHIFT)
 #  define TIM17_TISEL_TI1SEL_CH1    (0x0 << TIM17_TISEL_TI1SEL_SHIFT) /* 0000: CH1 input */
 
-#endif /* __ARCH_ARM_SRC_STM32L4_HARDWARE_STM32L4_TIM_H */
+#endif /* __ARCH_ARM_SRC_STM32WB_HARDWARE_STM32WB_TIM_H */
