@@ -190,6 +190,17 @@
 #  define TIM_CR1_CKD_4TCKINT       (0x2 << TIM_CR1_CKD_SHIFT) /* 10: tDTS=4*tCK_INT */
 #define TIM_CR1_UIFREMAP            (1 << 11) /* Bit 11: UIF status bit remap enable */
 
+#define TIM_1_2_CR1_DIR             (1 << 4)  /* Bit 4: Counter direction */
+#  define TIM_1_2_CR1_DIR_UP        (0 << 4)  /* 0: Upcounter mode */
+#  define TIM_1_2_CR1_DIR_DOWN      (1 << 4)  /* 1: Downcounter mode */
+#define TIM_1_2_CR1_CMS_SHIFT       (5)       /* Bits 5-6: Center-aligned mode selection */
+#define TIM_1_2_CR1_CMS_MASK        (0x3 << TIM1_CR1_CMS_SHIFT)
+#  define TIM_1_2_CR1_CMS_EDGE      (0x0 << TIM1_CR1_CMS_SHIFT) /* 00: Edge-aligned mode */
+#  define TIM_1_2_CR1_CMS_CNTR1     (0x1 << TIM1_CR1_CMS_SHIFT) /* 01: Center-aligned mode 1 */
+#  define TIM_1_2_CR1_CMS_CNTR2     (0x2 << TIM1_CR1_CMS_SHIFT) /* 10: Center-aligned mode 2 */
+#  define TIM_1_2_CR1_CMS_CNTR3     (0x3 << TIM1_CR1_CMS_SHIFT) /* 11: Center-aligned mode 3 */
+
+
 #define TIM1_CR1_CEN                (1 << 0)  /* Bit 0: Counter enable */
 #define TIM1_CR1_UDIS               (1 << 1)  /* Bit 1: Update disable */
 #define TIM1_CR1_URS                (1 << 2)  /* Bit 2: Update request source */
@@ -201,10 +212,10 @@
 #  define TIM1_CR1_DIR_DOWN         (1 << 4)  /* 1: Downcounter mode */
 #define TIM1_CR1_CMS_SHIFT          (5)       /* Bits 5-6: Center-aligned mode selection */
 #define TIM1_CR1_CMS_MASK           (0x3 << TIM1_CR1_CMS_SHIFT)
-#  define TIM1_CR1_EDGE             (0x0 << TIM1_CR1_CMS_SHIFT) /* 00: Edge-aligned mode */
-#  define TIM1_CR1_CENTER1          (0x1 << TIM1_CR1_CMS_SHIFT) /* 01: Center-aligned mode 1 */
-#  define TIM1_CR1_CENTER2          (0x2 << TIM1_CR1_CMS_SHIFT) /* 10: Center-aligned mode 2 */
-#  define TIM1_CR1_CENTER3          (0x3 << TIM1_CR1_CMS_SHIFT) /* 11: Center-aligned mode 3 */
+#  define TIM1_CR1_CMS_EDGE         (0x0 << TIM1_CR1_CMS_SHIFT) /* 00: Edge-aligned mode */
+#  define TIM1_CR1_CMS_CNTR1        (0x1 << TIM1_CR1_CMS_SHIFT) /* 01: Center-aligned mode 1 */
+#  define TIM1_CR1_CMS_CNTR2        (0x2 << TIM1_CR1_CMS_SHIFT) /* 10: Center-aligned mode 2 */
+#  define TIM1_CR1_CMS_CNTR3        (0x3 << TIM1_CR1_CMS_SHIFT) /* 11: Center-aligned mode 3 */
 #define TIM1_CR1_ARPE               (1 << 7)  /* Bit 7: Auto-reload preload enable */
 #define TIM1_CR1_CKD_SHIFT          (8)       /* Bits 8-9: Clock division */
 #define TIM1_CR1_CKD_MASK           (0x3 << TIM1_CR1_CKD_SHIFT)
@@ -224,10 +235,10 @@
 #  define TIM2_CR1_DIR_DOWN         (1 << 4)  /* 1: Downcounter mode */
 #define TIM2_CR1_CMS_SHIFT          (5)       /* Bits 5-6: Center-aligned mode selection */
 #define TIM2_CR1_CMS_MASK           (0x3 << TIM2_CR1_CMS_SHIFT)
-#  define TIM2_CR1_EDGE             (0x0 << TIM2_CR1_CMS_SHIFT) /* 00: Edge-aligned mode */
-#  define TIM2_CR1_CENTER1          (0x1 << TIM2_CR1_CMS_SHIFT) /* 01: Center-aligned mode 1 */
-#  define TIM2_CR1_CENTER2          (0x2 << TIM2_CR1_CMS_SHIFT) /* 10: Center-aligned mode 2 */
-#  define TIM2_CR1_CENTER3          (0x3 << TIM2_CR1_CMS_SHIFT) /* 11: Center-aligned mode 3 */
+#  define TIM2_CR1_CMS_EDGE         (0x0 << TIM2_CR1_CMS_SHIFT) /* 00: Edge-aligned mode */
+#  define TIM2_CR1_CMS_CNTR1        (0x1 << TIM2_CR1_CMS_SHIFT) /* 01: Center-aligned mode 1 */
+#  define TIM2_CR1_CMS_CNTR2        (0x2 << TIM2_CR1_CMS_SHIFT) /* 10: Center-aligned mode 2 */
+#  define TIM2_CR1_CMS_CNTR3        (0x3 << TIM2_CR1_CMS_SHIFT) /* 11: Center-aligned mode 3 */
 #define TIM2_CR1_ARPE               (1 << 7)  /* Bit 7: Auto-reload preload enable */
 #define TIM2_CR1_CKD_SHIFT          (8)       /* Bits 8-9: Clock division */
 #define TIM2_CR1_CKD_MASK           (0x3 << TIM2_CR1_CKD_SHIFT)
@@ -534,6 +545,8 @@
 #define TIM17_SR_CC1OF              (1 << 9)  /* Bit 9: Capture/Compare 1 Overcapture Flag */
 
 /* Event generation register */
+
+#define TIM_EGR_UG                  (1 << 0)  /* Bit 0: Update Generation */
 
 #define TIM1_EGR_UG                 (1 << 0)  /* Bit 0: Update Generation */
 #define TIM1_EGR_CC1G               (1 << 1)  /* Bit 1: Capture/Compare 1 Generation */
