@@ -176,6 +176,20 @@
 
 /* Control register 1 */
 
+#define TIM_CR1_CEN                 (1 << 0)  /* Bit 0: Counter enable */
+#define TIM_CR1_UDIS                (1 << 1)  /* Bit 1: Update disable */
+#define TIM_CR1_URS                 (1 << 2)  /* Bit 2: Update request source */
+#  define TIM_CR1_URS_CNT_UP_DMA    (0 << 2)  /* 0: Counter overflow/underflow, Update from slave or UG, DMA */
+#  define TIM_CR1_URS_CNT_DMA       (1 << 2)  /* 1: Counter overflow/underflow or DMA */
+#define TIM_CR1_OPM                 (1 << 3)  /* Bit 3: One pulse mode */
+#define TIM_CR1_ARPE                (1 << 7)  /* Bit 7: Auto-reload preload enable */
+#define TIM_CR1_CKD_SHIFT           (8)       /* Bits 8-9: Clock division */
+#define TIM_CR1_CKD_MASK            (0x3 << TIM_CR1_CKD_SHIFT)
+#  define TIM_CR1_CKD_TCKINT        (0x0 << TIM_CR1_CKD_SHIFT) /* 00: tDTS=tCK_INT */
+#  define TIM_CR1_CKD_2TCKINT       (0x1 << TIM_CR1_CKD_SHIFT) /* 01: tDTS=2*tCK_INT */
+#  define TIM_CR1_CKD_4TCKINT       (0x2 << TIM_CR1_CKD_SHIFT) /* 10: tDTS=4*tCK_INT */
+#define TIM_CR1_UIFREMAP            (1 << 11) /* Bit 11: UIF status bit remap enable */
+
 #define TIM1_CR1_CEN                (1 << 0)  /* Bit 0: Counter enable */
 #define TIM1_CR1_UDIS               (1 << 1)  /* Bit 1: Update disable */
 #define TIM1_CR1_URS                (1 << 2)  /* Bit 2: Update request source */
@@ -431,6 +445,9 @@
 #  define TIM2_SMCR_ETP_LOW         (1 << 15) /* 1: ETR is inverted, active at low level or falling edge */
 
 /* Timer DMA / Interrupt enable register */
+
+#define TIM_DIER_UIE                (1 << 0)  /* Bit 0: Update interrupt enable */
+#define TIM_DIER_UDE                (1 << 8)  /* Bit 8: Update DMA request enable */
 
 #define TIM1_DIER_UIE               (1 << 0)  /* Bit 0: Update interrupt enable */
 #define TIM1_DIER_CC1IE             (1 << 1)  /* Bit 1: Capture/Compare 1 interrupt enable */
