@@ -293,8 +293,8 @@
 #define TIM_CR2_MMS2_MASK           (15 << TIM_CR2_MMS2_SHIFT)
 #  define TIM_CR2_MMS2_RESET        (0 << TIM_CR2_MMS2_SHIFT)  /* 0000: Reset - TIMx_EGR UG bit is TRG9 */
 #  define TIM_CR2_MMS2_ENABLE       (1 << TIM_CR2_MMS2_SHIFT)  /* 0001: Enable - CNT_EN is TRGO2 */
-#  define TIM_CR2_MMS2_UPDATE       (2 << TIM_CR2_MMS2_SHIFT)  /* 0010: Update event is TRGH0 */
-#  define TIM_CR2_MMS2_COMPP        (3 << TIM_CR2_MMS2_SHIFT)  /* 0010: Compare Pulse - CC1IF flag */
+#  define TIM_CR2_MMS2_UPDATE       (2 << TIM_CR2_MMS2_SHIFT)  /* 0010: Update event is TRGO2 */
+#  define TIM_CR2_MMS2_COMPP        (3 << TIM_CR2_MMS2_SHIFT)  /* 0011: Compare Pulse - CC1IF flag */
 #  define TIM_CR2_MMS2_OC1REF       (4 << TIM_CR2_MMS2_SHIFT)  /* 0100: Compare OC1REF is TRGO2 */
 #  define TIM_CR2_MMS2_OC2REF       (5 << TIM_CR2_MMS2_SHIFT)  /* 0101: Compare OC2REF is TRGO2 */
 #  define TIM_CR2_MMS2_OC3REF       (6 << TIM_CR2_MMS2_SHIFT)  /* 0110: Compare OC3REF is TRGO2 */
@@ -1180,10 +1180,10 @@
 #define TIM1_BDTR_MOE               (1 << 15) /* Bit 15: Main Output enable */
 #define TIM1_BDTR_BKF_SHIFT         (16)      /* Bits 16-19: Break filter */
 #define TIM1_BDTR_BKF_MASK          (0xf << TIM1_BDTR_BKF_SHIFT)
-#  define TIM1_BDTR_BKF(f)          ((f) << TIM1_BDTR_BKF_SHIFT) /* f - STM32WB_DF_x  param */
+#  define TIM1_BDTR_BKF(f)          ((f) << TIM1_BDTR_BKF_SHIFT) /* STM32WB_DF_x digital filter param */
 #define TIM1_BDTR_BK2F_SHIFT        (20)      /* Bits 20-23: Break 2 filter */
 #define TIM1_BDTR_BK2F_MASK         (0xf << TIM1_BDTR_BK2F_SHIFT)
-#  define TIM1_BDTR_BK2F(f)         ((f) << TIM1_BDTR_BK2F_SHIFT) /* f - STM32WB_DF_x param */
+#  define TIM1_BDTR_BK2F(f)         ((f) << TIM1_BDTR_BK2F_SHIFT) /* STM32WB_DF_x digital filter param */
 #define TIM1_BDTR_BK2E              (1 << 24) /* Bit 24: Break 2 enable */
 #define TIM1_BDTR_BK2P              (1 << 25) /* Bit 25: Break 2 polarity */
 #define TIM1_BDTR_BKDSRM            (1 << 26) /* Bit 26: Break Disarm */
