@@ -88,29 +88,29 @@
 #endif
 
 #if defined(CONFIG_STM32WB_TIM1)
-#  if defined(GPIO_TIM1_CH1OUT) || defined(GPIO_TIM1_CH2OUT) || \
-      defined(GPIO_TIM1_CH3OUT) || defined(GPIO_TIM1_CH4OUT)
+#  if defined(GPIO_TIM1_CH1) || defined(GPIO_TIM1_CH2) || \
+      defined(GPIO_TIM1_CH3) || defined(GPIO_TIM1_CH4)
 #    define HAVE_TIM1_GPIOCONFIG 1
 #endif
 #endif
 
 #if defined(CONFIG_STM32WB_TIM2)
-#  if defined(GPIO_TIM2_CH1OUT) || defined(GPIO_TIM2_CH2OUT) || \
-      defined(GPIO_TIM2_CH3OUT) || defined(GPIO_TIM2_CH4OUT)
+#  if defined(GPIO_TIM2_CH1) || defined(GPIO_TIM2_CH2) || \
+      defined(GPIO_TIM2_CH3) || defined(GPIO_TIM2_CH4)
 #    define HAVE_TIM2_GPIOCONFIG 1
 #endif
 #endif
 
 #if defined(CONFIG_STM32WB_TIM16)
-#  if defined(GPIO_TIM16_CH1OUT) || defined(GPIO_TIM16_CH2OUT) || \
-      defined(GPIO_TIM16_CH3OUT) || defined(GPIO_TIM16_CH4OUT)
+#  if defined(GPIO_TIM16_CH1) || defined(GPIO_TIM16_CH2) || \
+      defined(GPIO_TIM16_CH3) || defined(GPIO_TIM16_CH4)
 #    define HAVE_TIM16_GPIOCONFIG 1
 #endif
 #endif
 
 #if defined(CONFIG_STM32WB_TIM17)
-#  if defined(GPIO_TIM17_CH1OUT) || defined(GPIO_TIM17_CH2OUT) || \
-      defined(GPIO_TIM17_CH3OUT) || defined(GPIO_TIM17_CH4OUT)
+#  if defined(GPIO_TIM17_CH1) || defined(GPIO_TIM17_CH2) || \
+      defined(GPIO_TIM17_CH3) || defined(GPIO_TIM17_CH4)
 #    define HAVE_TIM17_GPIOCONFIG 1
 #endif
 #endif
@@ -468,8 +468,6 @@ static void stm32wb_tim_reset(FAR struct stm32wb_tim_dev_s *dev)
     defined(HAVE_TIM16_GPIOCONFIG) || defined(HAVE_TIM17_GPIOCONFIG)
 static void stm32wb_tim_gpioconfig(uint32_t cfg, enum stm32wb_tim_channel_e mode)
 {
-  /* TODO: Add support for input capture and bipolar dual outputs for TIM8 */
-
   if (mode & STM32WB_TIM_CH_MODE_MASK)
     {
       stm32wb_configgpio(cfg);
@@ -889,15 +887,12 @@ static uint32_t stm32wb_tim_getcounter(FAR struct stm32wb_tim_dev_s *dev)
 static int stm32wb_tim_setchannel(FAR struct stm32wb_tim_dev_s *dev,
                                   uint8_t channel, enum stm32wb_tim_channel_e mode)
 {
-  uint16_t ccmr_orig   = 0;
-  uint16_t ccmr_val    = 0;
-  uint16_t ccmr_mask   = 0xff;
+  uint16_t ccmr_orig = 0;
+  uint16_t ccmr_val = 0;
   uint16_t ccer_val;
-  uint8_t  ccmr_offset = STM32WB_TIM_CCMR1_OFFSET;
+  uint8_t ccmr_offset = STM32WB_TIM_CCMR1_OFFSET;
 
   DEBUGASSERT(dev != NULL);
-
-  /* Further we use range as 0..3; if channel=0 it will also overflow here */
 
   if (channel > 4)
     {
@@ -938,7 +933,7 @@ static int stm32wb_tim_setchannel(FAR struct stm32wb_tim_dev_s *dev,
     }
 
   ccmr_orig  = stm32wb_getreg16(dev, ccmr_offset);
-  ccmr_orig &= ~ccmr_mask;
+  ccmr_orig &= ~(TIM_CCMR_OCM_MASK(channel) | TIM_CCMR_OCPE(channel));
   ccmr_orig |= ccmr_val;
   stm32wb_putreg16(dev, ccmr_offset, ccmr_orig);
   stm32wb_putreg16(dev, STM32WB_TIM_CCER_OFFSET, ccer_val);
@@ -951,27 +946,27 @@ static int stm32wb_tim_setchannel(FAR struct stm32wb_tim_dev_s *dev,
       case STM32WB_TIM1_BASE:
         switch (channel)
           {
-#if defined(GPIO_TIM1_CH1OUT)
+#if defined(GPIO_TIM1_CH1)
             case 0:
-              stm32wb_tim_gpioconfig(GPIO_TIM1_CH1OUT, mode);
+              stm32wb_tim_gpioconfig(GPIO_TIM1_CH1, mode);
               break;
 #endif
 
-#if defined(GPIO_TIM1_CH2OUT)
+#if defined(GPIO_TIM1_CH2)
             case 1:
-              stm32wb_tim_gpioconfig(GPIO_TIM1_CH2OUT, mode);
+              stm32wb_tim_gpioconfig(GPIO_TIM1_CH2, mode);
               break;
 #endif
 
-#if defined(GPIO_TIM1_CH3OUT)
+#if defined(GPIO_TIM1_CH3)
             case 2:
-              stm32wb_tim_gpioconfig(GPIO_TIM1_CH3OUT, mode);
+              stm32wb_tim_gpioconfig(GPIO_TIM1_CH3, mode);
               break;
 #endif
 
-#if defined(GPIO_TIM1_CH4OUT)
+#if defined(GPIO_TIM1_CH4)
             case 3:
-              stm32wb_tim_gpioconfig(GPIO_TIM1_CH4OUT, mode);
+              stm32wb_tim_gpioconfig(GPIO_TIM1_CH4, mode);
               break;
 #endif
 
@@ -984,27 +979,27 @@ static int stm32wb_tim_setchannel(FAR struct stm32wb_tim_dev_s *dev,
       case STM32WB_TIM2_BASE:
         switch (channel)
           {
-#if defined(GPIO_TIM2_CH1OUT)
+#if defined(GPIO_TIM2_CH1)
             case 0:
-              stm32wb_tim_gpioconfig(GPIO_TIM2_CH1OUT, mode);
+              stm32wb_tim_gpioconfig(GPIO_TIM2_CH1, mode);
               break;
 #endif
 
-#if defined(GPIO_TIM2_CH2OUT)
+#if defined(GPIO_TIM2_CH2)
             case 1:
-              stm32wb_tim_gpioconfig(GPIO_TIM2_CH2OUT, mode);
+              stm32wb_tim_gpioconfig(GPIO_TIM2_CH2, mode);
               break;
 #endif
 
-#if defined(GPIO_TIM2_CH3OUT)
+#if defined(GPIO_TIM2_CH3)
             case 2:
-              stm32wb_tim_gpioconfig(GPIO_TIM2_CH3OUT, mode);
+              stm32wb_tim_gpioconfig(GPIO_TIM2_CH3, mode);
               break;
 #endif
 
-#if defined(GPIO_TIM2_CH4OUT)
+#if defined(GPIO_TIM2_CH4)
             case 3:
-              stm32wb_tim_gpioconfig(GPIO_TIM2_CH4OUT, mode);
+              stm32wb_tim_gpioconfig(GPIO_TIM2_CH4, mode);
               break;
 #endif
 
@@ -1017,9 +1012,9 @@ static int stm32wb_tim_setchannel(FAR struct stm32wb_tim_dev_s *dev,
       case STM32WB_TIM16_BASE:
         switch (channel)
           {
-#if defined(GPIO_TIM16_CH1OUT)
+#if defined(GPIO_TIM16_CH1)
             case 0:
-              stm32wb_tim_gpioconfig(GPIO_TIM16_CH1OUT, mode);
+              stm32wb_tim_gpioconfig(GPIO_TIM16_CH1, mode);
               break;
 #endif
 
@@ -1032,9 +1027,9 @@ static int stm32wb_tim_setchannel(FAR struct stm32wb_tim_dev_s *dev,
       case STM32WB_TIM17_BASE:
         switch (channel)
           {
-#if defined(GPIO_TIM17_CH1OUT)
+#if defined(GPIO_TIM17_CH1)
             case 0:
-              stm32wb_tim_gpioconfig(GPIO_TIM17_CH1OUT, mode);
+              stm32wb_tim_gpioconfig(GPIO_TIM17_CH1, mode);
               break;
 #endif
 
