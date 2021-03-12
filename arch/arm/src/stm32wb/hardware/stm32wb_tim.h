@@ -187,10 +187,10 @@
 #  define TIM1_CR1_DIR_DOWN         (1 << 4)  /* 1: Downcounter mode */
 #define TIM1_CR1_CMS_SHIFT          (5)       /* Bits 5-6: Center-aligned mode selection */
 #define TIM1_CR1_CMS_MASK           (0x3 << TIM1_CR1_CMS_SHIFT)
-#  define TIM1_CR1_EDGE             (0x0 << TIM1_CR1_CMS_SHIFT) /* 00: Edge-aligned mode */
-#  define TIM1_CR1_CENTER1          (0x1 << TIM1_CR1_CMS_SHIFT) /* 01: Center-aligned mode 1 */
-#  define TIM1_CR1_CENTER2          (0x2 << TIM1_CR1_CMS_SHIFT) /* 10: Center-aligned mode 2 */
-#  define TIM1_CR1_CENTER3          (0x3 << TIM1_CR1_CMS_SHIFT) /* 11: Center-aligned mode 3 */
+#  define TIM1_CR1_CMS_EDGE         (0x0 << TIM1_CR1_CMS_SHIFT) /* 00: Edge-aligned mode */
+#  define TIM1_CR1_CMS_CNTR1        (0x1 << TIM1_CR1_CMS_SHIFT) /* 01: Center-aligned mode 1 */
+#  define TIM1_CR1_CMS_CNTR2        (0x2 << TIM1_CR1_CMS_SHIFT) /* 10: Center-aligned mode 2 */
+#  define TIM1_CR1_CMS_CNTR3        (0x3 << TIM1_CR1_CMS_SHIFT) /* 11: Center-aligned mode 3 */
 #define TIM1_CR1_ARPE               (1 << 7)  /* Bit 7: Auto-reload preload enable */
 #define TIM1_CR1_CKD_SHIFT          (8)       /* Bits 8-9: Clock division */
 #define TIM1_CR1_CKD_MASK           (0x3 << TIM1_CR1_CKD_SHIFT)
@@ -210,10 +210,10 @@
 #  define TIM2_CR1_DIR_DOWN         (1 << 4)  /* 1: Downcounter mode */
 #define TIM2_CR1_CMS_SHIFT          (5)       /* Bits 5-6: Center-aligned mode selection */
 #define TIM2_CR1_CMS_MASK           (0x3 << TIM2_CR1_CMS_SHIFT)
-#  define TIM2_CR1_EDGE             (0x0 << TIM2_CR1_CMS_SHIFT) /* 00: Edge-aligned mode */
-#  define TIM2_CR1_CENTER1          (0x1 << TIM2_CR1_CMS_SHIFT) /* 01: Center-aligned mode 1 */
-#  define TIM2_CR1_CENTER2          (0x2 << TIM2_CR1_CMS_SHIFT) /* 10: Center-aligned mode 2 */
-#  define TIM2_CR1_CENTER3          (0x3 << TIM2_CR1_CMS_SHIFT) /* 11: Center-aligned mode 3 */
+#  define TIM2_CR1_CMS_EDGE         (0x0 << TIM2_CR1_CMS_SHIFT) /* 00: Edge-aligned mode */
+#  define TIM2_CR1_CMS_CNTR1        (0x1 << TIM2_CR1_CMS_SHIFT) /* 01: Center-aligned mode 1 */
+#  define TIM2_CR1_CMS_CNTR2        (0x2 << TIM2_CR1_CMS_SHIFT) /* 10: Center-aligned mode 2 */
+#  define TIM2_CR1_CMS_CNTR3        (0x3 << TIM2_CR1_CMS_SHIFT) /* 11: Center-aligned mode 3 */
 #define TIM2_CR1_ARPE               (1 << 7)  /* Bit 7: Auto-reload preload enable */
 #define TIM2_CR1_CKD_SHIFT          (8)       /* Bits 8-9: Clock division */
 #define TIM2_CR1_CKD_MASK           (0x3 << TIM2_CR1_CKD_SHIFT)
@@ -517,6 +517,8 @@
 #define TIM17_SR_CC1OF              (1 << 9)  /* Bit 9: Capture/Compare 1 Overcapture Flag */
 
 /* Event generation register */
+
+#define TIM_EGR_UG                  (1 << 0)  /* Bit 0: Update Generation */
 
 #define TIM1_EGR_UG                 (1 << 0)  /* Bit 0: Update Generation */
 #define TIM1_EGR_CC1G               (1 << 1)  /* Bit 1: Capture/Compare 1 Generation */
@@ -839,7 +841,7 @@
 #define TIM16_CCMR1_OC1PE           (1 << 3)  /* Bit 3: Output Compare 1 Preload enable */
 #define TIM16_CCMR1_OC1M_LO_SHIFT   (4)       /* Bits 4-6: Output Compare 1 Mode, bits [2:0] */
 #define TIM16_CCMR1_OC1M_HI_SHIFT   (16)      /* Bit 16: Output Compare 1 Mode, bits [3] */
-#define TIM16_CCMR1_OC1M_BITS       (h,l)     ((h << TIM16_CCMR1_OC1M_HI_SHIFT) | (l << TIM16_CCMR1_OC1M_LO_SHIFT))
+#define TIM16_CCMR1_OC1M_BITS(h,l)  ((h << TIM16_CCMR1_OC1M_HI_SHIFT) | (l << TIM16_CCMR1_OC1M_LO_SHIFT))
 #define TIM16_CCMR1_OC1M_MASK       TIM16_CCMR1_OC1M_BITS(0x1, 0x7)
 #  define TIM16_CCMR1_OC1M_FRZN     TIM16_CCMR1_OC1M_BITS(0x0, 0x0)  /* 0,000: Frozen */
 #  define TIM16_CCMR1_OC1M_CHACT    TIM16_CCMR1_OC1M_BITS(0x0, 0x1)  /* 0,001: Channel 1 active on match */
@@ -854,7 +856,7 @@
 #define TIM17_CCMR1_OC1PE           (1 << 3)  /* Bit 3: Output Compare 1 Preload enable */
 #define TIM17_CCMR1_OC1M_LO_SHIFT   (4)       /* Bits 4-6: Output Compare 1 Mode, bits [2:0] */
 #define TIM17_CCMR1_OC1M_HI_SHIFT   (16)      /* Bit 16: Output Compare 1 Mode, bits [3] */
-#define TIM17_CCMR1_OC1M_BITS       (h,l)     ((h << TIM17_CCMR1_OC1M_HI_SHIFT) | (l << TIM17_CCMR1_OC1M_LO_SHIFT))
+#define TIM17_CCMR1_OC1M_BITS(h,l)  ((h << TIM17_CCMR1_OC1M_HI_SHIFT) | (l << TIM17_CCMR1_OC1M_LO_SHIFT))
 #define TIM17_CCMR1_OC1M_MASK       TIM17_CCMR1_OC1M_BITS(0x1, 0x7)
 #  define TIM17_CCMR1_OC1M_FRZN     TIM17_CCMR1_OC1M_BITS(0x0, 0x0)  /* 0,000: Frozen */
 #  define TIM17_CCMR1_OC1M_CHACT    TIM17_CCMR1_OC1M_BITS(0x0, 0x1)  /* 0,001: Channel 1 active on match */
