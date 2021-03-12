@@ -39,8 +39,9 @@
 #include "arm_arch.h"
 
 #include "stm32wb.h"
-#include "stm32wb_gpio.h"
 #include "stm32wb_tim.h"
+#include "stm32wb_gpio.h"
+#include "stm32wb_rcc.h"
 
 /************************************************************************************
  * Pre-processor Definitions
@@ -124,6 +125,85 @@
 /************************************************************************************
  * Private Types
  ************************************************************************************/
+
+/* Fail-safe register definitions */
+
+#if (TIM1_CR1_CEN & TIM2_CR1_CEN & TIM16_CR1_CEN & TIM17_CR1_CEN)
+#  define TIM_CR1_CEN               TIM1_CR1_CEN
+#endif
+
+#if (TIM1_CR1_ARPE & TIM2_CR1_ARPE & TIM16_CR1_ARPE & TIM17_CR1_ARPE)
+#  define TIM_CR1_ARPE              TIM1_CR1_ARPE
+#endif
+
+#if (TIM1_CR1_OPM & TIM2_CR1_OPM & TIM16_CR1_OPM & TIM17_CR1_OPM)
+#  define TIM_CR1_OPM               TIM1_CR1_OPM
+#endif
+
+#if (TIM1_DIER_UIE & TIM2_DIER_UIE & TIM16_DIER_UIE & TIM17_DIER_UIE)
+#  define TIM_DIER_UIE              TIM1_DIER_UIE
+#endif
+
+#if (TIM1_SR_UIF & TIM2_SR_UIF & TIM16_SR_UIF & TIM17_SR_UIF)
+#  define TIM_SR_UIF                TIM1_SR_UIF
+#endif
+
+#if (TIM1_CR1_DIR & TIM2_CR1_DIR)
+#  define TIM_1_2_CR1_DIR           TIM1_CR1_DIR
+#endif
+
+#if (TIM1_CR1_CMS_CNTR1 == TIM2_CR1_CMS_CNTR1)
+#  define TIM_1_2_CR1_CMS_CNTR1     TIM1_CR1_CMS_CNTR1
+#endif
+
+#if (TIM1_CCER_CC1E & TIM2_CCER_CC1E & TIM16_CCER_CC1E & TIM17_CCER_CC1E)
+#  define TIM_CCER_CC1E             TIM1_CCER_CC1E
+#endif
+
+#if (TIM1_CCMR1_OC1PE & TIM2_CCMR1_OC1PE & TIM16_CCMR1_OC1PE & TIM17_CCMR1_OC1PE)
+#  define TIM_CCMR1_OC1PE           TIM1_CCMR1_OC1PE
+#endif
+
+#if (TIM1_CCER_CC1E == TIM2_CCER_CC1E && TIM1_CCER_CC2E == TIM2_CCER_CC2E && \
+     TIM1_CCER_CC3E == TIM2_CCER_CC3E && TIM1_CCER_CC4E == TIM2_CCER_CC4E && \
+     TIM1_CCER_CC1E == TIM16_CCER_CC1E && TIM1_CCER_CC1E == TIM17_CCER_CC1E && \
+     TIM1_CCER_CC1E == (TIM1_CCER_CC2E >> 4) && \
+     TIM1_CCER_CC2E == (TIM1_CCER_CC3E >> 4) && \
+     TIM1_CCER_CC3E == (TIM1_CCER_CC4E >> 4))
+#  define TIM_CCER_CCE(ch)          (TIM1_CCER_CC1E << (ch << 2))
+#endif
+
+#if (TIM1_CCER_CC1P == TIM2_CCER_CC1P && TIM1_CCER_CC2P == TIM2_CCER_CC2P && \
+     TIM1_CCER_CC3P == TIM2_CCER_CC3P && TIM1_CCER_CC4P == TIM2_CCER_CC4P && \
+     TIM1_CCER_CC1P == TIM16_CCER_CC1P && TIM1_CCER_CC1P == TIM17_CCER_CC1P && \
+     TIM1_CCER_CC1P == (TIM1_CCER_CC2P >> 4) && \
+     TIM1_CCER_CC2P == (TIM1_CCER_CC3P >> 4) && \
+     TIM1_CCER_CC3P == (TIM1_CCER_CC4P >> 4))
+#  define TIM_CCER_CCP(ch)          (TIM1_CCER_CC1P << (ch << 2))
+#endif
+
+#if (TIM1_CCMR1_OC1PE == TIM2_CCMR1_OC1PE && TIM1_CCMR1_OC2PE == TIM2_CCMR1_OC2PE && \
+     TIM1_CCMR2_OC3PE == TIM2_CCMR2_OC3PE && TIM1_CCMR2_OC4PE == TIM2_CCMR2_OC4PE && \
+     TIM1_CCMR1_OC1PE == TIM16_CCMR1_OC1PE && TIM1_CCMR1_OC1PE == TIM17_CCMR1_OC1PE && \
+     TIM1_CCMR1_OC1PE == TIM1_CCMR2_OC3PE && TIM1_CCMR1_OC2PE == TIM1_CCMR2_OC4PE && \
+     TIM1_CCMR1_OC1PE == (TIM1_CCMR1_OC2PE >> 8) && \
+     TIM1_CCMR2_OC3PE == (TIM1_CCMR2_OC4PE >> 8))
+#  define TIM_CCMR_OCPE(ch)         (TIM1_CCMR1_OC1PE << ((ch - 1) & 0x1))
+#endif
+
+#if (TIM1_CCMR1_OC1M_MASK == TIM2_CCMR1_OC1M_MASK && \
+     TIM1_CCMR1_OC2M_MASK == TIM2_CCMR1_OC2M_MASK && \
+     TIM1_CCMR2_OC3M_MASK == TIM2_CCMR2_OC3M_MASK && \
+     TIM1_CCMR2_OC4M_MASK == TIM2_CCMR2_OC4M_MASK && \
+     TIM1_CCMR1_OC1M_MASK == TIM16_CCMR1_OC1M_MASK && \
+     TIM1_CCMR1_OC1M_MASK == TIM17_CCMR1_OC1M_MASK && \
+     TIM1_CCMR1_OC1M_MASK == TIM1_CCMR2_OC3M_MASK && \
+     TIM1_CCMR1_OC2M_MASK == TIM1_CCMR2_OC4M_MASK && \
+     TIM1_CCMR1_OC1M_MASK == (TIM1_CCMR1_OC2M_MASK >> 8) && \
+     TIM1_CCMR2_OC3M_MASK == (TIM1_CCMR2_OC4M_MASK >> 8))
+#  define TIM_CCMR_OCM_MASK(ch)     (TIM1_CCMR1_OC1M_MASK << ((ch - 1) & 0x1))
+#  define TIM_CCMR_OCM_PWM1(ch)     (TIM1_CCMR1_OC1M_PWM1 << ((ch - 1) & 0x1))
+#endif
 
 /* TIM Device Structure */
 
@@ -492,14 +572,14 @@ static int stm32wb_tim_setmode(FAR struct stm32wb_tim_dev_s *dev,
     }
 
   stm32wb_tim_reload_counter(dev);
-  stm32wb_putreg16(dev, STM32WB_BTIM_CR1_OFFSET, val);
+  stm32wb_putreg16(dev, STM32WB_TIM_CR1_OFFSET, val);
 
 #ifdef CONFIG_STM32WB_TIM1
   /* Advanced registers require Main Output Enable */
 
   if (((struct stm32wb_tim_priv_s *)dev)->base == STM32WB_TIM1_BASE)
     {
-      stm32wb_modifyreg16(dev, STM32WB_ATIM_BDTR_OFFSET, 0, TIM1_BDTR_MOE);
+      stm32wb_modifyreg16(dev, STM32WB_TIM_BDTR_OFFSET, 0, TIM1_BDTR_MOE);
     }
 #endif
 
@@ -755,7 +835,7 @@ static uint32_t stm32wb_tim_getclock(FAR struct stm32wb_tim_dev_s *dev)
 
   /* From chip datasheet, at page 1179. */
 
-  clock = freqin / (stm32wb_getreg16(dev, STM32WB_BTIM_PSC_OFFSET) + 1);
+  clock = freqin / (stm32wb_getreg16(dev, STM32WB_TIM_PSC_OFFSET) + 1);
   return clock;
 }
 
@@ -819,7 +899,7 @@ static int stm32wb_tim_setchannel(FAR struct stm32wb_tim_dev_s *dev,
 
   /* Further we use range as 0..3; if channel=0 it will also overflow here */
 
-  if (--channel > 4)
+  if (channel > 4)
     {
       return -EINVAL;
     }
@@ -827,7 +907,7 @@ static int stm32wb_tim_setchannel(FAR struct stm32wb_tim_dev_s *dev,
   /* Assume that channel is disabled and polarity is active high */
 
   ccer_val = stm32wb_getreg16(dev, STM32WB_TIM_CCER_OFFSET);
-  ccer_val &= ~(3 << (channel << 2));
+  ccer_val &= ~(TIM_CCER_CCE(channel) | TIM_CCER_CCP(channel));
 
   /* Decode configuration */
 
@@ -837,9 +917,8 @@ static int stm32wb_tim_setchannel(FAR struct stm32wb_tim_dev_s *dev,
         break;
 
       case STM32WB_TIM_CH_OUTPWM:
-        ccmr_val  =  (ATIM_CCMR_MODE_PWM1 << ATIM_CCMR1_OC1M_SHIFT) +
-                     ATIM_CCMR1_OC1PE;
-        ccer_val |= ATIM_CCER_CC1E << (channel << 2);
+        ccmr_val = TIM_CCMR_OCM_PWM1(channel) | TIM_CCMR_OCPE(channel);
+        ccer_val |= TIM_CCER_CCE(channel);
         break;
 
       default:
@@ -850,27 +929,19 @@ static int stm32wb_tim_setchannel(FAR struct stm32wb_tim_dev_s *dev,
 
   if (mode & STM32WB_TIM_CH_POLARITY_NEG)
     {
-      ccer_val |= ATIM_CCER_CC1P << (channel << 2);
+      ccer_val |= TIM_CCER_CCP(channel);
     }
 
-  /* Define its position (shift) and get register offset */
-
-  if (channel & 1)
+  if (channel > 2)
     {
-      ccmr_val  <<= 8;
-      ccmr_mask <<= 8;
-    }
-
-  if (channel > 1)
-    {
-      ccmr_offset = STM32WB_GTIM_CCMR2_OFFSET;
+      ccmr_offset = STM32WB_TIM_CCMR2_OFFSET;
     }
 
   ccmr_orig  = stm32wb_getreg16(dev, ccmr_offset);
   ccmr_orig &= ~ccmr_mask;
   ccmr_orig |= ccmr_val;
   stm32wb_putreg16(dev, ccmr_offset, ccmr_orig);
-  stm32wb_putreg16(dev, STM32WB_GTIM_CCER_OFFSET, ccer_val);
+  stm32wb_putreg16(dev, STM32WB_TIM_CCER_OFFSET, ccer_val);
 
   /* set GPIO */
 
@@ -992,19 +1063,19 @@ static int stm32wb_tim_setcompare(FAR struct stm32wb_tim_dev_s *dev,
   switch (channel)
     {
       case 1:
-        stm32wb_putreg32(dev, STM32WB_GTIM_CCR1_OFFSET, compare);
+        stm32wb_putreg32(dev, STM32WB_TIM_CCR1_OFFSET, compare);
         break;
 
       case 2:
-        stm32wb_putreg32(dev, STM32WB_GTIM_CCR2_OFFSET, compare);
+        stm32wb_putreg32(dev, STM32WB_TIM_CCR2_OFFSET, compare);
         break;
 
       case 3:
-        stm32wb_putreg32(dev, STM32WB_GTIM_CCR3_OFFSET, compare);
+        stm32wb_putreg32(dev, STM32WB_TIM_CCR3_OFFSET, compare);
         break;
 
       case 4:
-        stm32wb_putreg32(dev, STM32WB_GTIM_CCR4_OFFSET, compare);
+        stm32wb_putreg32(dev, STM32WB_TIM_CCR4_OFFSET, compare);
         break;
 
       default:
@@ -1026,16 +1097,16 @@ static int stm32wb_tim_getcapture(FAR struct stm32wb_tim_dev_s *dev,
   switch (channel)
     {
       case 1:
-        return stm32wb_getreg32(dev, STM32WB_GTIM_CCR1_OFFSET);
+        return stm32wb_getreg32(dev, STM32WB_TIM_CCR1_OFFSET);
 
       case 2:
-        return stm32wb_getreg32(dev, STM32WB_GTIM_CCR2_OFFSET);
+        return stm32wb_getreg32(dev, STM32WB_TIM_CCR2_OFFSET);
 
       case 3:
-        return stm32wb_getreg32(dev, STM32WB_GTIM_CCR3_OFFSET);
+        return stm32wb_getreg32(dev, STM32WB_TIM_CCR3_OFFSET);
 
       case 4:
-        return stm32wb_getreg32(dev, STM32WB_GTIM_CCR4_OFFSET);
+        return stm32wb_getreg32(dev, STM32WB_TIM_CCR4_OFFSET);
     }
 
   return -EINVAL;
@@ -1107,7 +1178,7 @@ static int stm32wb_tim_setisr(FAR struct stm32wb_tim_dev_s *dev,
 static void stm32wb_tim_enableint(FAR struct stm32wb_tim_dev_s *dev, int source)
 {
   DEBUGASSERT(dev != NULL);
-  stm32wb_modifyreg16(dev, STM32WB_BTIM_DIER_OFFSET, 0, ATIM_DIER_UIE);
+  stm32wb_modifyreg16(dev, STM32WB_TIM_DIER_OFFSET, 0, TIM_DIER_UIE);
 }
 
 /************************************************************************************
@@ -1118,7 +1189,7 @@ static void stm32wb_tim_disableint(FAR struct stm32wb_tim_dev_s *dev,
                                    int source)
 {
   DEBUGASSERT(dev != NULL);
-  stm32wb_modifyreg16(dev, STM32WB_BTIM_DIER_OFFSET, ATIM_DIER_UIE, 0);
+  stm32wb_modifyreg16(dev, STM32WB_TIM_DIER_OFFSET, TIM_DIER_UIE, 0);
 }
 
 /************************************************************************************
@@ -1127,7 +1198,7 @@ static void stm32wb_tim_disableint(FAR struct stm32wb_tim_dev_s *dev,
 
 static void stm32wb_tim_ackint(FAR struct stm32wb_tim_dev_s *dev, int source)
 {
-  stm32wb_putreg16(dev, STM32WB_BTIM_SR_OFFSET, ~ATIM_SR_UIF);
+  stm32wb_putreg16(dev, STM32WB_TIM_SR_OFFSET, ~TIM_SR_UIF);
 }
 
 /************************************************************************************
@@ -1136,8 +1207,8 @@ static void stm32wb_tim_ackint(FAR struct stm32wb_tim_dev_s *dev, int source)
 
 static int stm32wb_tim_checkint(FAR struct stm32wb_tim_dev_s *dev, int source)
 {
-  uint16_t regval = stm32wb_getreg16(dev, STM32WB_BTIM_SR_OFFSET);
-  return (regval & ATIM_SR_UIF) ? 1 : 0;
+  uint16_t regval = stm32wb_getreg16(dev, STM32WB_TIM_SR_OFFSET);
+  return (regval & TIM_SR_UIF) ? 1 : 0;
 }
 
 /************************************************************************************

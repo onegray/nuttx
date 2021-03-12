@@ -176,31 +176,6 @@
 
 /* Control register 1 */
 
-#define TIM_CR1_CEN                 (1 << 0)  /* Bit 0: Counter enable */
-#define TIM_CR1_UDIS                (1 << 1)  /* Bit 1: Update disable */
-#define TIM_CR1_URS                 (1 << 2)  /* Bit 2: Update request source */
-#  define TIM_CR1_URS_CNT_UP_DMA    (0 << 2)  /* 0: Counter overflow/underflow, Update from slave or UG, DMA */
-#  define TIM_CR1_URS_CNT_DMA       (1 << 2)  /* 1: Counter overflow/underflow or DMA */
-#define TIM_CR1_OPM                 (1 << 3)  /* Bit 3: One pulse mode */
-#define TIM_CR1_ARPE                (1 << 7)  /* Bit 7: Auto-reload preload enable */
-#define TIM_CR1_CKD_SHIFT           (8)       /* Bits 8-9: Clock division */
-#define TIM_CR1_CKD_MASK            (0x3 << TIM_CR1_CKD_SHIFT)
-#  define TIM_CR1_CKD_TCKINT        (0x0 << TIM_CR1_CKD_SHIFT) /* 00: tDTS=tCK_INT */
-#  define TIM_CR1_CKD_2TCKINT       (0x1 << TIM_CR1_CKD_SHIFT) /* 01: tDTS=2*tCK_INT */
-#  define TIM_CR1_CKD_4TCKINT       (0x2 << TIM_CR1_CKD_SHIFT) /* 10: tDTS=4*tCK_INT */
-#define TIM_CR1_UIFREMAP            (1 << 11) /* Bit 11: UIF status bit remap enable */
-
-#define TIM_1_2_CR1_DIR             (1 << 4)  /* Bit 4: Counter direction */
-#  define TIM_1_2_CR1_DIR_UP        (0 << 4)  /* 0: Upcounter mode */
-#  define TIM_1_2_CR1_DIR_DOWN      (1 << 4)  /* 1: Downcounter mode */
-#define TIM_1_2_CR1_CMS_SHIFT       (5)       /* Bits 5-6: Center-aligned mode selection */
-#define TIM_1_2_CR1_CMS_MASK        (0x3 << TIM1_CR1_CMS_SHIFT)
-#  define TIM_1_2_CR1_CMS_EDGE      (0x0 << TIM1_CR1_CMS_SHIFT) /* 00: Edge-aligned mode */
-#  define TIM_1_2_CR1_CMS_CNTR1     (0x1 << TIM1_CR1_CMS_SHIFT) /* 01: Center-aligned mode 1 */
-#  define TIM_1_2_CR1_CMS_CNTR2     (0x2 << TIM1_CR1_CMS_SHIFT) /* 10: Center-aligned mode 2 */
-#  define TIM_1_2_CR1_CMS_CNTR3     (0x3 << TIM1_CR1_CMS_SHIFT) /* 11: Center-aligned mode 3 */
-
-
 #define TIM1_CR1_CEN                (1 << 0)  /* Bit 0: Counter enable */
 #define TIM1_CR1_UDIS               (1 << 1)  /* Bit 1: Update disable */
 #define TIM1_CR1_URS                (1 << 2)  /* Bit 2: Update request source */
@@ -456,9 +431,6 @@
 #  define TIM2_SMCR_ETP_LOW         (1 << 15) /* 1: ETR is inverted, active at low level or falling edge */
 
 /* Timer DMA / Interrupt enable register */
-
-#define TIM_DIER_UIE                (1 << 0)  /* Bit 0: Update interrupt enable */
-#define TIM_DIER_UDE                (1 << 8)  /* Bit 8: Update DMA request enable */
 
 #define TIM1_DIER_UIE               (1 << 0)  /* Bit 0: Update interrupt enable */
 #define TIM1_DIER_CC1IE             (1 << 1)  /* Bit 1: Capture/Compare 1 interrupt enable */
@@ -869,7 +841,7 @@
 #define TIM16_CCMR1_OC1PE           (1 << 3)  /* Bit 3: Output Compare 1 Preload enable */
 #define TIM16_CCMR1_OC1M_LO_SHIFT   (4)       /* Bits 4-6: Output Compare 1 Mode, bits [2:0] */
 #define TIM16_CCMR1_OC1M_HI_SHIFT   (16)      /* Bit 16: Output Compare 1 Mode, bits [3] */
-#define TIM16_CCMR1_OC1M_BITS       (h,l)     ((h << TIM16_CCMR1_OC1M_HI_SHIFT) | (l << TIM16_CCMR1_OC1M_LO_SHIFT))
+#define TIM16_CCMR1_OC1M_BITS(h,l)  ((h << TIM16_CCMR1_OC1M_HI_SHIFT) | (l << TIM16_CCMR1_OC1M_LO_SHIFT))
 #define TIM16_CCMR1_OC1M_MASK       TIM16_CCMR1_OC1M_BITS(0x1, 0x7)
 #  define TIM16_CCMR1_OC1M_FRZN     TIM16_CCMR1_OC1M_BITS(0x0, 0x0)  /* 0,000: Frozen */
 #  define TIM16_CCMR1_OC1M_CHACT    TIM16_CCMR1_OC1M_BITS(0x0, 0x1)  /* 0,001: Channel 1 active on match */
@@ -884,7 +856,7 @@
 #define TIM17_CCMR1_OC1PE           (1 << 3)  /* Bit 3: Output Compare 1 Preload enable */
 #define TIM17_CCMR1_OC1M_LO_SHIFT   (4)       /* Bits 4-6: Output Compare 1 Mode, bits [2:0] */
 #define TIM17_CCMR1_OC1M_HI_SHIFT   (16)      /* Bit 16: Output Compare 1 Mode, bits [3] */
-#define TIM17_CCMR1_OC1M_BITS       (h,l)     ((h << TIM17_CCMR1_OC1M_HI_SHIFT) | (l << TIM17_CCMR1_OC1M_LO_SHIFT))
+#define TIM17_CCMR1_OC1M_BITS(h,l)  ((h << TIM17_CCMR1_OC1M_HI_SHIFT) | (l << TIM17_CCMR1_OC1M_LO_SHIFT))
 #define TIM17_CCMR1_OC1M_MASK       TIM17_CCMR1_OC1M_BITS(0x1, 0x7)
 #  define TIM17_CCMR1_OC1M_FRZN     TIM17_CCMR1_OC1M_BITS(0x0, 0x0)  /* 0,000: Frozen */
 #  define TIM17_CCMR1_OC1M_CHACT    TIM17_CCMR1_OC1M_BITS(0x0, 0x1)  /* 0,001: Channel 1 active on match */
