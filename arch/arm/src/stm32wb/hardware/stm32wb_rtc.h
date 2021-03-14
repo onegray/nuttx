@@ -265,6 +265,8 @@
 
 #define RTC_WPR_KEY_SHIFT           (0)       /* Bits 0-7: Write protection key */
 #define RTC_WPR_KEY_MASK            (0xff << RTC_WPR_KEY_SHIFT)
+#  define RTC_WPR_KEY1              (0xca << RTC_WPR_KEY_SHIFT)
+#  define RTC_WPR_KEY2              (0x53 << RTC_WPR_KEY_SHIFT)
 
 /* RTC sub second register */
 

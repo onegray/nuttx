@@ -36,6 +36,7 @@
 
 #include "chip.h"
 #include "stm32wb_rcc.h"
+#include "stm32wb_rtc.h"
 #include "stm32wb_pwr.h"
 #include "hardware/stm32wb_flash.h"
 
@@ -833,7 +834,7 @@ static inline void rcc_resetbkp(void)
 
       for (i = 0; i < STM32WB_RTC_BKCOUNT; i++)
         {
-          bkregs[i] = getreg32(STM32WB_RTC_BKR(i));
+          bkregs[i] = getreg32(STM32WB_RTC_BKPR(i));
         }
 
        /* Enable write access to the backup domain (RTC registers, RTC
@@ -853,12 +854,12 @@ static inline void rcc_resetbkp(void)
 
        for (i = 0; i < STM32WB_RTC_BKCOUNT; i++)
          {
-           if (RTC_MAGIC_REG == STM32WB_RTC_BKR(i))
+           if (RTC_MAGIC_REG == STM32WB_RTC_BKPR(i))
              {
                continue;
              }
 
-           putreg32(bkregs[i], STM32WB_RTC_BKR(i));
+           putreg32(bkregs[i], STM32WB_RTC_BKPR(i));
          }
 
        stm32wb_pwr_enablebkp(false);

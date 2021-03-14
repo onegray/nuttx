@@ -39,7 +39,8 @@
 #endif
 #include "arm_arch.h"
 #include "arm_internal.h"
-//#include "stm32wb.h"
+
+#include "stm32wb_rtc.h"
 
 /****************************************************************************
  * Pre-processor Definitions
