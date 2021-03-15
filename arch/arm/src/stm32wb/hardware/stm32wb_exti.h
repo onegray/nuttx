@@ -72,7 +72,7 @@
 
 /* Register Bitfield Definitions ********************************************/
 
-/* EXTI lines > 15 are associated with peripheral event sources: */
+/* EXTI lines > 15 peripheral event sources */
 
 #define EXTI_PVD_LINE               (1 << 16) /* EXTI line 16: PVD output */
 #define EXTI_RTC_ALARM              (1 << 17) /* EXTI line 17: RTC Alarm event */
@@ -103,64 +103,82 @@
 
 /* Rising trigger selection registers */
 
-#define EXTI_RTSR1_SHIFT            (0)       /* Rising trigger event enable for line n = 0..16, 18..22 */
+#define EXTI_RTSR1_SHIFT            (0)       /* Rising trigger event enable for line n = 0..21, 31 */
 #define EXTI_RTSR1_RT(n)            (1 << (n))
-#define EXTI_RTSR1_MASK             (0x7dffff << EXTI_RTSR1_SHIFT)
+#define EXTI_RTSR1_MASK             (0x803fffff << EXTI_RTSR1_SHIFT)
 
-#define EXTI_RTSR2_SHIFT            (0)       /* Rising trigger event enable for line n = 35..38 */
+#define EXTI_RTSR2_SHIFT            (0)       /* Rising trigger event enable for line n = 1, 8, 9 */
 #define EXTI_RTSR2_RT(n)            (1 << ((n) - 32))
-#define EXTI_RTSR2_MASK             (0x78 << EXTI_RTSR2_SHIFT)
-
+#define EXTI_RTSR2_MASK             (0x302 << EXTI_RTSR2_SHIFT)
 
 /* Falling trigger selection registers */
 
-#define EXTI_FTSR1_SHIFT            (0)       /* Falling trigger event enable for line n = 0..16, 18..22 */
+#define EXTI_FTSR1_SHIFT            (0)       /* Falling trigger event enable for line n = 0..21, 31 */
 #define EXTI_FTSR1_FT(n)            (1 << (n))
-#define EXTI_FTSR1_MASK             (0x7dffff << EXTI_FTSR1_SHIFT)
+#define EXTI_FTSR1_MASK             (0x803fffff << EXTI_FTSR1_SHIFT)
 
-#define EXTI_FTSR2_SHIFT            (0)       /* Falling trigger event enable for line n = 35..38 */
+#define EXTI_FTSR2_SHIFT            (0)       /* Falling trigger event enable for line n = 1, 8, 9 */
 #define EXTI_FTSR2_FT(n)            (1 << ((n) - 32))
-#define EXTI_FTSR2_MASK             (0x78 << EXTI_FTSR2_SHIFT)
+#define EXTI_FTSR2_MASK             (0x302 << EXTI_FTSR2_SHIFT)
 
 /* Software interrupt event registers */
 
-#define EXTI_SWIER1_SHIFT           (0)       /* Software interrupt on line n = 0..16, 18..22 */
+#define EXTI_SWIER1_SHIFT           (0)       /* Software interrupt on line n = 0..21, 31 */
 #define EXTI_SWIER1_SWI(n)          (1 << (n))
-#define EXTI_SWIER1_MASK            (0x7dffff << EXTI_SWIER1_SHIFT)
+#define EXTI_SWIER1_MASK            (0x803fffff << EXTI_SWIER1_SHIFT)
 
-#define EXTI_SWIER2_SHIFT           (0)       /* Software interrupt on line n = 35..38 */
+#define EXTI_SWIER2_SHIFT           (0)       /* Software interrupt on line n = 1, 8, 9 */
 #define EXTI_SWIER2_SWI(n)          (1 << ((n) - 32))
-#define EXTI_SWIER2_MASK            (0x78 << EXTI_SWIER2_SHIFT)
+#define EXTI_SWIER2_MASK            (0x302 << EXTI_SWIER2_SHIFT)
 
 /* Pending registers */
 
-#define EXTI_PR1_SHIFT              (0)       /* Pending interrupt flag on line n = 0..16, 18..22 */
+#define EXTI_PR1_SHIFT              (0)       /* Pending interrupt flag on line n = 0..21, 31 */
 #define EXTI_PR1_PIF(n)             (1 << (n))
-#define EXTI_PR1_MASK               (0x7dffff << EXTI_PR1_SHIFT)
+#define EXTI_PR1_MASK               (0x803fffff << EXTI_PR1_SHIFT)
 
-#define EXTI_PR2_SHIFT              (0)       /* Pending interrupt flag on line n = 35..38 */
+#define EXTI_PR2_SHIFT              (0)       /* Pending interrupt flag on line n = 1, 8, 9 */
 #define EXTI_PR2_PIF(n)             (1 << ((n) - 32))
-#define EXTI_PR2_MASK               (0x78 << EXTI_PR2_SHIFT)
+#define EXTI_PR2_MASK               (0x302 << EXTI_PR2_SHIFT)
 
-/* Interrupt mask register */
+/* Interrupt mask registers */
 
-#define EXTI_IMR1_SHIFT              (0)       /* Interrupt mask on line n = 0..16, 18..22 */
-#define EXTI_IMR1_IM(n)              (1 << (n))
-#define EXTI_IMR1_MASK               (0x7dffff << EXTI_IMR1_SHIFT)
+#define EXTI_IMR1_SHIFT             (0)       /* Interrupt mask on line n = 0..31 */
+#define EXTI_IMR1_IM(n)             (1 << (n))
+#define EXTI_IMR1_MASK              (0xffffffff << EXTI_IMR1_SHIFT)
 
-#define EXTI_IMR2_SHIFT              (0)       /* Interrupt mask on line n = 35..38 */
-#define EXTI_IMR2_IM(n)              (1 << ((n) - 32))
-#define EXTI_IMR2_MASK               (0x78 << EXTI_IMR2_SHIFT)
+#define EXTI_IMR2_SHIFT             (0)       /* Interrupt mask on line n = 32..48 */
+#define EXTI_IMR2_IM(n)             (1 << ((n) - 32))
+#define EXTI_IMR2_MASK              (0x1ffff << EXTI_IMR2_SHIFT)
 
-/* Event mask register */
+/* Event mask registers */
 
-#define EXTI_EMR1_SHIFT              (0)       /* Event mask on line n = 0..16, 18..22 */
-#define EXTI_EMR1_EM(n)              (1 << (n))
-#define EXTI_EMR1_MASK               (0x7dffff << EXTI_EMR1_SHIFT)
+#define EXTI_EMR1_SHIFT             (0)       /* Event mask on line n = 0..15, 17..21 */
+#define EXTI_EMR1_EM(n)             (1 << (n))
+#define EXTI_EMR1_MASK              (0x3effff << EXTI_EMR1_SHIFT)
 
-#define EXTI_EMR2_SHIFT              (0)       /* Event mask on line n = 35..38 */
-#define EXTI_EMR2_EM(n)              (1 << ((n) - 32))
-#define EXTI_EMR2_MASK               (0x78 << EXTI_EMR2_SHIFT)
+#define EXTI_EMR2_SHIFT             (0)       /* Event mask on line n = 40, 41 */
+#define EXTI_EMR2_EM(n)             (1 << ((n) - 32))
+#define EXTI_EMR2_MASK              (300 << EXTI_EMR2_SHIFT)
 
+/* CPU2 Interrupt mask registers */
+
+#define EXTI_C2IMR1_SHIFT           (0)       /* CPU2 Interrupt mask on line n = 0..31 */
+#define EXTI_C2IMR1_IM(n)           (1 << (n))
+#define EXTI_C2IMR1_MASK            (0xffffffff << EXTI_C2IMR1_SHIFT)
+
+#define EXTI_C2IMR2_SHIFT           (0)       /* CPU2 Interrupt mask on line n = 32..48 */
+#define EXTI_C2IMR2_IM(n)           (1 << ((n) - 32))
+#define EXTI_C2IMR2_MASK            (0x1ffff << EXTI_C2IMR2_SHIFT)
+
+/* CPU2 Event mask registers */
+
+#define EXTI_C2EMR1_SHIFT           (0)       /* CPU2 Event mask on line n = 0..15, 17..21 */
+#define EXTI_C2EMR1_EM(n)           (1 << (n))
+#define EXTI_C2EMR1_MASK            (0x3effff << EXTI_C2EMR1_SHIFT)
+
+#define EXTI_C2EMR2_SHIFT           (0)       /* CPU2 Event mask on line n = 40, 41 */
+#define EXTI_C2EMR2_EM(n)           (1 << ((n) - 32))
+#define EXTI_C2EMR2_MASK            (300 << EXTI_C2EMR2_SHIFT)
 
 #endif /* __ARCH_ARM_SRC_STM32WB_HARDWARE_STM32WB_EXTI_H */
