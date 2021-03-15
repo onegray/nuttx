@@ -152,7 +152,7 @@ ifeq ($(CONFIG_RTC_PERIODIC),y)
 endif
 ifeq ($(CONFIG_RTC_DRIVER),y)
 # CHIP_CSRCS += stm32wb_rtc_lowerhalf.c
-# CHIP_CSRCS += stm32wb_rtc.c
+ CHIP_CSRCS += stm32wb_rtc.c
 endif
 endif
 

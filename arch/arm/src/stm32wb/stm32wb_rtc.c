@@ -430,9 +430,9 @@ static void rtc_resume(void)
   regval &= ~(RTC_ISR_ALRAF | RTC_ISR_ALRBF);
   putreg32(regval, STM32WB_RTC_ISR);
 
-  /* Clear the EXTI Line 18 Pending bit (Connected internally to RTC Alarm) */
+  /* Clear the EXTI Line 17 Pending bit (Connected internally to RTC Alarm) */
 
-  putreg32(EXTI1_RTC_ALARM, STM32WB_EXTI1_PR);
+  putreg32(EXTI_RTC_ALARM, STM32WB_EXTI_PR1);
 #endif
 }
 
@@ -730,10 +730,10 @@ static inline void rtc_enable_alarm(void)
        * interrupts are connected to the EXTI controller.  To enable the
        * RTC Alarm interrupt, the following sequence is required:
        *
-       * 1. Configure and enable the EXTI Line 18 in interrupt mode and
-       *    select the rising edge sensitivity.
-       *    EXTI line 19 RTC Tamper or Timestamp or CSS_LSE
-       *    EXTI line 20 RTC Wakeup
+       * 1. Configure and enable the EXTI line 17 (RTC ALARM) in interrupt
+       *    mode and select the rising edge sensitivity.
+       *    EXTI line 18 RTC Tamper or Timestamp or CSS_LSE
+       *    EXTI line 19 RTC Wakeup
        * 2. Configure and enable the RTC_Alarm IRQ channel in the NVIC.
        * 3. Configure the RTC to generate RTC alarms (Alarm A or Alarm B).
        */
