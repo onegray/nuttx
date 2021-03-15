@@ -72,6 +72,10 @@
 
 /* Register Bitfield Definitions ********************************************/
 
+/* EXTI lines 0..15 GPIO event sources */
+
+#define EXTI_GPIO_LINE(n)           (1 << (n))
+
 /* EXTI lines > 15 peripheral event sources */
 
 #define EXTI_PVD_LINE               (1 << 16) /* EXTI line 16: PVD output */
@@ -107,7 +111,7 @@
 #define EXTI_RTSR1_RT(n)            (1 << (n))
 #define EXTI_RTSR1_MASK             (0x803fffff << EXTI_RTSR1_SHIFT)
 
-#define EXTI_RTSR2_SHIFT            (0)       /* Rising trigger event enable for line n = 1, 8, 9 */
+#define EXTI_RTSR2_SHIFT            (0)       /* Rising trigger event enable for line n = 33, 40, 41 */
 #define EXTI_RTSR2_RT(n)            (1 << ((n) - 32))
 #define EXTI_RTSR2_MASK             (0x302 << EXTI_RTSR2_SHIFT)
 
@@ -117,7 +121,7 @@
 #define EXTI_FTSR1_FT(n)            (1 << (n))
 #define EXTI_FTSR1_MASK             (0x803fffff << EXTI_FTSR1_SHIFT)
 
-#define EXTI_FTSR2_SHIFT            (0)       /* Falling trigger event enable for line n = 1, 8, 9 */
+#define EXTI_FTSR2_SHIFT            (0)       /* Falling trigger event enable for line n = 33, 40, 41 */
 #define EXTI_FTSR2_FT(n)            (1 << ((n) - 32))
 #define EXTI_FTSR2_MASK             (0x302 << EXTI_FTSR2_SHIFT)
 
@@ -127,7 +131,7 @@
 #define EXTI_SWIER1_SWI(n)          (1 << (n))
 #define EXTI_SWIER1_MASK            (0x803fffff << EXTI_SWIER1_SHIFT)
 
-#define EXTI_SWIER2_SHIFT           (0)       /* Software interrupt on line n = 1, 8, 9 */
+#define EXTI_SWIER2_SHIFT           (0)       /* Software interrupt on line n = 33, 40, 41 */
 #define EXTI_SWIER2_SWI(n)          (1 << ((n) - 32))
 #define EXTI_SWIER2_MASK            (0x302 << EXTI_SWIER2_SHIFT)
 
@@ -137,7 +141,7 @@
 #define EXTI_PR1_PIF(n)             (1 << (n))
 #define EXTI_PR1_MASK               (0x803fffff << EXTI_PR1_SHIFT)
 
-#define EXTI_PR2_SHIFT              (0)       /* Pending interrupt flag on line n = 1, 8, 9 */
+#define EXTI_PR2_SHIFT              (0)       /* Pending interrupt flag on line n = 33, 40, 41 */
 #define EXTI_PR2_PIF(n)             (1 << ((n) - 32))
 #define EXTI_PR2_MASK               (0x302 << EXTI_PR2_SHIFT)
 
