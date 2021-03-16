@@ -39,7 +39,8 @@
 #endif
 #include "arm_arch.h"
 #include "arm_internal.h"
-//#include "stm32wb.h"
+
+#include "stm32wb_rtc.h"
 
 /****************************************************************************
  * Pre-processor Definitions
@@ -390,12 +391,6 @@ void up_irqinitialize(void)
 #ifdef CONFIG_ARM_MPU
   irq_attach(STM32WB_IRQ_MEMFAULT, arm_memfault, NULL);
   up_enable_irq(STM32WB_IRQ_MEMFAULT);
-#endif
-
-#if defined(CONFIG_RTC) && !defined(CONFIG_RTC_EXTERNAL)
-  /* RTC was initialized earlier but IRQs weren't ready at that time */
-
-  stm32wb_rtc_irqinitialize();
 #endif
 
   /* Attach all other processor exceptions (except reset and sys tick) */
