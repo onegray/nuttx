@@ -36,7 +36,6 @@
 #include "arm_arch.h"
 
 #include "chip.h"
-//#include "stm32wb.h"
 
 /****************************************************************************
  * Pre-processor Definitions
