@@ -46,8 +46,8 @@
 
 #include "chip.h"
 #include "stm32wb_gpio.h"
-//#include "stm32wb_uart.h"
-//#include "stm32wb_dma.h"
+#include "stm32wb_uart.h"
+#include "stm32wb_dma.h"
 #include "stm32wb_rcc.h"
 #include "arm_arch.h"
 #include "arm_internal.h"
