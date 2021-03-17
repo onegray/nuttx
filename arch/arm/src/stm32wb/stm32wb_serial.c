@@ -45,10 +45,10 @@
 #include <arch/board/board.h>
 
 #include "chip.h"
-//#include "stm32wb_gpio.h"
+#include "stm32wb_gpio.h"
 //#include "stm32wb_uart.h"
 //#include "stm32wb_dma.h"
-//#include "stm32wb_rcc.h"
+#include "stm32wb_rcc.h"
 #include "arm_arch.h"
 #include "arm_internal.h"
 
@@ -60,14 +60,7 @@
 
 /* DMA configuration */
 
-/* If DMA is enabled on any USART, then very that other pre-requisites
- * have also been selected.
- */
-
 #ifdef SERIAL_HAVE_RXDMA
-
-/* Verify that DMA has been enabled and the DMA channel has been defined.
- */
 
 /* Currently RS-485 support cannot be enabled when RXDMA is in use due to
  * lack of testing - RS-485 support was developed on STM32F1x
@@ -2572,6 +2565,7 @@ static int stm32wb_serial_pmprepare(FAR struct pm_callback_s *cb, int domain,
  ****************************************************************************/
 
 #ifdef USE_SERIALDRIVER
+
 /****************************************************************************
  * Name: arm_earlyserialinit
  *

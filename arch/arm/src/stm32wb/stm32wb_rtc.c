@@ -42,7 +42,7 @@
 #include "stm32wb_rcc.h"
 #include "stm32wb_pwr.h"
 #include "stm32wb_rtc.h"
-#include "hardware/stm32wb_exti.h"
+#include "stm32wb_exti.h"
 
 #ifdef CONFIG_STM32WB_RTC
 
@@ -71,8 +71,8 @@
 
 /* Constants ****************************************************************/
 
-#define SYNCHRO_TIMEOUT  (0x00020000)
-#define INITMODE_TIMEOUT (0x00010000)
+#define SYNCHRO_TIMEOUT               (0x00020000)
+#define INITMODE_TIMEOUT              (0x00010000)
 
 #define RTC_ALRMR_ENABLE              (0x00000000)
 
