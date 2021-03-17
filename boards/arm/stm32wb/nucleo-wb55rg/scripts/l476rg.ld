@@ -1,50 +1,43 @@
 /****************************************************************************
- * boards/arm/stm32l4/nucleo-l476rg/scripts/l476rg.ld
+ * boards/arm/stm32wb/nucleo-wb55rg/scripts/wb55rg.ld
  *
- *   Copyright (C) 2014 Gregory Nutt. All rights reserved.
- *   Author: Gregory Nutt <gnutt@nuttx.org>
- *           Sebastien Lorquet <sebastien@lorquet.fr>
+ * Licensed to the Apache Software Foundation (ASF) under one or more
+ * contributor license agreements.  See the NOTICE file distributed with
+ * this work for additional information regarding copyright ownership.  The
+ * ASF licenses this file to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance with the
+ * License.  You may obtain a copy of the License at
  *
- * Redistribution and use in source and binary forms, with or without
- * modification, are permitted provided that the following conditions
- * are met:
+ *   http://www.apache.org/licenses/LICENSE-2.0
  *
- * 1. Redistributions of source code must retain the above copyright
- *    notice, this list of conditions and the following disclaimer.
- * 2. Redistributions in binary form must reproduce the above copyright
- *    notice, this list of conditions and the following disclaimer in
- *    the documentation and/or other materials provided with the
- *    distribution.
- * 3. Neither the name NuttX nor the names of its contributors may be
- *    used to endorse or promote products derived from this software
- *    without specific prior written permission.
- *
- * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
- * "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
- * LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
- * FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
- * COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
- * INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
- * BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS
- * OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED
- * AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
- * LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
- * ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
- * POSSIBILITY OF SUCH DAMAGE.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.  See the
+ * License for the specific language governing permissions and limitations
+ * under the License.
  *
  ****************************************************************************/
 
-/* The STM32L476RG has 512Kb of FLASH beginning at address 0x0800:0000 and
- * 128Kb of SRAM beginning at address 0x2000:0000.  When booting from FLASH,
- * FLASH memory is aliased to address 0x0000:0000 where the code expects to
- * begin execution by jumping to the entry point in the 0x0800:0000 address
- * range.
+/* The STM32WB55RG has 1024Kb of FLASH beginning at address 0x0800:0000,
+ * and 256Kb SRAM, split in three blocks:
+ *   SRAM1: 192Kb mapped at address 0x2000:0000
+ *   SRAM2a: 32Kb located at address 0x2003:0000 (contiguous to SRAM1)
+ * also mirrored at 0x1000:0000 with hardware parity check and can be
+ * retained in Standby mode.
+ *   SRAM2b: 32Kb located at address 0x2003:8000 (contiguous with SRAM2)
+ * also mirrored at 0x1000:8000 with hardware parity check.
+ *
+ * When booting from FLASH, FLASH memory is aliased to address 0x0000:0000
+ * where the code expects to begin execution by jumping to the entry point
+ * in the 0x0800:0000 address range.
  */
 
 MEMORY
 {
-  flash (rx) : ORIGIN = 0x08000000, LENGTH = 512K
-  sram (rwx) : ORIGIN = 0x20000000, LENGTH = 96K
+  flash (rx) : ORIGIN = 0x08000000, LENGTH = 1024K
+  sram1 (rwx) : ORIGIN = 0x20000000, LENGTH = 192K
+  sram2a (rwx) : ORIGIN = 0x20030000, LENGTH = 32K
+  sram2b (rwx) : ORIGIN = 0x20038000, LENGTH = 32K
 }
 
 OUTPUT_ARCH(arm)
@@ -85,7 +78,7 @@ SECTIONS
 
     _eronly = ABSOLUTE(.);
 
-    /* The STM32L476RG has 96Kb of SRAM beginning at the following address */
+    /* The STM32WB55RG has 192Kb of SRAM1 beginning at the following address */
 
     .data : {
         _sdata = ABSOLUTE(.);
@@ -94,7 +87,7 @@ SECTIONS
         CONSTRUCTORS
         . = ALIGN(4);
         _edata = ABSOLUTE(.);
-    } > sram AT > flash
+    } > sram1 AT > flash
 
     .bss : {
         _sbss = ABSOLUTE(.);
@@ -103,7 +96,7 @@ SECTIONS
         *(COMMON)
         . = ALIGN(4);
         _ebss = ABSOLUTE(.);
-    } > sram
+    } > sram1
 
     /* Stabs debugging sections. */
     .stab 0 : { *(.stab) }
