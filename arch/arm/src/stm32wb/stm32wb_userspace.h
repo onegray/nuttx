@@ -1,5 +1,5 @@
 /****************************************************************************
- * arch/arm/src/stm32wb/stm32wb_start.h
+ * arch/arm/src/stm32wb/stm32wb_userspace.h
  *
  * Licensed to the Apache Software Foundation (ASF) under one or more
  * contributor license agreements.  See the NOTICE file distributed with
@@ -18,27 +18,32 @@
  *
  ****************************************************************************/
 
-#ifndef __ARCH_ARM_SRC_STM32WB_STM32WB_START_H
-#define __ARCH_ARM_SRC_STM32WB_STM32WB_START_H
+#ifndef __ARCH_ARM_SRC_STM32W_STM32W_USERSPACE_H
+#define __ARCH_ARM_SRC_STM32W_STM32W_USERSPACE_H
 
-/************************************************************************************
+/****************************************************************************
  * Included Files
- ************************************************************************************/
+ ****************************************************************************/
 
-/************************************************************************************
+#include <nuttx/config.h>
+
+/****************************************************************************
  * Public Function Prototypes
- ************************************************************************************/
+ ****************************************************************************/
 
-/************************************************************************************
- * Name: stm32wb_board_initialize
+/****************************************************************************
+ * Name: stm32wb_userspace
  *
  * Description:
- *   All STM32WB architectures must provide the following entry point.  This entry
- *   point is called early in the initialization -- after all memory has been
- *   configured and mapped but before any devices have been initialized.
+ *   For the case of the separate user-/kernel-space build, perform whatever
+ *   platform specific initialization of the user memory is required.
+ *   Normally this just means initializing the user space .data and .bss
+ *   segments.
  *
- ************************************************************************************/
+ ****************************************************************************/
 
-void stm32wb_board_initialize(void);
+#ifdef CONFIG_BUILD_PROTECTED
+void stm32wb_userspace(void);
+#endif
 
-#endif /* __ARCH_ARM_SRC_STM32WB_STM32WB_START_H */
+#endif /* __ARCH_ARM_SRC_STM32W_STM32W_USERSPACE_H */

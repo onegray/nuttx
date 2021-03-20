@@ -39,7 +39,7 @@
 
 #include "stm32wb_rcc.h"
 #include "stm32wb_gpio.h"
-//#include "stm32wb_userspace.h"
+#include "stm32wb_userspace.h"
 #include "stm32wb_start.h"
 
 /****************************************************************************
@@ -50,8 +50,7 @@
 
 /* 0x0800:0000 - Beginning of the internal FLASH.   Address of vectors.
  *               Mapped as boot memory address 0x0000:0000 at reset.
- * 0x080f:ffff - End of flash region (assuming the max of 2MiB of FLASH).
- * 0x1000:0000 - Start of internal SRAM2
+ * 0x080f:ffff - End of flash region (assuming the max of 1MiB of FLASH).
  * 0x2000:0000 - Start of internal SRAM and start of .data (_sdata)
  *             - End of .data (_edata) and start of .bss (_sbss)
  *             - End of .bss (_ebss) and bottom of idle stack
