@@ -159,7 +159,7 @@ endif
 endif
 
 ifeq ($(CONFIG_DEBUG_FEATURES),y)
-# CHIP_CSRCS += stm32wb_dumpgpio.c
+CHIP_CSRCS += stm32wb_dumpgpio.c
 endif
 
 ifeq ($(CONFIG_STM32WB_COMP),y)
