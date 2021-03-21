@@ -48,7 +48,7 @@
 
 static const char g_portchar[STM32WB_NPORTS] =
 {
-#if CONFIG_STM32WB_GPIO_HAVE_PORTD
+#if defined(CONFIG_STM32WB_GPIO_HAVE_PORTD)
   'A', 'B', 'C', 'D', 'E', 'H'
 #else
   'A', 'B', 'C', 'E', 'H'
