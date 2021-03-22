@@ -49,9 +49,6 @@
  * Pre-processor Definitions
  ****************************************************************************/
 
-#define CONFIG_STM32WB_FLASH_CONFIG_G_1024 1
-#define CONFIG_STM32WB_FLASH_OVERRIDE_DEFAULT 1
-
 #if 1
 #  define HSI_CLOCK_CONFIG          /* HSI-16 clock configuration */
 #elif 0
@@ -187,22 +184,14 @@
  *
  * TODO These clock sources can be configured in Kconfig (this is not a board feature)
  * USART1
- * USART2
- * USART3
- * UART4
- * UART5
  * LPUART1
  * I2C1
- * I2C2
  * I2C3
  * LPTIM1
  * LPTIM2
  * SAI1
- * SAI2
  * CLK48
  * ADC
- * SWPMI
- * DFSDM
  */
 
 /* Prescaler common to all PLL inputs; will be 1 (XXX source is implicitly
